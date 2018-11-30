@@ -1,0 +1,288 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins|Varela+Round:400,500,700');
+
+/*---CSS de la page---*/
+html,body{
+  height: 100%;
+  width: 100%;
+  font-family: 'Varela Round', sans-serif;
+  color: #222;
+}
+
+/*---CSS des boutons---*/
+.btn-primary {
+  background-color: #FF9900;
+  border: 1px solid #FF9900;
+}
+
+.btn-primary:hover {
+  background-color: #C67200;
+}
+
+.btn-outline-secondary {
+    border-color: #007DFF;
+    color: #007DFF;
+
+}
+.btn-outline-secondary:hover {
+    border-color: #007DFF;
+    background-color: #007DFF;
+
+}
+
+/*---CSS barre de navigation---*/
+.navbar {
+  position:fixed;
+  width: 100%;
+  box-shadow: 1px 1px 6px #000;
+}
+.navbar-nav li{
+  padding-right: 20px;
+}
+
+.nav-link{
+  font-size: 1.1em !important;
+}
+
+.nav-link {
+  color: #007DFF;
+}
+/*---CSS du modal---*/
+.modal{
+  display: none;
+  position: fixed;
+  z-index:1;
+  left:0;
+  top:0;
+  width:100%;
+  height:100%;
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0);
+  background-color: rgba(0,0,0,0.4);
+  padding-top: 60px;
+}
+
+/*bouton du modal*/
+.btn-primary {
+  background-color: #FF9900;
+  border: 1px solid #FF9900;
+}
+
+.btn-primary:hover {
+  background-color: #C67200;
+}
+
+/*contenu du modal*/
+.card-signin {
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+
+.form-label-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.card-signin {
+  border: 0;
+  border-radius: 1rem;
+  box-shadow: 0 0.5rem 1rem 0 rgba(0, 0, 0, 0.1);
+}
+
+.card-signin .card-title {
+  margin-bottom: 2rem;
+  font-weight: 300;
+  font-size: 1.5rem;
+}
+
+.card-signin .card-body {
+  padding: 2rem;
+}
+
+.form-signin {
+  width: 100%;
+}
+
+.form-label-group {
+  position: relative;
+  margin-bottom: 1rem;
+}
+
+.form-label-group input {
+  border: 1px solid #FF9900;
+}
+
+.form-label-group>label {
+  position: absolute;
+  top: 6px;
+  left: 10px;
+  display: block;
+  width: 100%;
+  margin-bottom: 0;
+  /* Override default `<label>` margin */
+  line-height: 1.5;
+  color: #495057;
+  border: 1px solid transparent;
+  border-radius: .25rem;
+  transition: all .1s ease-in-out;
+}
+
+.form-label-group input::-webkit-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input:-ms-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::-ms-input-placeholder {
+  color: transparent;
+}
+
+.form-label-group input::-moz-placeholder {
+  color: transparent;
+}
+
+/*---CSS carousel---*/
+.carousel-inner img{
+  width: 100%;
+  height: 100%;
+}
+
+.carousel-caption {
+  position: absolute;
+  top:50%;
+  transform:translateY(-50%);
+}
+
+.carousel-caption h1 {
+  font-size: 500%;
+  text-transform: :uppercase;
+  text-shadow: 1px 1px 7px #000;
+}
+.carousel-caption h3{
+  font-size: 200%;
+  font-weight: 500;
+  text-shadow: 1px 1px 4px #000;
+  padding-bottom: 1rem;
+}
+
+.card{
+  box-shadow: 1px 1px 10px #000;
+}
+
+.thumbnail
+{
+  max-width: 210px;
+  height: 210px;
+  padding:0.25rem;
+
+}
+
+.img-jeu{
+  width: 360px;
+  height: 210px;
+  overflow: hidden;
+}
+
+.carousel-control-prev-icon, .carousel-control-next-icon{
+  background-color: rgba(255, 153, 0,.7);
+  border-radius: 50px;
+  height: 66px;
+  width: 66px;
+  background-size: 51px;
+}
+
+.form-container{
+  width: 100%;
+  justify-content: center;
+}
+
+/*---CSS Dernières publications---*/
+.last_published{
+  width:75%;
+  margin: 0 auto ;
+  padding-top: 2rem;
+
+}
+.last_published hr{
+  border: 1px solid #dec9b6;
+  width: 95%;
+}
+/*---CSS Dernières offres---*/
+
+.last_offers{
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+}
+
+/*---CSS Bas de page---*/
+footer
+{
+  background-color: #FF9900;
+  color: #fff;
+  padding-top: 2rem;
+}
+.social a{
+  font-size:3rem;
+  padding:2rem;
+}
+.fa-facebook{
+  color:#3b5998;
+}
+.fa-twitter{
+  color:#00aced;
+}
+.partenaire_logo{
+  max-width: 350px;
+  height: 50px;
+  padding: inherit;
+
+}
+
+hr.light{
+  border-top: 1px solid #fff;
+  width: 75%;
+  margin-top:.8rem;
+  margin-bottom: 1rem;
+
+}
+/*---Medias Queries*/
+@media (max-widht: 770px){
+.carousel-caption {
+  top:45%;
+}
+
+.carousel-caption h1 {
+  font-size: 350%;
+}
+.carousel-caption h3{
+  font-size: 140%;
+  font-weight: 400;
+  padding-bottom: .2rem;
+}
+.form-inline{
+  float:right;
+  transform:translateX(-50%);
+}
+}
+
+@media (max-width: 576px){
+.carousel-caption{
+    top:40%;
+}
+.carousel-caption h1{
+  font-size: 250%;
+}
+.carousel-caption h3{
+  font-size:100%;
+}
+.form-inline{
+  float:right;
+  transform:translateX(-50%);
+}
+.carousel-indicators{
+  display: none;
+
+}
+}
