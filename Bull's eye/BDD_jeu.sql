@@ -229,6 +229,21 @@ insert into Personne values (null, "bereski", "alexandra", "test9@gmail.com", "0
 insert into Personne values (null, "tran", "céline", "test10@gmail.com", "0009");
 
 #------------------------------------------------------------
+
+CREATE TABLE PersonneArchive(
+IdArchive				Int 			Auto_increment 	NOT NULL,
+IdPersonne				Int 							NOT NULL,
+nom        				Varchar (50)		 			NOT NULL,
+prenom     				Varchar (50) 					NOT NULL,
+email      				Varchar (50) 					NOT NULL,
+mdp        				Varchar (50) 					NOT NULL,
+date_histo				DATETIME						NOT NULL,
+CONSTRAINT Personne_Archive_PK		PRIMARY KEY (IdArchive)
+) ENGINE=InnoDB;
+
+#------------------------------------------------------------
+
+#------------------------------------------------------------
 # INSERT: Lieu
 #------------------------------------------------------------
 
@@ -384,5 +399,16 @@ insert into Rendezvous values (null, "2018/12/07", "16:30:00");
 insert into Rendezvous values (null, "2018/12/07", "17:00:00");
 
 #------------------------------------------------------------
-# INSERT: Organiser
+# TRIGGER : Archive_Personne
 #------------------------------------------------------------
+
+DELIMITER $
+CREATE TRIGGER DEYE_TRG_Archivage_Personne_After_Update AFTER UPDATE
+	ON Personne
+	FOR each row
+	BEGIN
+		insert into PersonneArchive (IdPersonne, nom, prenom, email, mdp, date_histo)
+		values
+		(OLD.IdPersonne, OLD.nom, OLD.prenom, OLD.email, OLD.mdp, NOW());
+	END $
+DELIMITER ;
