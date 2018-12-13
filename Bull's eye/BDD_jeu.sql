@@ -179,7 +179,7 @@ CREATE TABLE DEYE_Jeux(
         Id_tranche_age         Int NOT NULL ,
         IdCategorie            Int NOT NULL ,
         IdPersonne_Validateur  Int NOT NULL ,
-        date_entree_Validateur Date NOT NULL
+        date_entree_Validateur DATETIME NOT NULL
 	,CONSTRAINT DEYE_Jeux_PK PRIMARY KEY (IdJeux)
 
 	,CONSTRAINT DEYE_Jeux_DEYE_Utilisateur_FK FOREIGN KEY (IdPersonne) REFERENCES DEYE_Utilisateur(IdPersonne)
@@ -223,8 +223,7 @@ CREATE TABLE DEYE_Commentaire(
         datepublication Date NOT NULL ,
         note            Int NOT NULL ,
         IdJeux           Int NOT NULL ,
-        IdPersonne      Int NOT NULL ,
-        date_naissance  Date NOT NULL
+        IdPersonne      Int NOT NULL 
 	,CONSTRAINT DEYE_Commentaire_PK PRIMARY KEY (IdComment)
 
 	,CONSTRAINT DEYE_Commentaire_DEYE_Jeux_FK FOREIGN KEY (IdJeux) REFERENCES DEYE_Jeux(IdJeux)
@@ -241,8 +240,7 @@ CREATE TABLE DEYE_Rendezvous(
         date_rendezvous  Date NOT NULL ,
         heure_rendezvous Time NOT NULL ,
         IdJeux           Int NOT NULL ,
-        IdPersonne       Int NOT NULL ,
-        date_naissance   Date NOT NULL
+        IdPersonne       Int NOT NULL 
 	,CONSTRAINT DEYE_Rendezvous_PK PRIMARY KEY (idrendezvous)
 	
 	,CONSTRAINT DEYE_Rendezvous_DEYE_Jeux_FK FOREIGN KEY (IdJeux) REFERENCES DEYE_Jeux(IdJeux)
@@ -253,14 +251,13 @@ CREATE TABLE DEYE_Rendezvous(
 # Table: DEYE_Rendezvous_Archive
 #------------------------------------------------------------
 
-CREATE TABLE DEYE_Rendezvous(
+CREATE TABLE DEYE_Rendezvous_Archive(
 		IdRendezvous_Archive Int Auto_increment NOT NULL ,
         IdRendezvous     Int  NOT NULL ,
         date_rendezvous  Date NOT NULL ,
         heure_rendezvous Time NOT NULL ,
         IdJeux           Int NOT NULL ,
-        IdPersonne       Int NOT NULL ,
-        date_naissance   Date NOT NULL
+        IdPersonne       Int NOT NULL 
 	,CONSTRAINT DEYE_Rendezvous_Archive_PK PRIMARY KEY (IdRendezvous_Archive)
 
 )ENGINE=InnoDB;
@@ -277,8 +274,6 @@ CREATE TABLE Organiser(
 
 	,CONSTRAINT Organiser_DEYE_Jeux_FK FOREIGN KEY (IdJeux) REFERENCES DEYE_Jeux(IdJeux)
 	,CONSTRAINT Organiser_DEYE_Evenement0_FK FOREIGN KEY (IdEvent) REFERENCES DEYE_Evenement(IdEvent)
-)ENGINE=InnoDB;
-=======
 )ENGINE=InnoDB;
 
 #------------------------------------------------------------
@@ -412,27 +407,27 @@ insert into DEYE_Validateur values (10, "2018/09/15", "membre",  "2018/09/16", "
 # INSERT: DEYE_Jeux
 #------------------------------------------------------------
 
-insert into DEYE_Jeux values (null, "Games of Thrones" ,"2011/12/21", "54,00", "2:00:00", "6", "2011/12/21", 1, 1, 1, 1, 1);
-insert into DEYE_Jeux values (null, "*Jamaica" ,"2008/02/11", "35,00", "00:30:00", "6", "2011/06/21", 2, 2, 2, 2, 2);
-insert into DEYE_Jeux values (null, "Monopoly" ,"1935/02/06", "20,00", "12:00:00", "6", "2011/07/21", 3, 3, 3, 3, 3);
-insert into DEYE_Jeux values (null, "Games of Thrones" ,"2011/12/21", "54,00", "2:00:00", "6", "2011/12/11", 4, 4, 4, 4, 4);
-insert into DEYE_Jeux values (null, "Munchkins" ,"2010/12/21", "36,00", "1:00:00", "6", "2011/04/06", 5, 5, 5, 5, 5);
-insert into DEYE_Jeux values (null, "La Bonne Paye" ,"1975/12/21", "20,00", "1:00:00", "6", "2011/05/07", 6, 6, 6, 6, 6);
+insert into DEYE_Jeux values (null, "Games of Thrones" ,"2011/12/21", "54.00", "2:00:00", "6", "2011/12/21", 1, 1, 1, 1, 1, NOW());
+insert into DEYE_Jeux values (null, "*Jamaica" ,"2008/02/11", "35.00", "00:30:00", "6", "2011/06/21", 2, 2, 2, 2, 2, NOW());
+insert into DEYE_Jeux values (null, "Monopoly" ,"1935/02/06", "20.00", "12:00:00", "6", "2011/07/21", 3, 3, 3, 3, 3,NOW());
+insert into DEYE_Jeux values (null, "Games of Thrones" ,"2011/12/21", "54.00", "2:00:00", "6", "2011/12/11", 4, 4, 4, 4, 4, NOW());
+insert into DEYE_Jeux values (null, "Munchkins" ,"2010/12/21", "36.00", "1:00:00", "6", "2011/04/06", 5, 5, 5, 5, 5, NOW());
+insert into DEYE_Jeux values (null, "La Bonne Paye" ,"1975/12/21", "20.00", "1:00:00", "6", "2011/05/07", 6, 6, 6, 6, 6,  NOW());
 
 #------------------------------------------------------------
 # INSERT: DEYE_Commentaire
 #------------------------------------------------------------
 
 insert into DEYE_Commentaire values (null, "très nul", "2018/12/10", "0", 1, 1);
-insert into DEYE_Commentaire values (null, "nul", "2018/06/27", "0,5", 2, 2);
+insert into DEYE_Commentaire values (null, "nul", "2018/06/27", "0.5", 2, 2);
 insert into DEYE_Commentaire values (null, "pas incroyable", "2018/01/05", "1", 3, 3);
-insert into DEYE_Commentaire values (null, "pas très bien", "2018/01/15", "1,5", 4, 4);
+insert into DEYE_Commentaire values (null, "pas très bien", "2018/01/15", "1.5", 4, 4);
 insert into DEYE_Commentaire values (null, "bof", "2018/10/23", "2", 5, 5);
-insert into DEYE_Commentaire values (null, "normal", "2018/07/31", "2,5", 6, 6);
+insert into DEYE_Commentaire values (null, "normal", "2018/07/31", "2.5", 6, 6);
 insert into DEYE_Commentaire values (null, "moyen", "2018/04/01", "3", 4, 4);
-insert into DEYE_Commentaire values (null, "Pas mal", "2018/03/17", "3,5", 5 ,5);
+insert into DEYE_Commentaire values (null, "Pas mal", "2018/03/17", "3.5", 5 ,5);
 insert into DEYE_Commentaire values (null, "Super", "2018/12/11", "4", 6, 6);
-insert into DEYE_Commentaire values (null, "Excellent Jeux", "2018/01/20", "4,5", 1, 1);
+insert into DEYE_Commentaire values (null, "Excellent Jeux", "2018/01/20", "4.5", 1, 1);
 insert into DEYE_Commentaire values (null, "Parfait", "2018/05/30", "5", 2, 2);
 
 #------------------------------------------------------------
@@ -480,21 +475,7 @@ CREATE TRIGGER TRG_DEYE_Jeux_Archivage_After_Update AFTER UPDATE
 	BEGIN
 		insert into DEYE_Jeux_Archive values
 		(null, OLD.IdJeux, OLD.designation, OLD.date_sortie, OLD.prix, OLD.temps_Jeux, OLD.nb_joueurs, OLD.date_validation,
-		OLD.date_naissance, OLD.IdEditeur, OLD.Id_tranche_age, OLD.IdCategorie, OLD.IdPersonne_Validateur, OLD.date_entree_Validateur, NOW());
-	END $
-DELIMITER ;
-
-#------------------------------------------------------------
-# Trigger: Evenement_Archivage_Update
-#------------------------------------------------------------
-
-DELIMITER $
-CREATE TRIGGER TRG_Evenement_Archivage_After_Update AFTER UPDATE
-	ON DEYE_Evenement
-	FOR each row
-	BEGIN
-		insert into DEYE_Evenement_Archive values
-		(null, OLD.IdEvent, OLD.designation, OLD.date_event, OLD.heure_event, OLD.IdLieu, NOW());
+		 OLD.IdEditeur, OLD.Id_tranche_age, OLD.IdCategorie, OLD.IdPersonne_Validateur, OLD.date_entree_Validateur, NOW());
 	END $
 DELIMITER ;
 
@@ -522,6 +503,6 @@ CREATE TRIGGER TRG_Rendezvous_Archivage_After_Update AFTER UPDATE
 	FOR each row
 	BEGIN
 		insert into DEYE_Rendezvous_Archive values
-		(null, OLD.IdRendezvous, OLD.date_rendezvous, OLD.heure_rendezvous, OLD.IdJeux, OLD.IdPersonne, date_naissance, NOW());
+		(null, OLD.IdRendezvous, OLD.date_rendezvous, OLD.heure_rendezvous, OLD.IdJeux, OLD.IdPersonne, NOW());
 	END $
 DELIMITER ;
