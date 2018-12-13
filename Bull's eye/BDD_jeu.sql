@@ -465,12 +465,44 @@ CREATE TRIGGER TRG_Personne_Archivage_After_Update AFTER UPDATE
 	END $
 DELIMITER ;
 
+
+#------------------------------------------------------------
+# Trigger: DEYE_Personne_Archivage_Delete
+#------------------------------------------------------------
+
+DELIMITER $
+CREATE TRIGGER TRG_Personne_Archivage_Before_Delete BEFORE DELETE
+	ON DEYE_Personne
+	FOR each row
+	BEGIN
+		insert into DEYE_Personne_Archive values
+		(null, OLD.IdPersonne, OLD.nom, OLD.prenom, OLD.email, OLD.mdp, NOW());
+	END $
+DELIMITER ;
+
+
 #------------------------------------------------------------
 # Trigger: Jeux_Archivage_Update
 #------------------------------------------------------------
 
 DELIMITER $
 CREATE TRIGGER TRG_DEYE_Jeux_Archivage_After_Update AFTER UPDATE
+	ON DEYE_Jeux
+	FOR each row
+	BEGIN
+		insert into DEYE_Jeux_Archive values
+		(null, OLD.IdJeux, OLD.designation, OLD.date_sortie, OLD.prix, OLD.temps_Jeux, OLD.nb_joueurs, OLD.date_validation,
+		 OLD.IdEditeur, OLD.Id_tranche_age, OLD.IdCategorie, OLD.IdPersonne_Validateur, OLD.date_entree_Validateur, NOW());
+	END $
+DELIMITER ;
+
+
+#------------------------------------------------------------
+# Trigger: Jeux_Archivage_Delete
+#------------------------------------------------------------
+
+DELIMITER $
+CREATE TRIGGER TRG_DEYE_Jeux_Archivage_Before_Delete BEFORE DELETE
 	ON DEYE_Jeux
 	FOR each row
 	BEGIN
@@ -494,6 +526,21 @@ CREATE TRIGGER TRG_Evenement_Archivage_After_Update AFTER UPDATE
 	END $
 DELIMITER ;
 
+
+#------------------------------------------------------------
+# Trigger: Evenement_Archivage_Delete
+#------------------------------------------------------------
+
+DELIMITER $
+CREATE TRIGGER TRG_Evenement_Archivage_Before_Delete BEFORE DELETE
+	ON DEYE_Evenement
+	FOR each row
+	BEGIN
+		insert into DEYE_Evenement_Archive values
+		(null, OLD.IdEvent, OLD.designation, OLD.date_event, OLD.heure_event, OLD.IdLieu, NOW());
+	END $
+DELIMITER ;
+
 #------------------------------------------------------------
 # Trigger: Rendezvous_Archivage_Update
 #------------------------------------------------------------
@@ -508,6 +555,20 @@ CREATE TRIGGER TRG_Rendezvous_Archivage_After_Update AFTER UPDATE
 	END $
 DELIMITER ;
 
+
+#------------------------------------------------------------
+# Trigger: Rendezvous_Archivage_Delete
+#------------------------------------------------------------
+
+DELIMITER $
+CREATE TRIGGER TRG_Rendezvous_Archivage_Before_Delete BEFORE DELETE
+	ON DEYE_Rendezvous
+	FOR each row
+	BEGIN
+		insert into DEYE_Rendezvous_Archive values
+		(null, OLD.IdRendezvous, OLD.date_rendezvous, OLD.heure_rendezvous, OLD.IdJeux, OLD.IdPersonne, NOW());
+	END $
+DELIMITER ;
 
 #------------------------------------------------------------
 # Procedure: Compter Jeux Total
