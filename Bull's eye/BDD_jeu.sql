@@ -1,12 +1,12 @@
 #------------------------------------------------------------
 #        Script MySQL.
 #------------------------------------------------------------
-drop database if exists BDD_Jeu ; 
-create database BDD_Jeu; 
-use BDD_Jeu; 
+drop database if exists BDD_jeu ; 
+create database BDD_jeu; 
+use BDD_jeu; 
 
 #------------------------------------------------------------
-# Table: Lieu
+# Table: DEYE_Lieu
 #------------------------------------------------------------
 
 CREATE TABLE DEYE_Lieu(
@@ -33,9 +33,24 @@ CREATE TABLE DEYE_Evenement(
 	,CONSTRAINT DEYE_Evenement_DEYE_Lieu_FK FOREIGN KEY (IdLieu) REFERENCES DEYE_Lieu(IdLieu)
 )ENGINE=InnoDB;
 
+#------------------------------------------------------------
+# Table: DEYE_Evenement_Archive
+#------------------------------------------------------------
+
+CREATE TABLE DEYE_Evenement_Archive(
+		IdEvent_Archive	Int	Auto_increment	NOT NULL ,
+        IdEvent     Int  NOT NULL ,
+        designation Varchar (50) NOT NULL ,
+        date_event  Date NOT NULL ,
+        heure_event Time NOT NULL ,
+        IdLieu      Int NOT NULL ,
+		date_histo	DATETIME	NOT NULL
+	,CONSTRAINT DEYE_Evenement_Archive_PK PRIMARY KEY (IdEvent_Archive)
+
+)ENGINE=InnoDB;
 
 #------------------------------------------------------------
-# Table: Photo
+# Table: DEYE_Photo
 #------------------------------------------------------------
 
 CREATE TABLE DEYE_Photo(
@@ -43,7 +58,7 @@ CREATE TABLE DEYE_Photo(
         url     Varchar (50) NOT NULL ,
         type    Varchar (50) NOT NULL ,
         IdEvent Int NOT NULL
-	,CONSTRAINT Photo_PK PRIMARY KEY (IdPhoto)
+	,CONSTRAINT DEYE_Photo_PK PRIMARY KEY (IdPhoto)
 
 	,CONSTRAINT DEYE_Photo_DEYE_Evenement_FK FOREIGN KEY (IdEvent) REFERENCES DEYE_Evenement(IdEvent)
 )ENGINE=InnoDB;
@@ -73,10 +88,10 @@ CREATE TABLE DEYE_Categorie(
 
 
 #------------------------------------------------------------
-# Table: Tranche age
+# Table: DEYE_Trancheage
 #------------------------------------------------------------
 
-CREATE TABLE DEYE_DEYE_Trancheage(
+CREATE TABLE DEYE_Trancheage(
         Id_tranche_age Int  Auto_increment  NOT NULL ,
         age_requis     Varchar (50) NOT NULL
 	,CONSTRAINT DEYE_Trancheage_PK PRIMARY KEY (Id_tranche_age)
@@ -84,7 +99,7 @@ CREATE TABLE DEYE_DEYE_Trancheage(
 
 
 #------------------------------------------------------------
-# Table: Personne
+# Table: DEYE_Personne
 #------------------------------------------------------------
 
 CREATE TABLE DEYE_Personne(
@@ -97,19 +112,20 @@ CREATE TABLE DEYE_Personne(
 )ENGINE=InnoDB;
 
 #------------------------------------------------------------
-# Table: Archive Personne
+# Table: DEYE_Personne_Archive
 #------------------------------------------------------------
 
-CREATE TABLE DEYE_PersonneArchive(
-IdArchive				Int 			Auto_increment 	NOT NULL,
-IdPersonne				Int 							NOT NULL,
-nom        				Varchar (50)		 			NOT NULL,
-prenom     				Varchar (50) 					NOT NULL,
-email      				Varchar (50) 					NOT NULL,
-mdp        				Varchar (50) 					NOT NULL,
-date_histo				DATETIME						NOT NULL,
-CONSTRAINT DEYE_Personne_Archive_PK		PRIMARY KEY (IdArchive)
-) ENGINE=InnoDB;
+CREATE TABLE DEYE_Personne_Archive(
+		IdPersonne_Archive Int	Auto_increment NOT NULL ,
+        IdPersonne Int			NOT NULL ,
+        nom        Varchar (50) NOT NULL ,
+        prenom     Varchar (50) NOT NULL ,
+        email      Varchar (50) NOT NULL ,
+        mdp        Varchar (50) NOT NULL ,
+		date_histo	DATETIME	NOT NULL
+	,CONSTRAINT DEYE_Personne_Archive_PK PRIMARY KEY (IdPersonne_Archive)
+
+)ENGINE=InnoDB;
 
 #------------------------------------------------------------
 # Table: DEYE_Utilisateur
@@ -125,7 +141,7 @@ CREATE TABLE DEYE_Utilisateur(
         mdp            Varchar (50) NOT NULL
 	,CONSTRAINT DEYE_Utilisateur_PK PRIMARY KEY (IdPersonne,date_naissance)
 
-	,CONSTRAINT DEYE_Utilisateur_Personne_FK FOREIGN KEY (IdPersonne) REFERENCES DEYE_Personne(IdPersonne)
+	,CONSTRAINT DEYE_Utilisateur_DEYE_Personne_FK FOREIGN KEY (IdPersonne) REFERENCES DEYE_Personne(IdPersonne)
 )ENGINE=InnoDB;
 
 
@@ -143,39 +159,59 @@ CREATE TABLE DEYE_Validateur(
         email       Varchar (50) NOT NULL ,
         mdp         Varchar (50) NOT NULL
 	,CONSTRAINT DEYE_Validateur_PK PRIMARY KEY (IdPersonne,date_entree)
-
-	,CONSTRAINT DEYE_Validateur_Personne_FK FOREIGN KEY (IdPersonne) REFERENCES DEYE_Personne(IdPersonne)
+	,CONSTRAINT DEYE_Validateur_DEYE_Personne_FK FOREIGN KEY (IdPersonne) REFERENCES DEYE_Personne(IdPersonne)
 )ENGINE=InnoDB;
 
-
 #------------------------------------------------------------
-# Table: DEYE_Jeu
+# Table: DEYE_Jeux
 #------------------------------------------------------------
 
-CREATE TABLE DEYE_Jeu(
-        IdJeu                  Int  Auto_increment  NOT NULL ,
+CREATE TABLE DEYE_Jeux(
+        IdJeux                  Int  Auto_increment  NOT NULL ,
         designation            Varchar (50) NOT NULL ,
         date_sortie            Date NOT NULL ,
         prix                   Float NOT NULL ,
-        temps_Jeu              Time NOT NULL ,
+        temps_Jeux              Time NOT NULL ,
         nb_joueurs             Int NOT NULL ,
         date_validation        Date NOT NULL ,
         IdPersonne             Int NOT NULL ,
-        date_naissance         Date NOT NULL ,
-        Id_Editeur              Int NOT NULL ,
+        IdEditeur              Int NOT NULL ,
         Id_tranche_age         Int NOT NULL ,
         IdCategorie            Int NOT NULL ,
         IdPersonne_Validateur  Int NOT NULL ,
         date_entree_Validateur Date NOT NULL
-	,CONSTRAINT DEYE_Jeu_PK PRIMARY KEY (IdJeu)
+	,CONSTRAINT DEYE_Jeux_PK PRIMARY KEY (IdJeux)
 
-	,CONSTRAINT DEYE_Jeu_DEYE_Utilsateur_FK FOREIGN KEY (IdPersonne,date_naissance) REFERENCES DEYE_Utilisateur(IdPersonne,date_naissance)
-	,CONSTRAINT DEYE_Jeu_DEYE_Editeur0_FK FOREIGN KEY (IdEditeur) REFERENCES DEYE_Editeur(IdDEYE_Editeur)
-	,CONSTRAINT DEYE_Jeu_DEYE_Trancheage1_FK FOREIGN KEY (Id_tranche_age) REFERENCES DEYE_Trancheage(Id_tranche_age)
-	,CONSTRAINT DEYE_Jeu_DEYE_Categorie2_FK FOREIGN KEY (IdCategorie) REFERENCES DEYE_Categorie(IdCategorie)
-	,CONSTRAINT DEYE_Jeu_DEYE_Validateur3_FK FOREIGN KEY (IdPersonne_Validateur,date_entree_Validateur) REFERENCES DEYE_Validateur(IdPersonne,date_entree)
+	,CONSTRAINT DEYE_Jeux_DEYE_Utilisateur_FK FOREIGN KEY (IdPersonne) REFERENCES DEYE_Utilisateur(IdPersonne)
+	,CONSTRAINT DEYE_Jeux_DEYE_Editeur0_FK FOREIGN KEY (IdEditeur) REFERENCES DEYE_Editeur(IdEditeur)
+	,CONSTRAINT DEYE_Jeux_DEYE_Trancheage1_FK FOREIGN KEY (Id_tranche_age) REFERENCES DEYE_Trancheage(Id_tranche_age)
+	,CONSTRAINT DEYE_Jeux_DEYE_Categorie2_FK FOREIGN KEY (IdCategorie) REFERENCES DEYE_Categorie(IdCategorie)
+	,CONSTRAINT DEYE_Jeux_DEYE_Validateur3_FK FOREIGN KEY (IdPersonne_Validateur) REFERENCES DEYE_Validateur(IdPersonne)
 )ENGINE=InnoDB;
 
+#------------------------------------------------------------
+# Table : DEYE_Jeux_Archive
+#------------------------------------------------------------
+
+CREATE TABLE DEYE_Jeux_Archive(
+        IdJeux_Archive          Int  Auto_increment  NOT NULL ,
+		IdJeux                  Int  NOT NULL ,
+        designation            Varchar (50) NOT NULL ,
+        date_sortie            Date NOT NULL ,
+        prix                   Float NOT NULL ,
+        temps_Jeux              Time NOT NULL ,
+        nb_joueurs             Int NOT NULL ,
+        date_validation        Date NOT NULL ,
+        IdPersonne             Int NOT NULL ,
+        Id_Editeur              Int NOT NULL ,
+        Id_tranche_age         Int NOT NULL ,
+        IdCategorie            Int NOT NULL ,
+        IdPersonne_Validateur  Int NOT NULL ,
+        date_entree_Validateur Date NOT NULL ,
+		date_histo				DATETIME NOT NULL
+	,CONSTRAINT DEYE_Jeux_Archive_PK PRIMARY KEY (IdJeux_Archive)
+
+)ENGINE=InnoDB;
 
 #------------------------------------------------------------
 # Table: DEYE_Commentaire
@@ -186,13 +222,13 @@ CREATE TABLE DEYE_Commentaire(
         texte           Text NOT NULL ,
         datepublication Date NOT NULL ,
         note            Int NOT NULL ,
-        IdDEYE_Jeu           Int NOT NULL ,
+        IdJeux           Int NOT NULL ,
         IdPersonne      Int NOT NULL ,
         date_naissance  Date NOT NULL
 	,CONSTRAINT DEYE_Commentaire_PK PRIMARY KEY (IdComment)
 
-	,CONSTRAINT DEYE_Commentaire_DEYE_Jeu_FK FOREIGN KEY (Id_Jeu) REFERENCES DEYE_Jeu(IdJeu)
-	,CONSTRAINT DEYE_Commentaire_DEYE_Utilisateur0_FK FOREIGN KEY (IdPersonne,date_naissance) REFERENCES DEYE_Utilisateur(IdPersonne,date_naissance)
+	,CONSTRAINT DEYE_Commentaire_DEYE_Jeux_FK FOREIGN KEY (IdJeux) REFERENCES DEYE_Jeux(IdJeux)
+	,CONSTRAINT DEYE_Commentaire_DEYE_Utilisateur0_FK FOREIGN KEY (IdPersonne) REFERENCES DEYE_Utilisateur(IdPersonne)
 )ENGINE=InnoDB;
 
 
@@ -200,17 +236,33 @@ CREATE TABLE DEYE_Commentaire(
 # Table: DEYE_Rendezvous
 #------------------------------------------------------------
 
-CREATE TABLE DEYE_DEYE_Rendezvous(
-        idDEYE_Rendezvous     Int  Auto_increment  NOT NULL ,
-        date_DEYE_Rendezvous  Date NOT NULL ,
-        heure_DEYE_Rendezvous Time NOT NULL ,
-        IdDEYE_Jeu            Int NOT NULL ,
+CREATE TABLE DEYE_Rendezvous(
+        idrendezvous     Int  Auto_increment  NOT NULL ,
+        date_rendezvous  Date NOT NULL ,
+        heure_rendezvous Time NOT NULL ,
+        IdJeux           Int NOT NULL ,
         IdPersonne       Int NOT NULL ,
         date_naissance   Date NOT NULL
-	,CONSTRAINT DEYE_DEYE_Rendezvous_PK PRIMARY KEY (idDEYE_Rendezvous)
+	,CONSTRAINT DEYE_Rendezvous_PK PRIMARY KEY (idrendezvous)
+	
+	,CONSTRAINT DEYE_Rendezvous_DEYE_Jeux_FK FOREIGN KEY (IdJeux) REFERENCES DEYE_Jeux(IdJeux)
+	,CONSTRAINT DEYE_Rendezvous_DEYE_Utilisateur0_FK FOREIGN KEY (IdPersonne) REFERENCES DEYE_Utilisateur(IdPersonne)
+)ENGINE=InnoDB;
 
-	,CONSTRAINT DEYE_Rendezvous_DEYE_Jeu_FK FOREIGN KEY (IdJeu) REFERENCES DEYE_Jeu(IdDEYE_Jeu)
-	,CONSTRAINT DEYE_Rendezvous_DEYE_Utilisateur0_FK FOREIGN KEY (IdPersonne,date_naissance) REFERENCES DEYE_Utilisateur(IdPersonne,date_naissance)
+#------------------------------------------------------------
+# Table: DEYE_Rendezvous_Archive
+#------------------------------------------------------------
+
+CREATE TABLE DEYE_Rendezvous(
+		IdRendezvous_Archive Int Auto_increment NOT NULL ,
+        IdRendezvous     Int  NOT NULL ,
+        date_rendezvous  Date NOT NULL ,
+        heure_rendezvous Time NOT NULL ,
+        IdJeux           Int NOT NULL ,
+        IdPersonne       Int NOT NULL ,
+        date_naissance   Date NOT NULL
+	,CONSTRAINT DEYE_Rendezvous_Archive_PK PRIMARY KEY (IdRendezvous_Archive)
+
 )ENGINE=InnoDB;
 
 
@@ -218,17 +270,19 @@ CREATE TABLE DEYE_DEYE_Rendezvous(
 # Table: Organiser
 #------------------------------------------------------------
 
-CREATE TABLE DEYE_Organiser(
-        IdJeu   Int NOT NULL ,
+CREATE TABLE Organiser(
+        IdJeux   Int NOT NULL ,
         IdEvent Int NOT NULL
-	,CONSTRAINT DEYE_Organiser_PK PRIMARY KEY (IdJeu,IdEvent)
+	,CONSTRAINT Organiser_PK PRIMARY KEY (IdJeux,IdEvent)
 
-	,CONSTRAINT DEYE_Organiser_DEYE_Jeu_FK FOREIGN KEY (IdJeu) REFERENCES DEYE_Jeu(IdJeu)
-	,CONSTRAINT DEYE_Organiser_DEYE_Evenement0_FK FOREIGN KEY (IdEvent) REFERENCES DEYE_Evenement(IdEvent)
+	,CONSTRAINT Organiser_DEYE_Jeux_FK FOREIGN KEY (IdJeux) REFERENCES DEYE_Jeux(IdJeux)
+	,CONSTRAINT Organiser_DEYE_Evenement0_FK FOREIGN KEY (IdEvent) REFERENCES DEYE_Evenement(IdEvent)
+)ENGINE=InnoDB;
+=======
 )ENGINE=InnoDB;
 
 #------------------------------------------------------------
-# INSERT: Personne
+# INSERT: DEYE_Personne
 #------------------------------------------------------------
 
 insert into DEYE_Personne values (null, "lakun", "cindy", "test1@gmail.com", "0000");
@@ -243,7 +297,7 @@ insert into DEYE_Personne values (null, "bereski", "alexandra", "test9@gmail.com
 insert into DEYE_Personne values (null, "tran", "céline", "test10@gmail.com", "0009");
 
 #------------------------------------------------------------
-# INSERT: Lieu
+# INSERT: DEYE_Lieu
 #------------------------------------------------------------
 
 insert into DEYE_Lieu values (null, "16 Rue Stanislas, 75006", "Paris", "Waaagh Taverne");
@@ -253,28 +307,28 @@ insert into DEYE_Lieu values (null, " 25 Rue de la Reine Blanche, 75013", "Paris
 insert into DEYE_Lieu values (null, " 227 Rue Saint-Martin, 75003", "Paris", "LE NID - Cocon Ludique");
 
 #------------------------------------------------------------
-# INSERT: Photo
+# INSERT: DEYE_Evenement
 #------------------------------------------------------------
 
-insert into Photo values (null, "img/bazar.png");
-insert into Photo values (null, "img/bazar.png");
-insert into Photo values (null, "img/bazar.png");
-insert into Photo values (null, "img/bazar.png");
-insert into Photo values (null, "img/bazar.png");
+insert into DEYE_Evenement values (null, "Trial Zap Duel Commander", "2018/12/03", "19:15:00", 1);
+insert into DEYE_Evenement values (null, "Soirée Jeux de société", "2018/12/05", "19:00:00", 2);
+insert into DEYE_Evenement values (null, "Ultimate Masters Booster Draft", "2018/12/07", "19:15:00", 3);
+insert into DEYE_Evenement values (null, "Tournoi Mensuel Legacy", "2018/12/08", "11:30:00", 4);
+insert into DEYE_Evenement values (null, "Soirée Jeux de société", "2018/12/08", "19:00:00", 5);
+insert into DEYE_Evenement values (null, "Ultimate Masters Paquet Scellé", "2018/12/09", "12:00:00", 2);
+insert into DEYE_Evenement values (null, "Dragon Ball Last Chance", "2018/12/14", "13:00:00", 3);
+insert into DEYE_Evenement values (null, "Tournoi Mensuel Modern", "2018/12/15", "11:30:00", 4);
+insert into DEYE_Evenement values (null, "Tournoi Mensuel Legacy", "2018/12/08", "11:30:00", 5);
 
 #------------------------------------------------------------
-# INSERT: DEYE_DEYE_Evenement
+# INSERT: DEYE_Photo
 #------------------------------------------------------------
 
-insert into DEYE_Evenement values (null, "Trial Zap Duel Commander", "2018/12/03", "19:15:00");
-insert into DEYE_Evenement values (null, "Soirée DEYE_Jeux de société", "2018/12/05", "19:00:00");
-insert into DEYE_Evenement values (null, "Ultimate Masters Booster Draft", "2018/12/07", "19:15:00");
-insert into DEYE_Evenement values (null, "Tournoi Mensuel Legacy", "2018/12/08", "11:30:00");
-insert into DEYE_Evenement values (null, "Soirée DEYE_Jeux de société", "2018/12/08", "19:00:00");
-insert into DEYE_Evenement values (null, "Ultimate Masters Paquet Scellé", "2018/12/09", "12:00:00");
-insert into DEYE_Evenement values (null, "Dragon Ball Last Chance", "2018/12/14", "13:00:00");
-insert into DEYE_Evenement values (null, "Tournoi Mensuel Modern", "2018/12/15", "11:30:00");
-insert into DEYE_Evenement values (null, "Tournoi Mensuel Legacy", "2018/12/08", "11:30:00");
+insert into DEYE_Photo values (null, "img/bazar.png", "png", 1);
+insert into DEYE_Photo values (null, "img/bazar.png", "png", 2);
+insert into DEYE_Photo values (null, "img/bazar.png", "png", 3);
+insert into DEYE_Photo values (null, "img/bazar.png", "png", 4);
+insert into DEYE_Photo values (null, "img/bazar.png", "png", 5);
 
 #------------------------------------------------------------
 # INSERT: DEYE_Editeur
@@ -302,7 +356,7 @@ insert into DEYE_Editeur values (null, "Lui-même", "France");
 
 insert into DEYE_Categorie values (null, "Stratégie");
 insert into DEYE_Categorie values (null, "Coopération");
-insert into DEYE_Categorie values (null, "DEYE_Jeux de Rôles");
+insert into DEYE_Categorie values (null, "Jeux de Rôles");
 insert into DEYE_Categorie values (null, "Casse-Tête");
 insert into DEYE_Categorie values (null, "Conquête");
 insert into DEYE_Categorie values (null, "Course");
@@ -317,97 +371,157 @@ insert into DEYE_Categorie values (null, "Créativité");
 # INSERT: DEYE_Trancheage
 #------------------------------------------------------------
 
-insert into DEYE_Trancheage values ("0-3 ans et +");
-insert into DEYE_Trancheage values ("4-5 ans et +");
-insert into DEYE_Trancheage values ("6-7 ans et +");
-insert into DEYE_Trancheage values ("8-10 ans et +");
-insert into DEYE_Trancheage values ("10 ans et +");
-insert into DEYE_Trancheage values ("Toutes les tranches d'âge");
+insert into DEYE_Trancheage values (null, "0-3 ans et +");
+insert into DEYE_Trancheage values (null, "4-5 ans et +");
+insert into DEYE_Trancheage values (null, "6-7 ans et +");
+insert into DEYE_Trancheage values (null, "8-10 ans et +");
+insert into DEYE_Trancheage values (null, "10 ans et +");
+insert into DEYE_Trancheage values (null, "Toutes les tranches d'âge");
 
 #------------------------------------------------------------
 # INSERT: DEYE_Utilisateur
 #------------------------------------------------------------
 
-insert into DEYE_Utilisateur values ("1998/01/01", "0601010101", "lakun", "cindy", "test1@gmail.com", "0000");
-insert into DEYE_Utilisateur values ("1998/01/01", "0601010101", "kvs", "eric", "test2@gmail.com", "0001");
-insert into DEYE_Utilisateur values ("1998/01/01", "0601010101", "phitso", "pierre", "test3@gmail.com", "0002");
-insert into DEYE_Utilisateur values ("1998/01/01", "0601010101", "sotin", "yacine", "test4@gmail.com", "0003");
-insert into DEYE_Utilisateur values ("1998/01/01", "0601010101", "teteen", "cyril", "test5@gmail.com", "0004");
-insert into DEYE_Utilisateur values ("1998/01/01", "0601010101", "abaach", "yahia", "test6@gmail.com", "0005");
-insert into DEYE_Utilisateur values ("1998/01/01", "0601010101", "procha", "vincent", "test7@gmail.com", "0006");
-insert into DEYE_Utilisateur values ("1998/01/01", "0601010101", "saga", "sinthujah", "test8@gmail.com", "0007");
-insert into DEYE_Utilisateur values ("1998/01/01", "0601010101", "bereski", "alexandra", "test9@gmail.com", "0008");
-insert into DEYE_Utilisateur values ("1998/01/01", "0601010101", "tran", "céline", "test10@gmail.com", "0009");
+insert into DEYE_Utilisateur values (1, "1998/01/01", "0601010101", "lakun", "cindy", "test1@gmail.com", "0000");
+insert into DEYE_Utilisateur values (2, "1998/01/01", "0601010101", "kvs", "eric", "test2@gmail.com", "0001");
+insert into DEYE_Utilisateur values (3, "1998/01/01", "0601010101", "phitso", "pierre", "test3@gmail.com", "0002");
+insert into DEYE_Utilisateur values (4, "1998/01/01", "0601010101", "sotin", "yacine", "test4@gmail.com", "0003");
+insert into DEYE_Utilisateur values (5, "1998/01/01", "0601010101", "teteen", "cyril", "test5@gmail.com", "0004");
+insert into DEYE_Utilisateur values (6, "1998/01/01", "0601010101", "abaach", "yahia", "test6@gmail.com", "0005");
+insert into DEYE_Utilisateur values (7, "1998/01/01", "0601010101", "procha", "vincent", "test7@gmail.com", "0006");
+insert into DEYE_Utilisateur values (8, "1998/01/01", "0601010101", "saga", "sinthujah", "test8@gmail.com", "0007");
+insert into DEYE_Utilisateur values (9, "1998/01/01", "0601010101", "bereski", "alexandra", "test9@gmail.com", "0008");
+insert into DEYE_Utilisateur values (10, "1998/01/01", "0601010101", "tran", "céline", "test10@gmail.com", "0009");
 
 #------------------------------------------------------------
 # INSERT: DEYE_Validateur
 #------------------------------------------------------------
 
-insert into DEYE_Validateur values ("2018/09/15", "Administrateur", "2018/09/15", "lakun", "cindy", "test1@gmail.com", "0000");
-insert into DEYE_Validateur values ("2018/09/15", "Administrateur", "kvs", "eric", "test2@gmail.com", "0001");
-insert into DEYE_Validateur values ("2018/09/15", "Administrateur", "phitso", "pierre", "test3@gmail.com", "0002");
-insert into DEYE_Validateur values ("2018/09/15", "Administrateur", "sotin", "yacine", "test4@gmail.com", "0003");
-insert into DEYE_Validateur values ("2018/09/15", "membre", "teteen", "cyril", "test5@gmail.com", "0004");
-insert into DEYE_Validateur values ("2018/09/15", "membre", "abaach", "yahia", "test6@gmail.com", "0005");
-insert into DEYE_Validateur values ("2018/09/15", "membre", "procha", "vincent", "test7@gmail.com", "0006");
-insert into DEYE_Validateur values ("2018/09/15", "membre", "saga", "sinthujah", "test8@gmail.com", "0007");
-insert into DEYE_Validateur values ("2018/09/15", "membre", "bereski", "alexandra", "test9@gmail.com", "0008");
-insert into DEYE_Validateur values ("2018/09/15", "membre", "tran", "céline", "test10@gmail.com", "0009");
+insert into DEYE_Validateur values (1, "2018/09/15", "Administrateur", "2018/09/15", "lakun", "cindy", "test1@gmail.com", "0000");
+insert into DEYE_Validateur values (2, "2018/09/15", "Administrateur",  "2018/09/13", "kvs", "eric", "test2@gmail.com", "0001");
+insert into DEYE_Validateur values (3, "2018/09/15", "Administrateur",  "2018/09/2", "phitso", "pierre", "test3@gmail.com", "0002");
+insert into DEYE_Validateur values (4, "2018/09/15", "Administrateur",  "2018/03/05", "sotin", "yacine", "test4@gmail.com", "0003");
+insert into DEYE_Validateur values (5, "2018/09/15", "membre",  "2018/01/04", "teteen", "cyril", "test5@gmail.com", "0004");
+insert into DEYE_Validateur values (6, "2018/09/15", "membre",  "2018/05/05", "abaach", "yahia", "test6@gmail.com", "0005");
+insert into DEYE_Validateur values (7, "2018/09/15", "membre",  "2018/02/08", "procha", "vincent", "test7@gmail.com", "0006");
+insert into DEYE_Validateur values (8, "2018/09/15", "membre",  "2018/04/14", "saga", "sinthujah", "test8@gmail.com", "0007");
+insert into DEYE_Validateur values (9, "2018/09/15", "membre",  "2018/06/25", "bereski", "alexandra", "test9@gmail.com", "0008");
+insert into DEYE_Validateur values (10, "2018/09/15", "membre",  "2018/09/16", "tran", "céline", "test10@gmail.com", "0009");
 
 #------------------------------------------------------------
-# INSERT: DEYE_Jeu
+# INSERT: DEYE_Jeux
 #------------------------------------------------------------
 
-insert into DEYE_Jeu values (null, "Games of Thrones" ,"2011/12/21", "54,00", "2:00:00", "6");
-insert into DEYE_Jeu values (null, "*Jamaica" ,"2008/02/11", "35,00", "00:30:00", "6");
-insert into DEYE_Jeu values (null, "Monopoly" ,"1935/02/06", "20,00", "12:00:00", "6");
-insert into DEYE_Jeu values (null, "Games of Thrones" ,"2011/12/21", "54,00", "2:00:00", "6");
-insert into DEYE_Jeu values (null, "Munchkins" ,"2010/12/21", "36,00", "1:00:00", "6");
-insert into DEYE_Jeu values (null, "La Bonne Paye" ,"1975/12/21", "20,00", "1:00:00", "6");
+insert into DEYE_Jeux values (null, "Games of Thrones" ,"2011/12/21", "54,00", "2:00:00", "6", "2011/12/21", 1, 1, 1, 1, 1);
+insert into DEYE_Jeux values (null, "*Jamaica" ,"2008/02/11", "35,00", "00:30:00", "6", "2011/06/21", 2, 2, 2, 2, 2);
+insert into DEYE_Jeux values (null, "Monopoly" ,"1935/02/06", "20,00", "12:00:00", "6", "2011/07/21", 3, 3, 3, 3, 3);
+insert into DEYE_Jeux values (null, "Games of Thrones" ,"2011/12/21", "54,00", "2:00:00", "6", "2011/12/11", 4, 4, 4, 4, 4);
+insert into DEYE_Jeux values (null, "Munchkins" ,"2010/12/21", "36,00", "1:00:00", "6", "2011/04/06", 5, 5, 5, 5, 5);
+insert into DEYE_Jeux values (null, "La Bonne Paye" ,"1975/12/21", "20,00", "1:00:00", "6", "2011/05/07", 6, 6, 6, 6, 6);
 
 #------------------------------------------------------------
 # INSERT: DEYE_Commentaire
 #------------------------------------------------------------
 
-insert into DEYE_Commentaire values (null, "très nul", "2018/12/10", "0");
-insert into DEYE_Commentaire values (null, "nul", "2018/06/27", "0,5");
-insert into DEYE_Commentaire values (null, "pas incroyable", "2018/01/05", "1");
-insert into DEYE_Commentaire values (null, "pas très bien", "2018/01/15", "1,5");
-insert into DEYE_Commentaire values (null, "bof", "2018/10/23", "2");
-insert into DEYE_Commentaire values (null, "normal", "2018/07/31", "2,5");
-insert into DEYE_Commentaire values (null, "moyen", "2018/04/01", "3");
-insert into DEYE_Commentaire values (null, "Pas mal", "2018/03/17", "3,5");
-insert into DEYE_Commentaire values (null, "Super", "2018/12/11", "4");
-insert into DEYE_Commentaire values (null, "Excellent DEYE_Jeu", "2018/01/20", "4,5");
-insert into DEYE_Commentaire values (null, "Parfait", "2018/05/30", "5");
+insert into DEYE_Commentaire values (null, "très nul", "2018/12/10", "0", 1, 1);
+insert into DEYE_Commentaire values (null, "nul", "2018/06/27", "0,5", 2, 2);
+insert into DEYE_Commentaire values (null, "pas incroyable", "2018/01/05", "1", 3, 3);
+insert into DEYE_Commentaire values (null, "pas très bien", "2018/01/15", "1,5", 4, 4);
+insert into DEYE_Commentaire values (null, "bof", "2018/10/23", "2", 5, 5);
+insert into DEYE_Commentaire values (null, "normal", "2018/07/31", "2,5", 6, 6);
+insert into DEYE_Commentaire values (null, "moyen", "2018/04/01", "3", 4, 4);
+insert into DEYE_Commentaire values (null, "Pas mal", "2018/03/17", "3,5", 5 ,5);
+insert into DEYE_Commentaire values (null, "Super", "2018/12/11", "4", 6, 6);
+insert into DEYE_Commentaire values (null, "Excellent Jeux", "2018/01/20", "4,5", 1, 1);
+insert into DEYE_Commentaire values (null, "Parfait", "2018/05/30", "5", 2, 2);
 
 #------------------------------------------------------------
 # INSERT: DEYE_Rendezvous
 #------------------------------------------------------------
 
-insert into DEYE_Rendezvous values (null, "2018/12/07", "12:00:00");
-insert into DEYE_Rendezvous values (null, "2018/12/07", "12:30:00");
-insert into DEYE_Rendezvous values (null, "2018/12/07", "13:00:00");
-insert into DEYE_Rendezvous values (null, "2018/12/07", "13:30:00");
-insert into DEYE_Rendezvous values (null, "2018/12/07", "14:00:00");
-insert into DEYE_Rendezvous values (null, "2018/12/07", "14:30:00");
-insert into DEYE_Rendezvous values (null, "2018/12/07", "15:00:00");
-insert into DEYE_Rendezvous values (null, "2018/12/07", "15:30:00");
-insert into DEYE_Rendezvous values (null, "2018/12/07", "16:00:00");
-insert into DEYE_Rendezvous values (null, "2018/12/07", "16:30:00");
-insert into DEYE_Rendezvous values (null, "2018/12/07", "17:00:00");
+insert into DEYE_Rendezvous values (null, "2018/12/07", "12:00:00",1 ,1);
+insert into DEYE_Rendezvous values (null, "2018/12/07", "12:30:00", 2, 2);
+insert into DEYE_Rendezvous values (null, "2018/12/07", "13:00:00", 3, 3);
+insert into DEYE_Rendezvous values (null, "2018/12/07", "13:30:00", 4, 4);
+insert into DEYE_Rendezvous values (null, "2018/12/07", "14:00:00", 5, 5);
+insert into DEYE_Rendezvous values (null, "2018/12/07", "14:30:00", 6, 6);
+insert into DEYE_Rendezvous values (null, "2018/12/07", "15:00:00", 3, 4);
+insert into DEYE_Rendezvous values (null, "2018/12/07", "15:30:00", 5, 5);
+insert into DEYE_Rendezvous values (null, "2018/12/07", "16:00:00", 1, 4);
+insert into DEYE_Rendezvous values (null, "2018/12/07", "16:30:00", 3, 3);
+insert into DEYE_Rendezvous values (null, "2018/12/07", "17:00:00", 4, 4);
 
 #------------------------------------------------------------
-# TRIGGER : Archive_Personne
+# INSERT: Organiser
+#------------------------------------------------------------
+
+#------------------------------------------------------------
+# Trigger: DEYE_Personne_Archivage_Update
 #------------------------------------------------------------
 
 DELIMITER $
-CREATE TRIGGER DEYE_TRG_Archivage_Personne_After_Update AFTER UPDATE
+CREATE TRIGGER TRG_Personne_Archivage_After_Update AFTER UPDATE
 	ON DEYE_Personne
 	FOR each row
 	BEGIN
-		insert into DEYE_PersonneArchive (IdPersonne, nom, prenom, email, mdp, date_histo)
-		values
-		(OLD.IdPersonne, OLD.nom, OLD.prenom, OLD.email, OLD.mdp, NOW());
+		insert into DEYE_Personne_Archive values
+		(null, OLD.IdPersonne, OLD.nom, OLD.prenom, OLD.email, OLD.mdp, NOW());
+	END $
+DELIMITER ;
+
+#------------------------------------------------------------
+# Trigger: Jeux_Archivage_Update
+#------------------------------------------------------------
+
+DELIMITER $
+CREATE TRIGGER TRG_DEYE_Jeux_Archivage_After_Update AFTER UPDATE
+	ON DEYE_Jeux
+	FOR each row
+	BEGIN
+		insert into DEYE_Jeux_Archive values
+		(null, OLD.IdJeux, OLD.designation, OLD.date_sortie, OLD.prix, OLD.temps_Jeux, OLD.nb_joueurs, OLD.date_validation,
+		OLD.date_naissance, OLD.IdEditeur, OLD.Id_tranche_age, OLD.IdCategorie, OLD.IdPersonne_Validateur, OLD.date_entree_Validateur, NOW());
+	END $
+DELIMITER ;
+
+#------------------------------------------------------------
+# Trigger: Evenement_Archivage_Update
+#------------------------------------------------------------
+
+DELIMITER $
+CREATE TRIGGER TRG_Evenement_Archivage_After_Update AFTER UPDATE
+	ON DEYE_Evenement
+	FOR each row
+	BEGIN
+		insert into DEYE_Evenement_Archive values
+		(null, OLD.IdEvent, OLD.designation, OLD.date_event, OLD.heure_event, OLD.IdLieu, NOW());
+	END $
+DELIMITER ;
+
+#------------------------------------------------------------
+# Trigger: Evenement_Archivage_Update
+#------------------------------------------------------------
+
+DELIMITER $
+CREATE TRIGGER TRG_Evenement_Archivage_After_Update AFTER UPDATE
+	ON DEYE_Evenement
+	FOR each row
+	BEGIN
+		insert into DEYE_Evenement_Archive values
+		(null, OLD.IdEvent, OLD.designation, OLD.date_event, OLD.heure_event, OLD.IdLieu, NOW());
+	END $
+DELIMITER ;
+
+#------------------------------------------------------------
+# Trigger: Rendezvous_Archivage_Update
+#------------------------------------------------------------
+
+DELIMITER $
+CREATE TRIGGER TRG_Rendezvous_Archivage_After_Update AFTER UPDATE
+	ON DEYE_Rendezvous
+	FOR each row
+	BEGIN
+		insert into DEYE_Rendezvous_Archive values
+		(null, OLD.IdRendezvous, OLD.date_rendezvous, OLD.heure_rendezvous, OLD.IdJeux, OLD.IdPersonne, date_naissance, NOW());
 	END $
 DELIMITER ;
