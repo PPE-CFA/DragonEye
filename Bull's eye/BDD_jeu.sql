@@ -267,7 +267,7 @@ CREATE TABLE DEYE_Rendezvous_Archive(
 # Table: Organiser
 #------------------------------------------------------------
 
-CREATE TABLE Organiser(
+CREATE TABLE DEYE_Organiser(
         IdJeux   Int NOT NULL ,
         IdEvent Int NOT NULL
 	,CONSTRAINT Organiser_PK PRIMARY KEY (IdJeux,IdEvent)
@@ -408,11 +408,11 @@ insert into DEYE_Validateur values (10, "2018/09/15", "membre",  "2018/09/16", "
 #------------------------------------------------------------
 
 insert into DEYE_Jeux values (null, "Games of Thrones" ,"2011/12/21", "54.00", "2:00:00", "6", "2011/12/21", 1, 1, 1, 1, 1, NOW());
-insert into DEYE_Jeux values (null, "*Jamaica" ,"2008/02/11", "35.00", "00:30:00", "6", "2011/06/21", 2, 2, 2, 2, 2, NOW());
-insert into DEYE_Jeux values (null, "Monopoly" ,"1935/02/06", "20.00", "12:00:00", "6", "2011/07/21", 3, 3, 3, 3, 3,NOW());
-insert into DEYE_Jeux values (null, "Games of Thrones" ,"2011/12/21", "54.00", "2:00:00", "6", "2011/12/11", 4, 4, 4, 4, 4, NOW());
-insert into DEYE_Jeux values (null, "Munchkins" ,"2010/12/21", "36.00", "1:00:00", "6", "2011/04/06", 5, 5, 5, 5, 5, NOW());
-insert into DEYE_Jeux values (null, "La Bonne Paye" ,"1975/12/21", "20.00", "1:00:00", "6", "2011/05/07", 6, 6, 6, 6, 6,  NOW());
+insert into DEYE_Jeux values (null, "Jamaica" ,"2008/02/11", "35.00", "00:30:00", "6", "2011/06/21", 2, 2, 2, 10, 2, NOW());
+insert into DEYE_Jeux values (null, "Monopoly" ,"1935/02/06", "20.00", "12:00:00", "6", "2011/07/21", 3, 3, 3, 10, 3,NOW());
+insert into DEYE_Jeux values (null, "Games of Thrones" ,"2011/12/21", "54.00", "2:00:00", "6", "2011/12/11", 4, 4, 4, 1, 4, NOW());
+insert into DEYE_Jeux values (null, "Munchkins" ,"2010/12/21", "36.00", "1:00:00", "6", "2011/04/06", 5, 5, 5, 1, 5, NOW());
+insert into DEYE_Jeux values (null, "La Bonne Paye" ,"1975/12/21", "20.00", "1:00:00", "6", "2011/05/07", 6, 6, 6, 10, 6,  NOW());
 
 #------------------------------------------------------------
 # INSERT: DEYE_Commentaire
@@ -506,3 +506,103 @@ CREATE TRIGGER TRG_Rendezvous_Archivage_After_Update AFTER UPDATE
 		(null, OLD.IdRendezvous, OLD.date_rendezvous, OLD.heure_rendezvous, OLD.IdJeux, OLD.IdPersonne, NOW());
 	END $
 DELIMITER ;
+
+
+#------------------------------------------------------------
+# Procedure: Compter Jeux Total
+#------------------------------------------------------------
+
+DELIMITER $
+CREATE PROCEDURE DEYE_Count_Game()
+BEGIN
+	SELECT COUNT(*)
+	FROM DEYE_Jeux;
+END $
+DELIMITER ;
+
+#------------------------------------------------------------
+# Procedure: Afficher Jeux par Categorie
+#------------------------------------------------------------
+
+DELIMITER $
+CREATE PROCEDURE DEYE_Afficher_Jeux_Categorie (IN p_IdCategorie INT)
+BEGIN
+	SELECT * FROM DEYE_Jeux
+	WHERE IdCategorie = p_IdCategorie;
+END $
+
+#------------------------------------------------------------
+# Procedure: Afficher Jeux par Categorie et par Limite Prix
+#------------------------------------------------------------
+
+DELIMITER $
+CREATE PROCEDURE DEYE_Afficher_Jeux_Categorie_Limite_Prix (IN p_IdCategorie INT, IN p_prix INT)
+BEGIN
+	SELECT * FROM DEYE_Jeux
+	WHERE IdCategorie = p_IdCategorie
+	AND prix <= p_prix;
+END $
+
+#------------------------------------------------------------
+# Procedure: Compter Categorie
+#------------------------------------------------------------
+
+DELIMITER $
+CREATE PROCEDURE DEYE_Count_Categorie ()
+BEGIN
+	SELECT COUNT(*)
+	FROM DEYE_Categorie;
+END $
+DELIMITER ;
+
+#------------------------------------------------------------
+# Procedure: Compter Jeux par Categorie
+#------------------------------------------------------------
+
+DELIMITER $
+CREATE PROCEDURE DEYE_Count_Game_Per_Categorie (p_IdCategorie INT)
+BEGIN
+	SELECT COUNT(*)
+	FROM DEYE_Jeux
+	WHERE IdCategorie = p_IdCategorie;
+END $
+DELIMITER $
+
+#------------------------------------------------------------
+# Procedure: Compter Evenement
+#------------------------------------------------------------
+
+DELIMITER $
+CREATE PROCEDURE DEYE_Count_Evenement ()
+BEGIN
+	SELECT COUNT(*)
+	FROM DEYE_Evenement;
+END $
+DELIMITER ;
+
+
+#------------------------------------------------------------
+# Procedure: Compter Evenement par Lieu
+#------------------------------------------------------------
+
+DELIMITER $
+CREATE PROCEDURE DEYE_Count_Event_Per_Lieu (IN p_IdLieu INT)
+BEGIN
+	SELECT COUNT(*)
+	FROM DEYE_Event
+	WHERE IdLieu = p_IdLieu;
+END $
+DELIMITER $
+
+#------------------------------------------------------------
+# Procedure: Afficher Evenement par Lieu
+#------------------------------------------------------------
+
+DELIMITER $
+CREATE PROCEDURE DEYE_Afficher_Event_Per_Lieu (IN p_IdLieu INT)
+BEGIN
+	SELECT *
+	FROM DEYE_Event
+	WHERE IdLieu = p_IdLieu;
+END $
+DELIMITER $
