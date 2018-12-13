@@ -46,7 +46,7 @@
             </div>
         </nav>
 
-
+        <!--filtre et card!-->
         <div class="container-fluid padding">
         <div class="row text-center padding">
           <div class="container col-12">
@@ -57,9 +57,10 @@
             <h2>Filterable List</h2>
             <p>Type something in the input field to search the list for specific items:</p>
             <input class="form-control" id="inputGame" type="text" placeholder="Rechercher un jeu">
-            <br>
             <input class="form-control" id="inputPlace" type="text" placeholder="Rechercher un lieu">
-            <br>
+            <button class="btn btn-xl btn-primary sorter" value="jeux video">Jeux video</button>
+            <button class="btn btn-xl btn-primary sorter" value="jeux de société">Jeu de société</button>
+            <button class="btn btn-xl btn-primary game">Jeux video</button>
 
           </div>
           </div>
@@ -77,9 +78,9 @@
                   <hr>
                     <div class="card-body">
                       <h4 class="card-title">World of Warcraft</h4>
-                      <p class="card-text-type"><i <i class="fas fa-gamepad"></i> Jeux video</p>
-                      <p class="card-text-place"><i <i class="fas fa-map-marker-alt"></i> Paris - France</p>
-                      <p class="card-text-age"><i <i class="fas fa-users"></i> 13+</p>
+                      <p class="card-text-typeGame" data-typeGame='["jeux video"]'><i <i class="fas fa-gamepad"></i> Jeux video</p>
+                      <p class="card-text-place" data-place='["paris"]'><i <i class="fas fa-map-marker-alt"></i> Paris - France</p>
+                      <p class="card-text-age"data-age='["13"]'><i <i class="fas fa-users"></i> 13+</p>
                       <a href="#" class="btn btn-outline-secondary">Voir plus</a>
                     </div>
                   </div>
@@ -93,9 +94,9 @@
                   <hr>
                     <div class="card-body">
                       <h4 class="card-title">takenoko</h4>
-                      <p class="card-text-type" data-groups='["jeux de société"]'><i <i class="fas fa-gamepad"></i> Jeux de société</p>
-                      <p class="card-text-place" data-groups='["paris"]'><i <i class="fas fa-map-marker-alt"></i> Paris - France</p>
-                      <p class="card-text-age" data-groups='["6"]'><i <i class="fas fa-users"></i> 6+</p>
+                      <p class="card-text-typeGame" data-typeGame='["jeux de société"]'><i <i class="fas fa-gamepad"></i> Jeux de société</p>
+                      <p class="card-text-place" data-place='["paris"]'><i <i class="fas fa-map-marker-alt"></i> Paris - France</p>
+                      <p class="card-text-age" data-age='["6"]'><i <i class="fas fa-users"></i> 6+</p>
                       <a href="#" class="btn btn-outline-secondary">Voir plus</a>
                     </div>
                   </div>
@@ -109,9 +110,9 @@
                   <hr>
                     <div class="card-body">
                       <h4 class="card-title">God of War</h4>
-                      <p class="card-text-type"><i <i class="fas fa-gamepad"></i> Jeux video</p>
-                      <p class="card-text-place"><i <i class="fas fa-map-marker-alt"></i> Lyon - France</p>
-                      <p class="card-text-age"><i <i class="fas fa-users"></i> 18+</p>
+                      <p class="card-text-typeGame" data-typeGame='["jeux video"]'><i <i class="fas fa-gamepad"></i> Jeux video</p>
+                      <p class="card-text-place" data-place='["lyon"]'><i <i class="fas fa-map-marker-alt"></i> Lyon - France</p>
+                      <p class="card-text-age" data-age='["18"]'><i <i class="fas fa-users"></i> 18+</p>
                       <a href="#" class="btn btn-outline-secondary">Voir plus</a>
                     </div>
                   </div>
@@ -173,6 +174,7 @@
     </body>
 
     <script>
+    //rechercher un jeu
     $(document).ready(function(){
       $("#inputGame").on("keyup", function() {
         var value = $(this).val().toLowerCase();
@@ -182,6 +184,7 @@
       });
     });
 
+    //rechercher un lieu
     $(document).ready(function(){
       $("#inputPlace").on("keyup", function() {
         var value = $(this).val().toLowerCase();
@@ -191,14 +194,27 @@
       });
     });
 
+    //catégorie jeux video ou jeu de société
     $(document).ready(function(){
-      $("#inputPlace").on("keyup", function() {
+      $(".sorter").on("click", function() {
         var value = $(this).val().toLowerCase();
-        $(".card-text-place").filter(function() {
+        console.log(value);
+        $("p").filter(function() {
           $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
       });
     });
+
+    $(document).ready(function(){
+      $(".game").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $(".card-text-typeGame").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+
+
 
     </script>
 
