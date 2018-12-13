@@ -30,7 +30,7 @@ CREATE TABLE DEYE_Evenement(
         IdLieu      Int NOT NULL
 	,CONSTRAINT DEYE_Evenement_PK PRIMARY KEY (IdEvent)
 
-	,CONSTRAINT DEYE_Evenement_DEYE_Lieu_FK FOREIGN KEY (IdLieu) REFERENCES DEYE_Lieu(IdLieu)
+	,CONSTRAINT DEYE_Evenement_DEYE_Lieu_FK FOREIGN KEY (IdLieu) REFERENCES DEYE_Lieu(IdLieu) ON DELETE CASCADE
 )ENGINE=InnoDB;
 
 #------------------------------------------------------------
@@ -60,7 +60,7 @@ CREATE TABLE DEYE_Photo(
         IdEvent Int NOT NULL
 	,CONSTRAINT DEYE_Photo_PK PRIMARY KEY (IdPhoto)
 
-	,CONSTRAINT DEYE_Photo_DEYE_Evenement_FK FOREIGN KEY (IdEvent) REFERENCES DEYE_Evenement(IdEvent)
+	,CONSTRAINT DEYE_Photo_DEYE_Evenement_FK FOREIGN KEY (IdEvent) REFERENCES DEYE_Evenement(IdEvent) ON DELETE CASCADE
 )ENGINE=InnoDB;
 
 
@@ -141,7 +141,7 @@ CREATE TABLE DEYE_Utilisateur(
         mdp            Varchar (50) NOT NULL
 	,CONSTRAINT DEYE_Utilisateur_PK PRIMARY KEY (IdPersonne,date_naissance)
 
-	,CONSTRAINT DEYE_Utilisateur_DEYE_Personne_FK FOREIGN KEY (IdPersonne) REFERENCES DEYE_Personne(IdPersonne)
+	,CONSTRAINT DEYE_Utilisateur_DEYE_Personne_FK FOREIGN KEY (IdPersonne) REFERENCES DEYE_Personne(IdPersonne) ON DELETE CASCADE
 )ENGINE=InnoDB;
 
 
@@ -159,7 +159,8 @@ CREATE TABLE DEYE_Validateur(
         email       Varchar (50) NOT NULL ,
         mdp         Varchar (50) NOT NULL
 	,CONSTRAINT DEYE_Validateur_PK PRIMARY KEY (IdPersonne,date_entree)
-	,CONSTRAINT DEYE_Validateur_DEYE_Personne_FK FOREIGN KEY (IdPersonne) REFERENCES DEYE_Personne(IdPersonne)
+
+	,CONSTRAINT DEYE_Validateur_DEYE_Personne_FK FOREIGN KEY (IdPersonne) REFERENCES DEYE_Personne(IdPersonne) ON DELETE CASCADE
 )ENGINE=InnoDB;
 
 #------------------------------------------------------------
@@ -181,12 +182,12 @@ CREATE TABLE DEYE_Jeux(
         IdPersonne_Validateur  Int NOT NULL ,
         date_entree_Validateur DATETIME NOT NULL
 	,CONSTRAINT DEYE_Jeux_PK PRIMARY KEY (IdJeux)
-
-	,CONSTRAINT DEYE_Jeux_DEYE_Utilisateur_FK FOREIGN KEY (IdPersonne) REFERENCES DEYE_Utilisateur(IdPersonne)
-	,CONSTRAINT DEYE_Jeux_DEYE_Editeur0_FK FOREIGN KEY (IdEditeur) REFERENCES DEYE_Editeur(IdEditeur)
-	,CONSTRAINT DEYE_Jeux_DEYE_Trancheage1_FK FOREIGN KEY (Id_tranche_age) REFERENCES DEYE_Trancheage(Id_tranche_age)
-	,CONSTRAINT DEYE_Jeux_DEYE_Categorie2_FK FOREIGN KEY (IdCategorie) REFERENCES DEYE_Categorie(IdCategorie)
-	,CONSTRAINT DEYE_Jeux_DEYE_Validateur3_FK FOREIGN KEY (IdPersonne_Validateur) REFERENCES DEYE_Validateur(IdPersonne)
+	
+	,CONSTRAINT DEYE_Jeux_DEYE_Utilisateur_FK FOREIGN KEY (IdPersonne) REFERENCES DEYE_Utilisateur(IdPersonne) ON DELETE CASCADE
+	,CONSTRAINT DEYE_Jeux_DEYE_Editeur0_FK FOREIGN KEY (IdEditeur) REFERENCES DEYE_Editeur(IdEditeur) ON DELETE CASCADE
+	,CONSTRAINT DEYE_Jeux_DEYE_Trancheage1_FK FOREIGN KEY (Id_tranche_age) REFERENCES DEYE_Trancheage(Id_tranche_age) ON DELETE CASCADE
+	,CONSTRAINT DEYE_Jeux_DEYE_Categorie2_FK FOREIGN KEY (IdCategorie) REFERENCES DEYE_Categorie(IdCategorie) ON DELETE CASCADE
+	,CONSTRAINT DEYE_Jeux_DEYE_Validateur3_FK FOREIGN KEY (IdPersonne_Validateur) REFERENCES DEYE_Validateur(IdPersonne) ON DELETE CASCADE
 )ENGINE=InnoDB;
 
 #------------------------------------------------------------
@@ -226,8 +227,8 @@ CREATE TABLE DEYE_Commentaire(
         IdPersonne      Int NOT NULL 
 	,CONSTRAINT DEYE_Commentaire_PK PRIMARY KEY (IdComment)
 
-	,CONSTRAINT DEYE_Commentaire_DEYE_Jeux_FK FOREIGN KEY (IdJeux) REFERENCES DEYE_Jeux(IdJeux)
-	,CONSTRAINT DEYE_Commentaire_DEYE_Utilisateur0_FK FOREIGN KEY (IdPersonne) REFERENCES DEYE_Utilisateur(IdPersonne)
+	,CONSTRAINT DEYE_Commentaire_DEYE_Jeux_FK FOREIGN KEY (IdJeux) REFERENCES DEYE_Jeux(IdJeux) ON DELETE CASCADE
+	,CONSTRAINT DEYE_Commentaire_DEYE_Utilisateur0_FK FOREIGN KEY (IdPersonne) REFERENCES DEYE_Utilisateur(IdPersonne) ON DELETE CASCADE
 )ENGINE=InnoDB;
 
 
@@ -242,9 +243,9 @@ CREATE TABLE DEYE_Rendezvous(
         IdJeux           Int NOT NULL ,
         IdPersonne       Int NOT NULL 
 	,CONSTRAINT DEYE_Rendezvous_PK PRIMARY KEY (idrendezvous)
-	
-	,CONSTRAINT DEYE_Rendezvous_DEYE_Jeux_FK FOREIGN KEY (IdJeux) REFERENCES DEYE_Jeux(IdJeux)
-	,CONSTRAINT DEYE_Rendezvous_DEYE_Utilisateur0_FK FOREIGN KEY (IdPersonne) REFERENCES DEYE_Utilisateur(IdPersonne)
+	 
+	,CONSTRAINT DEYE_Rendezvous_DEYE_Jeux_FK FOREIGN KEY (IdJeux) REFERENCES DEYE_Jeux(IdJeux) ON DELETE CASCADE
+	,CONSTRAINT DEYE_Rendezvous_DEYE_Utilisateur0_FK FOREIGN KEY (IdPersonne) REFERENCES DEYE_Utilisateur(IdPersonne) ON DELETE CASCADE
 )ENGINE=InnoDB;
 
 #------------------------------------------------------------
@@ -272,8 +273,8 @@ CREATE TABLE DEYE_Organiser(
         IdEvent Int NOT NULL
 	,CONSTRAINT Organiser_PK PRIMARY KEY (IdJeux,IdEvent)
 
-	,CONSTRAINT Organiser_DEYE_Jeux_FK FOREIGN KEY (IdJeux) REFERENCES DEYE_Jeux(IdJeux)
-	,CONSTRAINT Organiser_DEYE_Evenement0_FK FOREIGN KEY (IdEvent) REFERENCES DEYE_Evenement(IdEvent)
+	,CONSTRAINT Organiser_DEYE_Jeux_FK FOREIGN KEY (IdJeux) REFERENCES DEYE_Jeux(IdJeux) ON DELETE CASCADE
+	,CONSTRAINT Organiser_DEYE_Evenement0_FK FOREIGN KEY (IdEvent) REFERENCES DEYE_Evenement(IdEvent) ON DELETE CASCADE
 )ENGINE=InnoDB;
 
 #------------------------------------------------------------
@@ -530,6 +531,7 @@ BEGIN
 	SELECT * FROM DEYE_Jeux
 	WHERE IdCategorie = p_IdCategorie;
 END $
+DELIMITER ;
 
 #------------------------------------------------------------
 # Procedure: Afficher Jeux par Categorie et par Limite Prix
@@ -542,6 +544,7 @@ BEGIN
 	WHERE IdCategorie = p_IdCategorie
 	AND prix <= p_prix;
 END $
+DELIMITER ;
 
 #------------------------------------------------------------
 # Procedure: Compter Categorie
@@ -566,7 +569,7 @@ BEGIN
 	FROM DEYE_Jeux
 	WHERE IdCategorie = p_IdCategorie;
 END $
-DELIMITER $
+DELIMITER ;
 
 #------------------------------------------------------------
 # Procedure: Compter Evenement
@@ -592,7 +595,7 @@ BEGIN
 	FROM DEYE_Event
 	WHERE IdLieu = p_IdLieu;
 END $
-DELIMITER $
+DELIMITER ;
 
 #------------------------------------------------------------
 # Procedure: Afficher Evenement par Lieu
@@ -605,4 +608,4 @@ BEGIN
 	FROM DEYE_Event
 	WHERE IdLieu = p_IdLieu;
 END $
-DELIMITER $
+DELIMITER ;
