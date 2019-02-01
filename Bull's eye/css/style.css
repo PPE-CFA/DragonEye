@@ -175,7 +175,11 @@ html,body{
 }
 
 .card{
+<<<<<<< HEAD
   box-shadow: 1px 1px 6px #4E2909;
+=======
+  box-shadow: 1px 1px 6px #A79B91;
+>>>>>>> 934bce2c2abd3a2511c27c266ea34ee72f337f83
   border-radius: 1rem;
 
 }

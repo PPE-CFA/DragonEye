@@ -260,7 +260,6 @@ CREATE TABLE DEYE_Rendezvous_Archive(
         IdJeux           Int NOT NULL ,
         IdPersonne       Int NOT NULL 
 	,CONSTRAINT DEYE_Rendezvous_Archive_PK PRIMARY KEY (IdRendezvous_Archive)
-
 )ENGINE=InnoDB;
 
 
@@ -272,7 +271,6 @@ CREATE TABLE DEYE_Organiser(
         IdJeux   Int NOT NULL ,
         IdEvent Int NOT NULL
 	,CONSTRAINT Organiser_PK PRIMARY KEY (IdJeux,IdEvent)
-
 	,CONSTRAINT Organiser_DEYE_Jeux_FK FOREIGN KEY (IdJeux) REFERENCES DEYE_Jeux(IdJeux) ON DELETE CASCADE
 	,CONSTRAINT Organiser_DEYE_Evenement0_FK FOREIGN KEY (IdEvent) REFERENCES DEYE_Evenement(IdEvent) ON DELETE CASCADE
 )ENGINE=InnoDB;
@@ -325,7 +323,6 @@ insert into DEYE_Photo values (null, "img/bazar.png", "png", 2);
 insert into DEYE_Photo values (null, "img/bazar.png", "png", 3);
 insert into DEYE_Photo values (null, "img/bazar.png", "png", 4);
 insert into DEYE_Photo values (null, "img/bazar.png", "png", 5);
-
 #------------------------------------------------------------
 # INSERT: DEYE_Editeur
 #------------------------------------------------------------
@@ -407,18 +404,17 @@ insert into DEYE_Validateur values (10, "2018/09/15", "membre",  "2018/09/16", "
 #------------------------------------------------------------
 # INSERT: DEYE_Jeux
 #------------------------------------------------------------
-
 insert into DEYE_Jeux values (null, "Games of Thrones" ,"2011/12/21", "54.00", "2:00:00", "6", "2011/12/21", 1, 1, 1, 1, 1, NOW());
 insert into DEYE_Jeux values (null, "Jamaica" ,"2008/02/11", "35.00", "00:30:00", "6", "2011/06/21", 2, 2, 2, 10, 2, NOW());
 insert into DEYE_Jeux values (null, "Monopoly" ,"1935/02/06", "20.00", "12:00:00", "6", "2011/07/21", 3, 3, 3, 10, 3,NOW());
 insert into DEYE_Jeux values (null, "Games of Thrones" ,"2011/12/21", "54.00", "2:00:00", "6", "2011/12/11", 4, 4, 4, 1, 4, NOW());
 insert into DEYE_Jeux values (null, "Munchkins" ,"2010/12/21", "36.00", "1:00:00", "6", "2011/04/06", 5, 5, 5, 1, 5, NOW());
 insert into DEYE_Jeux values (null, "La Bonne Paye" ,"1975/12/21", "20.00", "1:00:00", "6", "2011/05/07", 6, 6, 6, 10, 6,  NOW());
-
+                              
 #------------------------------------------------------------
 # INSERT: DEYE_Commentaire
 #------------------------------------------------------------
-
+                              
 insert into DEYE_Commentaire values (null, "très nul", "2018/12/10", "0", 1, 1);
 insert into DEYE_Commentaire values (null, "nul", "2018/06/27", "0.5", 2, 2);
 insert into DEYE_Commentaire values (null, "pas incroyable", "2018/01/05", "1", 3, 3);

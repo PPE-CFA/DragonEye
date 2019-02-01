@@ -1,4 +1,7 @@
 <!DOCTYPE html>
+<?php
+  include 'bdd.php';
+?>
 <html>
 <head>
   <meta charset="utf-8">
@@ -120,6 +123,7 @@
                    modal.style.display = "none";
                }
             }
+
             function show(id){
               console.log(id);
               if(id == "eyeInscription"){

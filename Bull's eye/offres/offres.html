@@ -46,7 +46,11 @@
             </div>
         </nav>
 
+<<<<<<< HEAD
 
+=======
+        <!--filtre et card!-->
+>>>>>>> 934bce2c2abd3a2511c27c266ea34ee72f337f83
         <div class="container-fluid padding">
         <div class="row text-center padding">
           <div class="container col-12">
@@ -57,9 +61,16 @@
             <h2>Filterable List</h2>
             <p>Type something in the input field to search the list for specific items:</p>
             <input class="form-control" id="inputGame" type="text" placeholder="Rechercher un jeu">
+<<<<<<< HEAD
             <br>
             <input class="form-control" id="inputPlace" type="text" placeholder="Rechercher un lieu">
             <br>
+=======
+            <input class="form-control" id="inputPlace" type="text" placeholder="Rechercher un lieu">
+            <button class="btn btn-xl btn-primary sorter" value="jeux video">Jeux video</button>
+            <button class="btn btn-xl btn-primary sorter" value="jeux de société">Jeu de société</button>
+            <button class="btn btn-xl btn-primary game">Jeux video</button>
+>>>>>>> 934bce2c2abd3a2511c27c266ea34ee72f337f83
 
           </div>
           </div>
@@ -77,9 +88,15 @@
                   <hr>
                     <div class="card-body">
                       <h4 class="card-title">World of Warcraft</h4>
+<<<<<<< HEAD
                       <p class="card-text-type"><i <i class="fas fa-gamepad"></i> Jeux video</p>
                       <p class="card-text-place"><i <i class="fas fa-map-marker-alt"></i> Paris - France</p>
                       <p class="card-text-age"><i <i class="fas fa-users"></i> 13+</p>
+=======
+                      <p class="card-text-typeGame" data-typeGame='["jeux video"]'><i <i class="fas fa-gamepad"></i> Jeux video</p>
+                      <p class="card-text-place" data-place='["paris"]'><i <i class="fas fa-map-marker-alt"></i> Paris - France</p>
+                      <p class="card-text-age"data-age='["13"]'><i <i class="fas fa-users"></i> 13+</p>
+>>>>>>> 934bce2c2abd3a2511c27c266ea34ee72f337f83
                       <a href="#" class="btn btn-outline-secondary">Voir plus</a>
                     </div>
                   </div>
@@ -93,6 +110,7 @@
                   <hr>
                     <div class="card-body">
                       <h4 class="card-title">takenoko</h4>
+<<<<<<< HEAD
                       <p class="card-text-type" data-groups='["jeux de société"]'><i <i class="fas fa-gamepad"></i> Jeux de société</p>
                       <p class="card-text-place" data-groups='["paris"]'><i <i class="fas fa-map-marker-alt"></i> Paris - France</p>
                       <p class="card-text-age" data-groups='["6"]'><i <i class="fas fa-users"></i> 6+</p>
@@ -112,11 +130,35 @@
                       <p class="card-text-type"><i <i class="fas fa-gamepad"></i> Jeux video</p>
                       <p class="card-text-place"><i <i class="fas fa-map-marker-alt"></i> Lyon - France</p>
                       <p class="card-text-age"><i <i class="fas fa-users"></i> 18+</p>
+=======
+                      <p class="card-text-typeGame" data-typeGame='["jeux de société"]'><i <i class="fas fa-gamepad"></i> Jeux de société</p>
+                      <p class="card-text-place" data-place='["paris"]'><i <i class="fas fa-map-marker-alt"></i> Paris - France</p>
+                      <p class="card-text-age" data-age='["6"]'><i <i class="fas fa-users"></i> 6+</p>
+>>>>>>> 934bce2c2abd3a2511c27c266ea34ee72f337f83
                       <a href="#" class="btn btn-outline-secondary">Voir plus</a>
                     </div>
                   </div>
                 </div>
 
+<<<<<<< HEAD
+=======
+              <div class="col-sm-4">
+                <div class="card">
+                  <div class="img-jeu">
+                  <img src="../img/takenoko.jpg" class="thumbnail" alt="article">
+                  </div>
+                  <hr>
+                    <div class="card-body">
+                      <h4 class="card-title">God of War</h4>
+                      <p class="card-text-typeGame" data-typeGame='["jeux video"]'><i <i class="fas fa-gamepad"></i> Jeux video</p>
+                      <p class="card-text-place" data-place='["lyon"]'><i <i class="fas fa-map-marker-alt"></i> Lyon - France</p>
+                      <p class="card-text-age" data-age='["18"]'><i <i class="fas fa-users"></i> 18+</p>
+                      <a href="#" class="btn btn-outline-secondary">Voir plus</a>
+                    </div>
+                  </div>
+                </div>
+
+>>>>>>> 934bce2c2abd3a2511c27c266ea34ee72f337f83
               </div>
                 <br>
                 <a href="connect/sign.html"class="btn btn-primary">Voir plus</a>
@@ -173,6 +215,10 @@
     </body>
 
     <script>
+<<<<<<< HEAD
+=======
+    //rechercher un jeu
+>>>>>>> 934bce2c2abd3a2511c27c266ea34ee72f337f83
     $(document).ready(function(){
       $("#inputGame").on("keyup", function() {
         var value = $(this).val().toLowerCase();
@@ -182,6 +228,10 @@
       });
     });
 
+<<<<<<< HEAD
+=======
+    //rechercher un lieu
+>>>>>>> 934bce2c2abd3a2511c27c266ea34ee72f337f83
     $(document).ready(function(){
       $("#inputPlace").on("keyup", function() {
         var value = $(this).val().toLowerCase();
@@ -191,15 +241,38 @@
       });
     });
 
+<<<<<<< HEAD
     $(document).ready(function(){
       $("#inputPlace").on("keyup", function() {
         var value = $(this).val().toLowerCase();
         $(".card-text-place").filter(function() {
+=======
+    //catégorie jeux video ou jeu de société
+    $(document).ready(function(){
+      $(".sorter").on("click", function() {
+        var value = $(this).val().toLowerCase();
+        console.log(value);
+        $("p").filter(function() {
+>>>>>>> 934bce2c2abd3a2511c27c266ea34ee72f337f83
           $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
         });
       });
     });
 
+<<<<<<< HEAD
+=======
+    $(document).ready(function(){
+      $(".game").on("keyup", function() {
+        var value = $(this).val().toLowerCase();
+        $(".card-text-typeGame").filter(function() {
+          $(this).toggle($(this).text().toLowerCase().indexOf(value) > -1)
+        });
+      });
+    });
+
+
+
+>>>>>>> 934bce2c2abd3a2511c27c266ea34ee72f337f83
     </script>
 
 </html>
