@@ -231,6 +231,7 @@ footer
   background-color: #FF9900;
   color: #fff;
   padding-top: 2rem;
+  width: 100%;
 }
 .social a{
   font-size:3rem;

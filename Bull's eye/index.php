@@ -3,6 +3,7 @@
   $unC = new ControleurAnnonce("localhost","bdd_jeu","root","");
   $unC->setTableAnnonce("deye_annonce");
   $resultats = $unC->select_Annonce_recent();
+  $resultats_demandes = $unC->select_Demandes();
 ?>
 <!DOCTYPE html>
 <html>
@@ -255,63 +256,15 @@
     <h2>Demandes</h2>
   </div>
 
-    <!--card offre-->
+  <!--card offre-->
   <div class="container">
     <div class="row padding">
-
-      <div class="col-sm-4">
-        <div class="card">
-          <div class="img-jeu">
-          <img src="img/takenoko.jpg" class="thumbnail" alt="article">
-          </div>
-          <hr>
-            <div class="card-body">
-              <h4 class="card-title">Nom du jeu</h4>
-              <p class="card-text"><i  class="fas fa-gamepad"></i> Type de jeu</p>
-              <p class="card-text"><i  class="fas fa-map-marker-alt"></i> Lieu</p>
-              <p class="card-text"><i  class="fas fa-users"></i> Age</p>
-              <a href="#" class="btn btn-outline-secondary">Voir plus</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-sm-4">
-          <div class="card">
-            <div class="img-jeu">
-            <img src="img/takenoko.jpg" class="thumbnail" alt="article">
-            </div>
-            <hr>
-              <div class="card-body">
-                <h4 class="card-title">Nom du jeu</h4>
-                <p class="card-text"><i  class="fas fa-gamepad"></i> Type de jeu</p>
-                <p class="card-text"><i  class="fas fa-map-marker-alt"></i> Lieu</p>
-                <p class="card-text"><i  class="fas fa-users"></i> Age</p>
-                <a href="#" class="btn btn-outline-secondary">Voir plus</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-sm-4">
-            <div class="card">
-              <div class="img-jeu">
-              <img src="img/takenoko.jpg" class="thumbnail" alt="article">
-              </div>
-              <hr>
-                <div class="card-body">
-                  <h4 class="card-title">Nom du jeu</h4>
-                  <p class="card-text"><i  class="fas fa-gamepad"></i> Type de jeu</p>
-                  <p class="card-text"><i  class="fas fa-map-marker-alt"></i> Lieu</p>
-                  <p class="card-text"><i  class="fas fa-users"></i> Age</p>
-                  <a href="#" class="btn btn-outline-secondary">Voir plus</a>
-                </div>
-              </div>
-            </div>
-
-      </div>
-      <br>
-      <a href="connect/sign.html"class="btn btn-primary">Voir plus</a>
-      <hr>
+      <?php include('vue/vue_demandes_accueil.php'); ?>
     </div>
+    <br>
+    <a href="connect/sign.html"class="btn btn-primary">Voir plus</a>
+    <hr>
+  </div>
 
 </div>
 </div>

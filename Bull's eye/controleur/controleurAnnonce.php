@@ -27,5 +27,11 @@
     return $resultats;
   }
 
+  function select_Demandes()
+  {
+    $resultats=$this->unModeleAnnonce->select_Demandes();
+    return $resultats;
+  }
+
 }
 ?>
