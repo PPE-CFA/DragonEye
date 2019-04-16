@@ -1,0 +1,30 @@
+/*-- CSS Card--*/
+hr.light{
+    border-top: 1px solid #fff;
+    width: 75%;
+    margin-top:.8rem;
+    margin-bottom: 1rem;
+
+  }
+
+.thumbnail
+  {
+    max-width: 210px;
+    height: 210px;
+    padding:0.25rem;
+  
+  }
+.card{
+    box-shadow: 1px 1px 6px #A79B91;
+    border-radius: 1rem;
+  
+  }
+
+  
+.img-jeu{
+    width: 360px;
+    height: 130px;
+    overflow: hidden;
+  }
+
+  
