@@ -2,7 +2,7 @@
 	$sql_serveur  = "localhost"; 			// Serveur
 	$sql_user 	  = "root";        // Utilisateur
 	$sql_pass	  = "";          // Mot de passe
-	$sql_database = "bdd_jeu";    // Base de données
+	$sql_database = "BDD_jeu.sql";    // Base de données
 
 	//connexion avec PDO
 	try {

@@ -164,7 +164,7 @@ html,body{
 
 .carousel-caption h1 {
   font-size: 500%;
-  text-transform: :uppercase;
+  text-transform: uppercase;
   text-shadow: 1px 1px 7px #000;
 }
 .carousel-caption h3{
@@ -231,6 +231,7 @@ footer
   background-color: #FF9900;
   color: #fff;
   padding-top: 2rem;
+  width: 100%;
 }
 .social a{
   font-size:3rem;
