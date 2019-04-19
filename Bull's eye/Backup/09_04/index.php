@@ -3,7 +3,7 @@
   $unC = new ControleurAnnonce("localhost","bdd_jeu","root","");
   $unC->setTableAnnonce("deye_annonce");
   $resultats = $unC->select_Annonce_recent();
-  $resultats_demandes = $unC->select_Demandes();
+  var_dump($resultats);
 ?>
 <!DOCTYPE html>
 <html>
@@ -245,9 +245,61 @@
     <!--card offre-->
   <div class="container">
     <div class="row padding">
-      <?php include('vue/vue_anonces_accueil.php'); ?>
-    </div>
-  </div>
+
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="img-jeu">
+          <img src="img/trone.jpg" class="thumbnail" alt="article">
+          </div>
+          <hr>
+            <div class="card-body">
+              <h4 class="card-title">Nom du jeu</h4>
+              <p class="card-text"><i class="fas fa-gamepad"></i> Type de jeu</p>
+              <p class="card-text"><i class="fas fa-map-marker-alt"></i> Lieu</p>
+              <p class="card-text"><i class="fas fa-users"></i> Age</p>
+              <a href="#" class="btn btn-outline-secondary">Voir plus</a>
+            </div>
+          </div>
+        </div>
+
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="img-jeu">
+          <img src="img/takenoko.jpg" class="thumbnail" alt="article">
+          </div>
+          <hr>
+            <div class="card-body">
+              <h4 class="card-title">Darsiders</h4>
+              <p class="card-text"><i class="fas fa-gamepad"></i> Type de jeu</p>
+              <p class="card-text"><i class="fas fa-map-marker-alt"></i> Lieu</p>
+              <p class="card-text"><i class="fas fa-users"></i> Age</p>
+              <a href="#" class="btn btn-outline-secondary">Voir plus</a>
+            </div>
+          </div>
+        </div>
+
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="img-jeu">
+          <img src="img/takenoko.jpg" class="thumbnail" alt="article">
+          </div>
+          <hr>
+            <div class="card-body">
+              <h4 class="card-title">Wow</h4>
+              <p class="card-text"><i  class="fas fa-gamepad"></i> Type de jeu</p>
+              <p class="card-text"><i  class="fas fa-map-marker-alt"></i> Lieu</p>
+              <p class="card-text"><i  class="fas fa-users"></i> Age</p>
+              <a href="#" class="btn btn-outline-secondary">Voir plus</a>
+            </div>
+          </div>
+        </div>
+      </div>
+        <br>
+        <a href="connect/sign.html"class="btn btn-primary">Voir plus</a>
+        <hr>
+     </div>
+</div>
+</div>
 
 <!---Dernières demandes-->
 <div class="container-fluid padding">
@@ -256,15 +308,63 @@
     <h2>Demandes</h2>
   </div>
 
-  <!--card offre-->
+    <!--card offre-->
   <div class="container">
     <div class="row padding">
-      <?php include('vue/vue_demandes_accueil.php'); ?>
+
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="img-jeu">
+          <img src="img/takenoko.jpg" class="thumbnail" alt="article">
+          </div>
+          <hr>
+            <div class="card-body">
+              <h4 class="card-title">Nom du jeu</h4>
+              <p class="card-text"><i  class="fas fa-gamepad"></i> Type de jeu</p>
+              <p class="card-text"><i  class="fas fa-map-marker-alt"></i> Lieu</p>
+              <p class="card-text"><i  class="fas fa-users"></i> Age</p>
+              <a href="#" class="btn btn-outline-secondary">Voir plus</a>
+            </div>
+          </div>
+        </div>
+
+        <div class="col-sm-4">
+          <div class="card">
+            <div class="img-jeu">
+            <img src="img/takenoko.jpg" class="thumbnail" alt="article">
+            </div>
+            <hr>
+              <div class="card-body">
+                <h4 class="card-title">Nom du jeu</h4>
+                <p class="card-text"><i  class="fas fa-gamepad"></i> Type de jeu</p>
+                <p class="card-text"><i  class="fas fa-map-marker-alt"></i> Lieu</p>
+                <p class="card-text"><i  class="fas fa-users"></i> Age</p>
+                <a href="#" class="btn btn-outline-secondary">Voir plus</a>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-sm-4">
+            <div class="card">
+              <div class="img-jeu">
+              <img src="img/takenoko.jpg" class="thumbnail" alt="article">
+              </div>
+              <hr>
+                <div class="card-body">
+                  <h4 class="card-title">Nom du jeu</h4>
+                  <p class="card-text"><i  class="fas fa-gamepad"></i> Type de jeu</p>
+                  <p class="card-text"><i  class="fas fa-map-marker-alt"></i> Lieu</p>
+                  <p class="card-text"><i  class="fas fa-users"></i> Age</p>
+                  <a href="#" class="btn btn-outline-secondary">Voir plus</a>
+                </div>
+              </div>
+            </div>
+
+      </div>
+      <br>
+      <a href="connect/sign.html"class="btn btn-primary">Voir plus</a>
+      <hr>
     </div>
-    <br>
-    <a href="connect/sign.html"class="btn btn-primary">Voir plus</a>
-    <hr>
-  </div>
 
 </div>
 </div>

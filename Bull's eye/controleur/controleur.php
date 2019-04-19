@@ -1,5 +1,5 @@
-    <?php
-	include ("modele/modele.php");
+<?php
+	include ("../modele/modele.php");
 	class Controleur
 	{
 		private $unModele;
@@ -9,6 +9,7 @@
 		//instanciation de la classe modele
 		$this->unModele = new Modele ($serveur, $bdd, $user, $mdp);
 	}
+
 	public function setTable($uneTable)
 	{
 		$this->unModele->setTable($uneTable);
@@ -19,5 +20,6 @@
 		$resultats=$this->unModele->select_all();
 		return $resultats;
 	}
+
 }
 ?>
