@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css?family=Poppins|Varela+Round:400,500,700');
+
+/*---CSS de la page---*/
+html,body{
+  height: 100%;
+  width: 100%;
+  font-family: 'Varela Round', sans-serif;
+  color: #222;
+}
+
+/*---CSS des boutons---*/
+.btn-primary {
+  background-color: #FF9900;
+  border: 1px solid #FF9900;
+}
+
+.btn-primary:hover {
+  background-color: #C67200;
+}
+
+.btn-secondary{
+
+  background-color: #007DFF;
+  border: 1px solid #007DFF;
+
+}
+
+.btn-outline-secondary {
+    border-color: #007DFF;
+    color: #007DFF;
+
+}
+.btn-outline-secondary:hover {
+    border-color: #007DFF;
+    background-color: #007DFF;
+
+}
+.d-flex{
+  display : flow-root;
+}
+
+/*---CSS barre de navigation---*/
+.navbar {
+  position:fixed;
+  width: 100%;
+  box-shadow: 1px 1px 6px #000;
+}
+.navbar-nav li{
+  padding-right: 20px;
+}
+
+.nav-link{
+  font-size: 1.1em !important;
+}
+
+.nav-link {
+  color: #007DFF;
+}
+
+
+
+
+/*---CSS Bas de page---*/
+footer
+{
+  background-color: #FF9900;
+  color: #fff;
+  padding-top: 2rem;
+}
+.social a{
+  font-size:3rem;
+  padding:2rem;
+}
+.fa-facebook{
+  color:#3b5998;
+}
+.fa-twitter{
+  color:#00aced;
+}
+.partenaire_logo{
+  max-width: 350px;
+  height: 50px;
+  padding: inherit;
+
+}
+
+hr.light{
+  border-top: 1px solid #fff;
+  width: 75%;
+  margin-top:.8rem;
+  margin-bottom: 1rem;
+
+}
