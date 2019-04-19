@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <?php
-  include 'bdd.php';
+	include ("controleur/controleur.php");
 ?>
+
 <html>
 <head>
   <meta charset="utf-8">
@@ -34,6 +35,9 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Demandes</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="evenement/evenement.php">Evènement</a>
           </li>
         </ul>
         <ul class="navbar-nav navbar-right ml-auto">
