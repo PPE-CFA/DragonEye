@@ -43,18 +43,21 @@
   	    return null;
   	  }else
   	  {
-  	    $requete = "select IdAnnonce, designation, nom, url, age_requis, libelle, Description
-  	      FROM deye_annonce
-  	      INNER JOIN deye_jeux ON deye_annonce.IdJeux=deye_jeux.IdJeux
-  	      INNER JOIN deye_personne ON deye_annonce.IdPersonne=deye_personne.IdPersonne
-  	      INNER JOIN deye_photo ON deye_annonce.IdPhoto=deye_photo.IdPhoto
-  	      INNER JOIN deye_trancheage ON deye_annonce.Id_tranche_age=deye_trancheage.Id_tranche_age
+				$pdo = new PDO('mysql:host=127.0.0.1;dbname=bdd_jeu;charset=utf8', 'root', '');
+				$resultats = $pdo->query('SELECT IdAnnonce, deye_jeux.designation, deye_annonce_type.AnnonceType, deye_personne.nom, deye_photo.url_photo,
+					deye_age.age_requis, deye_categorie.libelle, deye_annonce.Description,region,ville,postal,Etat,deye_personne.prenom,
+					deye_jeux.prix, deye_jeux.date_sortie, deye_jeux.nb_joueurs, deye_jeux.temps_jeux, deye_personne.email
+					FROM deye_annonce
+					INNER JOIN deye_jeux     ON deye_annonce.IdJeux=deye_jeux.IdJeux
+					INNER JOIN deye_personne ON deye_annonce.IdPersonne=deye_personne.IdPersonne
+					INNER JOIN deye_annonce_type ON deye_annonce.Idforme = deye_annonce_type.IdA_type
+					INNER JOIN deye_photo    ON deye_annonce.IdPhoto=deye_photo.IdPhoto
+					INNER JOIN deye_age      ON deye_annonce.IdAge=deye_age.IdAge
 					INNER JOIN deye_categorie ON deye_annonce.IdCategorie=deye_categorie.IdCategorie
-					ORDER BY date_validation
-					LIMIT 5;";
-  	    $select = $this->pdo->prepare ($requete);
-  	    $select ->execute ();
-  	    $resultats = $select->fetchAll();
+					WHERE Idforme = "O"
+					ORDER BY IdAnnonce DESC 
+					LIMIT 0,3');
+				var_dump($resultats);
   	    return $resultats;
   	  }
 		}
@@ -66,18 +69,19 @@
   	    return null;
   	  }else
   	  {
-  	    $requete = "select IdAnnonce, designation, nom, url, age_requis, libelle, Description
-  	      FROM deye_annonce
-  	      INNER JOIN deye_jeux ON deye_annonce.IdJeux=deye_jeux.IdJeux
-  	      INNER JOIN deye_personne ON deye_annonce.IdPersonne=deye_personne.IdPersonne
-  	      INNER JOIN deye_photo ON deye_annonce.IdPhoto=deye_photo.IdPhoto
-  	      INNER JOIN deye_trancheage ON deye_annonce.Id_tranche_age=deye_trancheage.Id_tranche_age
+  	    $resultats = $this->pdo->query('SELECT IdAnnonce, deye_jeux.designation, deye_annonce_type.AnnonceType, deye_personne.nom, deye_photo.url_photo,
+					deye_age.age_requis, deye_categorie.libelle, deye_annonce.Description,region,ville,postal,Etat,deye_personne.prenom,
+					deye_jeux.prix, deye_jeux.date_sortie, deye_jeux.nb_joueurs, deye_jeux.temps_jeux, deye_personne.email
+					FROM deye_annonce
+					INNER JOIN deye_jeux     ON deye_annonce.IdJeux=deye_jeux.IdJeux
+					INNER JOIN deye_personne ON deye_annonce.IdPersonne=deye_personne.IdPersonne
+					INNER JOIN deye_annonce_type ON deye_annonce.Idforme = deye_annonce_type.IdA_type
+					INNER JOIN deye_photo    ON deye_annonce.IdPhoto=deye_photo.IdPhoto
+					INNER JOIN deye_age      ON deye_annonce.IdAge=deye_age.IdAge
 					INNER JOIN deye_categorie ON deye_annonce.IdCategorie=deye_categorie.IdCategorie
-					ORDER BY date_validation
-					LIMIT 5;";
-  	    $select = $this->pdo->prepare ($requete);
-  	    $select ->execute ();
-  	    $resultats = $select->fetchAll();
+					WHERE Idforme = "D"
+					ORDER BY IdAnnonce DESC 
+					LIMIT 0,3');
   	    return $resultats;
   	  }
 		}
