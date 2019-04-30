@@ -1,5 +1,8 @@
 <?php
     if(isset($resultats) && $resultats!=null){
+      echo "<table>";
+      var_dump($resultats);
+      var_dump($resultats->fetch());
 
         while ($unRes = $resultats->fetch())
         {
