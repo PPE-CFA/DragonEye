@@ -1,7 +1,7 @@
 <?php
     if(isset($resultats_demandes) && $resultats!=null){
 
-        foreach ($resultats_demandes as $unRes)
+        while ($unRes = $resultats_demandes->fetch())
         {
             echo '<div class="col-sm-4">
             <div class="card">

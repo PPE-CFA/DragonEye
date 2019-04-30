@@ -24,7 +24,7 @@
 <!--- Navigation --->
   <nav class = "navbar navbar-expand-md navbar-light bg-light sticky-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="index.php"><img src ="img/logo.png"></a>
+      <a class="navbar-brand" href="index.php"><img src=""></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse"data-target="#navbarResponsive">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -61,9 +61,9 @@
                   <div class="col-sm-9 col-md-7 col-lg-5 mx-auto">
                     <div class="card card-signin my-5">
                       <div class="card-body">
-                        <div class"img-container">
+                        <div class="img-container">
                         <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-                        <img src="img/logo.png" class="logo_modal">
+                        <img src="" class="logo_modal">
                         </div>
                         <div class="col-xs-12 d-flex flex-row">
                           <button id="eyeConnexion" class="btn btn-lg btn-primary btn-block col-xs-6 col-md-6" onclick="show(id)" >Se connecter</button>
@@ -144,8 +144,8 @@
                   </div>
                 </div>
               </div>
+              </form>
             </div>
-            </form>
             <script>
             // Get the modal
             var modal = document.getElementById('id01');
@@ -174,6 +174,7 @@
           </li>
         </ul>
       </div>
+    </div>
 </nav>
 
 <!--- Image centrale--->
@@ -248,6 +249,8 @@
       <?php include('vue/vue_anonces_accueil.php'); ?>
     </div>
   </div>
+</div>
+</div>
 
 <!---Dernières demandes-->
 <div class="container-fluid padding">
@@ -276,7 +279,7 @@
 <div class="container-fluid padding">
 <div class="row text-center">
   <div class="col-md-4">
-    <img src="img/logo.png">
+    <img src="">
     <hr class="light">
     <p>phone</p>
     <p>email</p>

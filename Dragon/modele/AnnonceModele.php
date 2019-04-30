@@ -57,7 +57,6 @@
 					WHERE Idforme = "O"
 					ORDER BY IdAnnonce DESC 
 					LIMIT 0,3');
-				var_dump($resultats);
   	    return $resultats;
   	  }
 		}
