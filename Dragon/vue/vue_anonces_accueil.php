@@ -1,15 +1,15 @@
 <?php
     if(isset($resultats) && $resultats!=null){
       echo "<table>";
-      var_dump($resultats);
-      var_dump($resultats->fetch());
+      //var_dump($resultats);
+      //var_dump($resultats->fetch());
 
         while ($unRes = $resultats->fetch())
         {
             echo '<div class="col-sm-4">
             <div class="card">
               <div class="img-jeu">
-              <img src="'.$unRes['url'].'" class="thumbnail" alt="article">
+              <img src="'.$unRes['url_photo'].'" class="thumbnail" alt="article">
               </div>
               <hr>
               <div class="card-body">
