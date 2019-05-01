@@ -54,10 +54,9 @@
 					INNER JOIN deye_photo    ON deye_annonce.IdPhoto=deye_photo.IdPhoto
 					INNER JOIN deye_age      ON deye_annonce.IdAge=deye_age.IdAge
 					INNER JOIN deye_categorie ON deye_annonce.IdCategorie=deye_categorie.IdCategorie
-				
+					WHERE idA_type = "NO"
 					ORDER BY IdAnnonce DESC 
 					LIMIT 0,3');
-				var_dump($resultats);
   	    return $resultats;
   	  }
 		}
@@ -79,9 +78,9 @@
 					INNER JOIN deye_photo    ON deye_annonce.IdPhoto=deye_photo.IdPhoto
 					INNER JOIN deye_age      ON deye_annonce.IdAge=deye_age.IdAge
 					INNER JOIN deye_categorie ON deye_annonce.IdCategorie=deye_categorie.IdCategorie
-			
+					WHERE idA_type = "ND"
 					ORDER BY IdAnnonce DESC 
-					LIMIT 0,3');
+					LIMIT 3');
   	    return $resultats;
   	  }
 		}
