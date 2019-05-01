@@ -2,7 +2,7 @@
 <!--- Navigation --->
 <nav class = "navbar navbar-expand-md navbar-light bg-light sticky-top">
     <div class="container-fluid">
-      <a class="navbar-brand" href="<?=_DIR_?>/index.php"><img src ="../img/logo.png"></a>
+      <a class="navbar-brand" href="<?=_DIR_?>/index.php"><img class="deye_logo" src ="<?=_DIR_?>/img/logo2.png"></a>
       <button class="navbar-toggler" type="button" data-toggle="collapse"data-target="#navbarResponsive">
         <span class="navbar-toggler-icon"></span>
       </button>
@@ -24,7 +24,9 @@
         <ul class="navbar-nav navbar-right ml-auto">
           <li class="nav-item">
           <?php
-              session_start();
+              if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+              }
 
               $bdd = new PDO('mysql:host=127.0.0.1;dbname=bdd_jeu;charset=utf8', 'root', '');
 

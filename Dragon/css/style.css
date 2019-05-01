@@ -31,6 +31,9 @@ html,body{
 .d-flex{
   display : flow-root;
 }
+.deye_logo{
+  width: 50px;
+}
 
 /*---CSS barre de navigation---*/
 .navbar {
