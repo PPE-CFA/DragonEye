@@ -16,7 +16,7 @@
                             INNER JOIN deye_categorie ON deye_annonce.IdCategorie=deye_categorie.IdCategorie
                             
 
-                            WHERE Idforme = "O"
+                            WHERE Idforme = "NO"
                             ORDER BY IdAnnonce DESC');
 
 
@@ -162,7 +162,7 @@
 
           }else{
         ?>
-            <a href="../../connexion/inscription.php" class="btn btn-secondary"><i class="fas fa-id-card"></i> Obtenir les coordonnées</a>  
+            <a href="../connexion/inscription.php" class="btn btn-secondary"><i class="fas fa-id-card"></i> Obtenir les coordonnées</a>  
 
         <?php    
           }

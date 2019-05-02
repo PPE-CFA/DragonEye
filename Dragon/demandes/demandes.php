@@ -16,7 +16,7 @@
                             INNER JOIN deye_categorie ON deye_annonce.IdCategorie=deye_categorie.IdCategorie
                             
 
-                            WHERE Idforme = "D"
+                            WHERE Idforme = "NO"
                             ORDER BY IdAnnonce DESC');
 
 
@@ -86,7 +86,7 @@
               <p class="card-text"><i class="fas fa-gamepad"></i> <?=$res['libelle']?></p>
               <p class="card-text"><i class="fas fa-map-marker-alt"></i> <?=$res['region']?>, <?=$res['ville']?>  </p>
               <p class="card-text"><i class="fas fa-users"></i> <?=$res['age_requis']?></p>
-              <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal">Voir plus</button>
+              <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal<?= $res['IdAnnonce'] ?>">Voir plus</button>
             </div>
           </div>
         </div>
@@ -101,7 +101,7 @@
 
 
 <!-- Modal -->
-<div id="myModal" class="modal fade" role="dialog">
+<div id="myModal<?= $res['IdAnnonce'] ?>" class="modal fade" role="dialog">
   <div class="modal-dialog">
 
     <!-- Modal content-->
@@ -162,7 +162,7 @@
 
           }else{
         ?>
-            <a href="../../connexion/inscription.php" class="btn btn-secondary"><i class="fas fa-id-card"></i> Obtenir les coordonnées</a>  
+            <a href="../connexion/inscription.php" class="btn btn-secondary"><i class="fas fa-id-card"></i> Obtenir les coordonnées</a>  
 
         <?php    
           }
