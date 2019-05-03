@@ -1,88 +1,117 @@
 <?php
-	include ("../controleur/controleur.php");
+
+	$bdd = new PDO('mysql:host=127.0.0.1;dbname=bdd_jeu;charset=utf8', 'root', '');
+
+	$allEvent = $bdd->query('SELECT designation, heure_event, date_event, deye_photo.url_photo, deye_lieu.Adresse, deye_lieu.ville, deye_lieu.Nom
+													FROM deye_evenement
+													INNER JOIN deye_photo ON deye_evenement.IdEvent=deye_photo.IdPhoto
+													INNER JOIN deye_lieu ON deye_evenement.IdEvent=deye_lieu.IdLieu
+													ORDER BY date_event ASC');
+
 ?>
 
+
+<!DOCTYPE html>
 <html>
-	<head>
-	<title> Les evenements - Dragon's Eyes </title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device, initial-scale=1">
+  <title>Dragon's Eye - Les évènements</title>
+
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
+  <link href="../css/style.css" rel="stylesheet">
   <link href="../css/evenement_style.css" rel="stylesheet">
-	</head>
-	<body>
+</head>
 
-		<!--nav class = "navbar navbar-expand-md navbar-light bg-light sticky-top">
-	    <div class="container-fluid">
-	      <a class="navbar-brand" href="#"><img src ="../img/logo.png"></a>
-	      <button class="navbar-toggler" type="button" data-toggle="collapse"data-target="#navbarResponsive">
-	        <span class="navbar-toggler-icon"></span>
-	      </button>
-	      <div class="collapse navbar-collapse" id="navbarResponsive">
-	        <ul class="navbar-nav">
-	          <li class="nav-item">
-	            <a class="nav-link" href="#">Déposer une annonce</a>
-	          </li>
-	          <li class="nav-item">
-	            <a class="nav-link" href="offres/offres.html">Offres</a>
-	          </li>
-	          <li class="nav-item">
-	            <a class="nav-link" href="#">Demandes</a>
-	          </li>
-	          <li class="nav-item">
-	            <a class="nav-link" href="evenement/evenement.php">Evènement</a>
-	          </li>
-	        </ul>
-	        <ul class="navbar-nav navbar-right ml-auto">
-	          <li class="nav-item">
-							<a href="../connexion/inscription.php" class="btn btn-primary">S'inscrire/Se connecter</a>
-						</li>
-					</ul>
-				</div>
-				</div>          
-	</nav-->
-                
-                          <?php 
-        $deposerAnnonce = null;
-        include("includes/menu.php");
-        ?>
+<body>
+<?php include('../include/header.php') ?>
 
-	<header>
-		<div class="container-fluid padding">
-		<div class="row text-center">
-		  <div class="col-xl-12">
-
-			</div>
+	<div class="container-fluid padding">
+		<div class="row titleEvent text-center">
+  	<div class="col-12">
+    <br>
+    	<h2>Retrouver ici tous les évènements dans les boutiques de jeux de société en France !</h2>
+  	</div>
 		</div>
-		</div>
+</div>
 
-	</header>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-	<br>
-		<center> 
-		<?php
-
-			$unC = new Controleur("localhost","bdd_jeu","root","");
-
-			$unC->setTable("deye_evenement");
+	<div class="container-fluid padding">
+	<div class="row padding">
 			
+		<div class="container allEvent">
+		<div class="row">
+			
+		<table class="table">
+            <thead>
+                <th>Evènements</th>
+                <th>Heure</th>
+                <th>Date</th>
+								<th>Boutique</th>
+                <th>Adresse</th>
+                <th></th>
+                
+                
+            </thead>
+                <tbody>
+                <?php while($res = $allEvent->fetch()){?>
+                <tr class="table-info">
 
-			$resultats = $unC->select_all();
-			include ("../vue/vue_select_evenement.php");
-		?>
-		</center>
+                      
+                <td>
+                    <?=$res['designation']?>
+                </td>
+
+                <td>  
+                    <?=$res['heure_event']?> 
+                </td>
+
+                <td>
+                    <?=$res['date_event']?>
+                </td>
+
+                <td>
+                    <?=$res['Nom']?>
+                </td>
+
+                <td>
+									<?=$res['Adresse']?>, <?=$res['ville']?>
+                </td>
+
+                <td>
+									<img src="<?=$res['url_photo']?>"/> 
+                </td>
+
+
+                </tr>
+                <?php
+                  }
+                ?>
+              </tbody>
+
+        </table>
+
+
+
+		</div>
+		</div>
+	</div>
+	</div>
+
+
+
+
+
+	
 
 		<footer>
 		<div class="container-fluid padding">
 		<div class="row text-center">
 		  <div class="col-md-4">
-		    <img src="img/logo.png">
+		    <img src="../img/logo.png">
 		    <hr class="light">
 		    <p>phone</p>
 		    <p>email</p>
@@ -107,8 +136,8 @@
 		  </div>
 
 		  <div class="col-md-4">
-		    <img src="img/focus_home_interactive_logo.svg" class="partenaire_logo" alt="partenaire">
-		    <img src="img/novatim_logo.png" class="partenaire_logo" alt="article">
+		    <img src="../img/focus_home_interactive_logo.svg" class="partenaire_logo" alt="partenaire">
+		    <img src="../img/novatim_logo.png" class="partenaire_logo" alt="article">
 		  </div>
 
 

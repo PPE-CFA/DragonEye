@@ -1,9 +1,16 @@
+<?php
+  include('controleur/controleurAnnonce.php');
+  $unC = new ControleurAnnonce("localhost","bdd_jeu","root","");
+  $unC->setTableAnnonce("deye_annonce");
+  $resultats = $unC->select_Annonce_recent();
+  $resultats_demandes = $unC->select_Demandes();
+?>
 <!DOCTYPE html>
 <html>
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device, initial-scale=1">
-  <title>Dragon Eye's - Accueil</title>
+  <title>Dragon's Eye</title>
 
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
@@ -11,67 +18,12 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
   <link href="css/style.css" rel="stylesheet">
-  <link href="css/index_style.css" rel="stylesheet">
 </head>
 
 <body>
-<!--- Navigation --->
-  <!--nav class = "navbar navbar-expand-md navbar-light bg-light sticky-top">
-    <div class="container-fluid">
-      <a class="navbar-brand" href="#"><img src ="img/logo.png"></a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse"data-target="#navbarResponsive">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarResponsive">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-              <a class="nav-link" href="annonces/annonce.php">Déposer une annonce</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="offres/offres.html">Offres</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="#">Demandes</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="evenement/evenement.php">Evènements</a>
-          </li>
-        </ul>
-        <ul class="navbar-nav navbar-right ml-auto">
-          <li class="nav-item">
-          <?php
-             /* session_start();
+<?php include('include/header.php')?>
 
-              $bdd = new PDO('mysql:host=127.0.0.1;dbname=bdd_jeu', 'root', '');
-
-              if(isset($_SESSION["IdPersonne"]) AND $_SESSION["IdPersonne"] > 0){
-                $requser = $bdd->prepare("SELECT * FROM deye_personne WHERE IdPersonne = ?");
-                $requser->execute(array($_SESSION['IdPersonne']));
-                $user = $requser->fetch();*/
-            ?>
-              <a href="/profil/profil.php" class="btn btn-primary"><?= $user['nom'];?> <?=$user['prenom'];?></a>
-            <?php
-            /*
-              }else{
-             * 
-             */
-            ?>
-                <a href="../connexion/inscription.php" class="btn btn-primary">S'inscrire/Se connecter</a>
-            <?php
-             // }
-            ?>           
-					</li>
-				</ul>
-			</div>
-		</div>
-  </nav-->
-          <?php 
-        $deposerAnnonce = null;
-        include("includes/menu.php");
-        ?>
-  
-
-<!--- HEADER--->
+<!--- Image centrale--->
 <div id="slides" class="carousel slide" date-ride="carousel">
     <ul class="carousel-indicators">
       <li data-target="#slides" data-slide-to="0"class="active"></li>
@@ -140,59 +92,9 @@
     <!--card offre-->
   <div class="container">
     <div class="row padding">
-
-      <div class="col-sm-4">
-        <div class="card">
-          <div class="img-jeu">
-          <img src="img/trone.jpg" class="thumbnail" alt="article">
-          </div>
-          <hr>
-            <div class="card-body">
-              <h4 class="card-title">Nom du jeu</h4>
-              <p class="card-text"><i class="fas fa-gamepad"></i> Type de jeu</p>
-              <p class="card-text"><i class="fas fa-map-marker-alt"></i> Lieu</p>
-              <p class="card-text"><i class="fas fa-users"></i> Age</p>
-              <a href="#" class="btn btn-outline-secondary">Voir plus</a>
-            </div>
-          </div>
-        </div>
-
-      <div class="col-sm-4">
-        <div class="card">
-          <div class="img-jeu">
-          <img src="img/takenoko.jpg" class="thumbnail" alt="article">
-          </div>
-          <hr>
-            <div class="card-body">
-              <h4 class="card-title">Darsiders</h4>
-              <p class="card-text"><i class="fas fa-gamepad"></i> Type de jeu</p>
-              <p class="card-text"><i class="fas fa-map-marker-alt"></i> Lieu</p>
-              <p class="card-text"><i class="fas fa-users"></i> Age</p>
-              <a href="#" class="btn btn-outline-secondary">Voir plus</a>
-            </div>
-          </div>
-        </div>
-
-      <div class="col-sm-4">
-        <div class="card">
-          <div class="img-jeu">
-          <img src="img/takenoko.jpg" class="thumbnail" alt="article">
-          </div>
-          <hr>
-            <div class="card-body">
-              <h4 class="card-title">Wow</h4>
-              <p class="card-text"><i  class="fas fa-gamepad"></i> Type de jeu</p>
-              <p class="card-text"><i  class="fas fa-map-marker-alt"></i> Lieu</p>
-              <p class="card-text"><i  class="fas fa-users"></i> Age</p>
-              <a href="#" class="btn btn-outline-secondary">Voir plus</a>
-            </div>
-          </div>
-        </div>
-      </div>
-        <br>
-        <a href="connect/sign.html"class="btn btn-primary">Voir plus d'offres</a>
-        <hr>
-     </div>
+      <?php include('vue/vue_anonces_accueil.php'); ?>
+    </div>
+  </div>
 </div>
 </div>
 
@@ -203,113 +105,18 @@
     <h2>Demandes</h2>
   </div>
 
-    <!--card offre-->
+  <!--card offre-->
   <div class="container">
     <div class="row padding">
-
-      <div class="col-sm-4">
-        <div class="card">
-          <div class="img-jeu">
-          <img src="img/takenoko.jpg" class="thumbnail" alt="article">
-          </div>
-          <hr>
-            <div class="card-body">
-              <h4 class="card-title">Nom du jeu</h4>
-              <p class="card-text"><i  class="fas fa-gamepad"></i> Type de jeu</p>
-              <p class="card-text"><i  class="fas fa-map-marker-alt"></i> Lieu</p>
-              <p class="card-text"><i  class="fas fa-users"></i> Age</p>
-              <a href="#" class="btn btn-outline-secondary">Voir plus</a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-sm-4">
-          <div class="card">
-            <div class="img-jeu">
-            <img src="img/takenoko.jpg" class="thumbnail" alt="article">
-            </div>
-            <hr>
-              <div class="card-body">
-                <h4 class="card-title">Nom du jeu</h4>
-                <p class="card-text"><i  class="fas fa-gamepad"></i> Type de jeu</p>
-                <p class="card-text"><i  class="fas fa-map-marker-alt"></i> Lieu</p>
-                <p class="card-text"><i  class="fas fa-users"></i> Age</p>
-                <a href="#" class="btn btn-outline-secondary">Voir plus</a>
-              </div>
-            </div>
-          </div>
-
-          <div class="col-sm-4">
-            <div class="card">
-              <div class="img-jeu">
-              <img src="img/takenoko.jpg" class="thumbnail" alt="article">
-              </div>
-              <hr>
-                <div class="card-body">
-                  <h4 class="card-title">Nom du jeu</h4>
-                  <p class="card-text"><i  class="fas fa-gamepad"></i> Type de jeu</p>
-                  <p class="card-text"><i  class="fas fa-map-marker-alt"></i> Lieu</p>
-                  <p class="card-text"><i  class="fas fa-users"></i> Age</p>
-                  <a href="#" class="btn btn-outline-secondary">Voir plus</a>
-                </div>
-              </div>
-            </div>
-
-      </div>
-      <br>
-      <a href="connect/sign.html"class="btn btn-primary">Voir plus de demandes</a>
-      <hr>
+      <?php include('vue/vue_demandes_accueil.php'); ?>
     </div>
-
-</div>
-</div>
-
-
-<!---Bas de page-->
-<br/>
-<br/>
-<footer>
-<div class="container-fluid padding">
-<div class="row text-center">
-  <div class="col-md-4">
-    <img src="img/logo.png">
-    <hr class="light">
-    <p>phone</p>
-    <p>email</p>
-    <p>adresse</p>
-    <div class="social">
-      <a href="#"><i class="fab fa-facebook"></i></a>
-      <a href="#"><i class="fab fa-twitter"></i></a>
-    </div>
-  </div>
-
-  <div class="col-md-4">
-    <i class="fas fa-table"></i>
-    <h5>Horaire</h5>
-    <hr class="light">
-    <p>lundi</p>
-    <p>mardi</p>
-    <p>mercredi</p>
-    <p>jeudi</p>
-    <p>vendredi</p>
-    <p>samedi</p>
-    <p>dimanche</p>
-  </div>
-
-  <div class="col-md-4">
-    <img src="img/focus_home_interactive_logo.svg" class="partenaire_logo" alt="partenaire">
-    <img src="img/novatim_logo.png" class="partenaire_logo" alt="article">
-  </div>
-
-
-  <div class="col-12">
-    <hr class="light">
-    <h5>&copy; Dragon's Eye</h5>
+    <br>
+    <a href="connect/sign.html"class="btn btn-primary">Voir plus</a>
+    <hr>
   </div>
 
 </div>
 </div>
-</footer>
-
+  <?php include('include/footer.php') ?>
 </body>
 </html>

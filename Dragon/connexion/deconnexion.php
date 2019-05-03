@@ -1,5 +1,3 @@
-
-
 <?php
 
     //deconnecte un utilisateur

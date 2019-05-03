@@ -2,14 +2,14 @@
 
 <?php
 	echo "<table border = 1>
-	<tr> <td> Designation </td> <td> Date </td><td> Heure </td>  </tr> ";
+	<tr> <td> Id Evenement </td><td> Designation </td> <td> Date </td><td> Heure </td> <td> Id Lieu </td> </tr> ";
 	foreach ($resultats as $unRes)
 	{
-		echo "<tr>	
+		echo "<tr>	<td> ".$unRes['id']."</td>
 					<td> ".$unRes['designation']."</td>
-					<td> ".$unRes['date_event']."</td>
-					<td> ".$unRes['IdLieu']."</td>
-          			<td> ".$unRes['heure_event']."</td> </tr>";
+					<td> ".$unRes['date']."</td>
+          <td> ".$unRes['heure']."</td>
+					<td> ".$unRes['idlieu']."</td> </tr>";
 	}
 	echo "</table>";
 ?>

@@ -1,5 +1,5 @@
-<?php
-	include ("../modele/modele.php");
+    <?php
+	include ("modele/modele.php");
 	class Controleur
 	{
 		private $unModele;
@@ -21,4 +21,3 @@
 	}
 }
 ?>
- 

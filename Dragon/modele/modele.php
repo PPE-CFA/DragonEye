@@ -23,7 +23,7 @@
 		if ($this->pdo == null) //pas de connexion
 		{
 			return null;
-		}else 
+		}else
 		{
 			$requete = "select * from ".$this->table.";";
 			$select = $this->pdo->prepare ($requete);
@@ -32,7 +32,6 @@
 			return $resultats;
 		}
 	}
-
 
 	public function setTable($uneTable)
 	{
