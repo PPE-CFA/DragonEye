@@ -111,7 +111,7 @@
       <?php include('vue/vue_demandes_accueil.php'); ?>
     </div>
     <br>
-    <a href="connect/sign.html"class="btn btn-primary">Voir plus</a>
+    <a href="offres/offres.php"class="btn btn-primary">Voir plus d'offres</a>
     <hr>
   </div>
 

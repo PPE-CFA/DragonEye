@@ -9,7 +9,7 @@
       <div class="collapse navbar-collapse" id="navbarResponsive">
         <ul class="navbar-nav">
           <li class="nav-item">
-            <a class="nav-link" href="#">Déposer une annonce</a>
+            <a class="nav-link" href="<?=_DIR_?>/annonce.php">Déposer une annonce</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="<?=_DIR_?>/offres/offres.php">Offres</a>

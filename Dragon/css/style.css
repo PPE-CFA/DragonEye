@@ -10,12 +10,12 @@ html,body{
 
 /*---CSS des boutons---*/
 .btn-primary {
-  background-color: #FF9900;
-  border: 1px solid #FF9900;
+  background-color: #FF9900!important;
+  border: 1px solid #FF9900!important;
 }
 
 .btn-primary:hover {
-  background-color: #C67200;
+  background-color: #C67200!important;
 }
 
 .btn-outline-secondary {
