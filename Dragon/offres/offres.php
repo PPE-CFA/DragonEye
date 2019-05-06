@@ -68,12 +68,10 @@
     <h2>Offres</h2>
   </div>
 
-            
-    <!--card offre-->
-  
-  <?php while($res = $allOffers->fetch()){?>
   <div class="container">
-    <div class="row padding">
+    <div class="row padding">        
+    <!--card offre-->
+    <?php while($res = $allOffers->fetch()){?>
 
       <div class="col-sm-4">
         <div class="card">
@@ -90,15 +88,6 @@
             </div>
           </div>
         </div>
-     
-    
-
-    </div>
-    </div>
-
-
-
-
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -177,7 +166,8 @@
 <?php
   }
 ?>
-
+ </div>
+</div>
 </div>
 </div>
   <?php include('../include/footer.php') ?>

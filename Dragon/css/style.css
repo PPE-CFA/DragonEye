@@ -4,7 +4,7 @@
 html,body{
   height: 100%;
   width: 100%;
-  font-family: 'Varela Round', sans-serif;
+  font-family: 'Varela Round', sans-serif!important;
   color: #222;
 }
 
@@ -192,7 +192,7 @@ html,body{
 }
 
 .img-jeu{
-  width: 360px;
+  width: 100%;
   height: 210px;
   overflow: hidden;
 }
@@ -258,7 +258,8 @@ hr.light{
   width: 75%;
   margin-top:.8rem;
   margin-bottom: 1rem;
-
+  margin-left: auto;
+  margin-right: auto;
 }
 /*---Medias Queries*/
 @media (max-widht: 770px){
