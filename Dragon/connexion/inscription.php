@@ -120,49 +120,50 @@
 
     <!--- FORM Connexion--->
 
-   
-    <div class="connexion_title">
+    <div class="col-6 m-top-250 left-col">
+      <div class="connexion_title">
 
-    <h2>Deja inscrit ? Connectez-vous !</h2>
-    <div class="col-md-5">
-    <form method="POST" class="form-signin">
+      <h2 class="col-12">Deja inscrit ? Connectez-vous !</h2>
+      <div class="col-10 m-auto">
+      <form method="POST" class="form-signin">
 
-            <div class="sign_in">
-            <h5 class="card-title text-center">Connexion</h5>
-            
-              <div class="form-label-group">
-                <label for="inputEmail">Email</label>
-                <input type="email" id="mailconnect" class="form-control" name="mailconnect" placeholder="Email">
-              </div>
+              <div class="sign_in">
+              <h5 class="card-title text-center">Connexion</h5>
               
-              <div class="form-label-group">
-                <label for="inputMdp">Mot de passe</label>
-                <input type="password" id="mdpconnect" class="form-control" name="mdpconnect" placeholder="Mot de passe">
-              </div>
-              
-              <button class="btn btn-lg btn-secondary btn-block text-uppercase" name="formconnexion" type="submit">Go !</button>
-              </div>
+                <div class="form-label-group">
+                  <label for="inputEmail">Email</label>
+                  <input type="email" id="mailconnect" class="form-control" name="mailconnect" placeholder="Email">
+                </div>
+                
+                <div class="form-label-group">
+                  <label for="inputMdp">Mot de passe</label>
+                  <input type="password" id="mdpconnect" class="form-control" name="mdpconnect" placeholder="Mot de passe">
+                </div>
+                
+                <button class="btn btn-lg btn-secondary btn-block text-uppercase" name="formconnexion" type="submit">Go !</button>
+                </div>
 
-    </form>
-    <?php
-    if(isset($erreurConnect)) {
-            echo '<font color="red" class="erreur">'.$erreurConnect."</font>";
-    }
-    
-    ?>
+      </form>
+      <?php
+      if(isset($erreurConnect)) {
+              echo '<font color="red" class="erreur">'.$erreurConnect."</font>";
+      }
+      
+      ?>
+      </div>
+      </div>
     </div>
-    </div>
 
 
-    <div class="vertical_line"></div>
+ 
 
 
     
     
-    <div class="col-sm-3 offset-sm-7">
+    <div class="col-6 m-top-250">
   
     <!---  FORM Inscription -->
-    
+    <div class="col-10 m-auto">
     <form method="POST" class="form-signup">
       
             <div class="sign_up">
@@ -206,6 +207,7 @@
         
         
     ?>
+    </div>
     </div>
 
     

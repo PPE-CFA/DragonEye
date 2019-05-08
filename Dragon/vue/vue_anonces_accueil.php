@@ -30,7 +30,7 @@
             <div class="modal-content">
               <div class="modal-header">
                 <button type="button" class="close" data-dismiss="modal">&times;</button>
-                <h4 class="modal-title"><img src="../../img/logo.png"> Offre - '.$unRes["designation"].'</h4>
+                <h4 class="modal-title"><img src="'._DIR_.'/img/logo.png"> Offre - '.$unRes["designation"].'</h4>
                 <h6 class="modal-subtitle">'.$unRes["region"].', '.$unRes["ville"].', '.$unRes["postal"].'</h6>
                 
               </div>
@@ -39,7 +39,7 @@
               <div class="modal-body">
                 
                 <div class="img-ad">
-                  <img src="../img/nature3.jpg"/>
+                  <img  class="w-100" src="'._DIR_.'/img/nature3.jpg"/>
                   <!--popover
                   <a href="#" title="Fiche de '.$unRes["designation"].'" data-toggle="popover" data-trigger="focus" data-img="'.$unRes["url_photo"].'" ></a>-->
                   

@@ -24,16 +24,14 @@ hr.light{
 .card{
     box-shadow: 1px 1px 6px #A79B91;
     border-radius: 1rem;
-  
   }
 
   
 .img-fa{
-    width: 360px;
+    width: 100%;
     height: 130px;
     overflow: hidden;
   }
-
 
 /*CSS font amesome icon*/
 .svg-inline--fa.fa-w-18, .svg-inline--fa.fa-w-16, .svg-inline--fa.fa-w-14{
@@ -62,3 +60,9 @@ hr.light{
   color:#FD5458;
 }
   
+/*responsive*/
+@media (max-width: 991px){
+  .btn-secondary{
+    font-size: 0.8rem;
+  }
+}

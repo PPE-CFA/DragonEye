@@ -39,7 +39,7 @@
               <div class="modal-body">
                 
                 <div class="img-ad">
-                  <img src="../img/nature3.jpg"/>
+                  <img  class="w-100" src="../img/nature3.jpg"/>
                   <!--popover
                   <a href="#" title="Fiche de '.$unRes["designation"].'" data-toggle="popover" data-trigger="focus" data-img="'.$unRes["url_photo"].'" ></a>-->
                   

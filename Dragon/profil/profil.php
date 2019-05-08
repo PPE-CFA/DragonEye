@@ -44,7 +44,7 @@
           </div>
           <hr>
             <div class="card-body">
-              <a href="#" class="btn btn-secondary">Déposer un article</a>
+              <a href="../annonce.php" class="btn btn-secondary">Déposer une annonce</a>
             </div>
           </div>
         </div>

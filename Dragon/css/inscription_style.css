@@ -1,10 +1,9 @@
 /*--CSS titre connexion--*/
 .connexion_title{
-  position: absolute;
+/*position: absolute;
   left:10%;
   margin-left: -3px;
-  top: 200px;
-
+  top: 200px;*/
 
 }
 
@@ -40,15 +39,16 @@
   }
 
   .sign_in{
-
-    position: absolute;
+    /* position: absolute;
     right: -155px;
     top: 20px;
-
+    */
+   
   }
   .sign_up{
     position:relative;
-    top:100px;
+    /*top:100px;*/
+    
   }
 
   .erreur{
@@ -57,7 +57,13 @@
   }
 
 
+  .m-top-250{
+    margin-top:250px;
+  }
 
+  .left-col{
+    border-right: 1px solid #FF9900;
+  }
 
   
   

@@ -107,7 +107,6 @@ if(isset($_SESSION['IdPersonne']))
          </form>
          <?php 
             if (isset($erreur)){
-
                echo $erreur;
             }
     
