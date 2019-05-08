@@ -2,15 +2,14 @@
         - supprime une offre ou une demande de la table annonce
         - affiche toutes les données des offres/demandes de la table annonces-->
 <?php
-
-    session_start();
+    include('../include/header.php'); 
 
     if(isset($_GET['type']) AND $_GET['type'] == 'allmydemands'){
 
         if(isset($_GET['supprime']) AND !empty($_GET['supprime']))
         {
             $supprime = (int) $_GET['supprime'];
-            $req = $bdd->prepare('DELETE FROM deye_annonce WHERE IdAnnonce = ? AND Idforme = ?');
+            $req = $bdd->prepare('DELETE FROM deye_annonce WHERE IdAnnonce = ?');
             $req->execute(array($supprime));
         }
     }elseif(isset($_GET['type']) AND $_GET['type'] == 'allmyoffers'){
@@ -18,35 +17,28 @@
         if(isset($_GET['supprime']) AND !empty($_GET['supprime']))
         {
             $supprime = (int) $_GET['supprime'];
-            $req = $bdd->prepare('DELETE FROM deye_annonce WHERE IdAnnonce = ? AND Idforme = ?');
+            $req = $bdd->prepare('DELETE FROM deye_annonce WHERE IdAnnonce = ?');
             $req->execute(array($supprime));
+            var_dump($req->execute(array($supprime)));
         }
     }
-
-    $bdd = new PDO('mysql:host=127.0.0.1;dbname=bdd_jeu;charset=utf8', 'root', '');  
-
-    
-     
-
-        $allMyOffers = $bdd->query('SELECT * FROM deye_annonce WHERE Idforme = "O"');
-       
-        
-
-        $allMyDemands = $bdd->prepare('SELECT IdAnnonce, deye_jeux.designation, deye_annonce_type.AnnonceType, deye_personne.nom, deye_photo.url_photo, deye_age.age_requis, deye_categorie.libelle, deye_annonce.Description,region,ville,postal,Etat
-                                        FROM deye_annonce
-                                        INNER JOIN deye_jeux     ON deye_annonce.IdJeux=deye_jeux.IdJeux
-                                        INNER JOIN deye_personne ON deye_annonce.IdPersonne=deye_personne.IdPersonne
-                                        INNER JOIN deye_annonce_type ON deye_annonce.Idforme = deye_annonce_type.IdA_type
-                                        INNER JOIN deye_photo    ON deye_annonce.IdPhoto=deye_photo.IdPhoto
-                                        INNER JOIN deye_age      ON deye_annonce.IdAge=deye_age.IdAge
-                                        INNER JOIN deye_categorie ON deye_annonce.IdCategorie=deye_categorie.IdCategorie
-                                        WHERE IdPersonne = ? AND Idforme = "D"
-                                        ORDER BY IdAnnonce DESC');
-        $allMyDemands->execute(array($_SESSION['IdPersonne']));
-
-        var_dump($_SESSION['IdPersonne']);
+    $allMyOffers = $bdd->query('SELECT * FROM deye_annonce
+                                INNER JOIN deye_jeux ON deye_annonce.IdJeux=deye_jeux.IdJeux
+                                WHERE Idforme = "O"');
 
 
+
+    $allMyDemands = $bdd->prepare('SELECT IdAnnonce, deye_jeux.designation, deye_annonce_type.AnnonceType, deye_personne.nom, deye_photo.url_photo, deye_age.age_requis, deye_categorie.libelle, deye_annonce.Description,region,ville,postal,Etat
+                                    FROM deye_annonce
+                                    INNER JOIN deye_jeux     ON deye_annonce.IdJeux=deye_jeux.IdJeux
+                                    INNER JOIN deye_personne ON deye_annonce.IdPersonne=deye_personne.IdPersonne
+                                    INNER JOIN deye_annonce_type ON deye_annonce.Idforme = deye_annonce_type.IdA_type
+                                    INNER JOIN deye_photo    ON deye_annonce.IdPhoto=deye_photo.IdPhoto
+                                    INNER JOIN deye_age      ON deye_annonce.IdAge=deye_age.IdAge
+                                    INNER JOIN deye_categorie ON deye_annonce.IdCategorie=deye_categorie.IdCategorie
+                                    WHERE IdPersonne = ? AND Idforme = "D"
+                                    ORDER BY IdAnnonce DESC');
+    $allMyDemands->execute(array($_SESSION['IdPersonne']));
 ?>
 <!DOCTYPE html>
 <html>
@@ -65,10 +57,9 @@
 </head>
 
 <body>
-<?php  include('../include/header.php'); ?>
 <!-- Tableau de toutes les demandes de l'utilisateur -->
 
-<div class="container-fluid padding">     
+<div class="m-top-100 container-fluid padding">     
     <div class="row text-center padding">
 
     <div class="container allMyDemands">

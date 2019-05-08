@@ -4,6 +4,10 @@ include('../include/header.php');
 
 if(isset($_SESSION['IdPersonne']))
 {
+   $requser = $bdd->prepare("SELECT * FROM deye_personne WHERE IdPersonne = ?");
+   $requser->execute(array($_SESSION['IdPersonne']));
+   $user = $requser->fetch();
+
    if(isset($_POST['newNom']) AND !empty($_POST['newNom']) AND $_POST['newNom'] != $user['nom']){
       
       $newNom = htmlspecialchars($_POST['newNom']);
@@ -51,7 +55,7 @@ if(isset($_SESSION['IdPersonne']))
       }
       
    }
-
+   
    $requser = $bdd->prepare("SELECT * FROM deye_personne WHERE IdPersonne = ?");
    $requser->execute(array($_SESSION['IdPersonne']));
    $user = $requser->fetch();

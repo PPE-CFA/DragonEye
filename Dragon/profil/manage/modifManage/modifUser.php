@@ -39,16 +39,14 @@ if(isset($_SESSION['IdPersonne']) AND $_SESSION['IdType'] == "A")
    }
 
    if(isset($_POST['newEmail']) AND !empty($_POST['newEmail']) AND $_POST['newEmail'] != $modifUser['email']){
-      
       $newEmail = htmlspecialchars($_POST['newEmail']);
       $updateEmail = $bdd->prepare("UPDATE deye_personne SET mail = ? WHERE IdPersonne = ? AND IdType = ?");
       $updateEmail->execute(array($newEmail,$_GET['modifUser'],$u));
-      
-
     }
       
-   
-
+   $requser = $bdd->prepare('SELECT * FROM deye_personne WHERE IdPersonne = ? AND IdType = ?');
+   $requser->execute(array($_GET['modifUser'],$u));
+   $modifUser = $requser->fetch();
 ?>
 <html>
    <head>
@@ -72,9 +70,9 @@ if(isset($_SESSION['IdPersonne']) AND $_SESSION['IdType'] == "A")
 
    <div class="container-fluid padding">
       <div class="row text-center padding">
-         <div class="container center-div">
+         <div class="container center-div col-6">
          <div class="row">
-         <form method="POST" class="form-signup">
+         <form method="POST" class="form-signup col-10 m-auto">
             <div class="form_modif_user">
             <h4 class="card-title text-center">Modifier l'utilisateur</h4>
               <div class="form-label-group">
