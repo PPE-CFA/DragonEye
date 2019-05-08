@@ -40,7 +40,7 @@
         <section id="contact">
             <div class="contact-cover">
                 <div class="contact-inner">
-                    <h1>Deposer une annonce</h1>
+                    <h1>Déposer une annonce</h1>
                     <form method = "post" id="annonceform" action = "gererPosterAnnonce.php" enctype="multipart/form-data" autocomplete="off">
 
                         <div class="form-group">
@@ -178,18 +178,15 @@
                 method: "POST",
                 url: "obtenirUrlImage.php?idJeu=" + idJeu,
             })
-                    .done(function (url) {
-                        url = url.substring(3);
-                        //alert(url);
-                        $("#img-jeu").empty();
-                        $('<img class="image-jeu" src="' + url + '">').appendTo("#img-jeu");
-                        //alert( "Handler for .change() called." );
-                    });
-
-
-
+            .done(function (url) {
+                url = url.substring(3);
+                local = '<?=_DIR_?>/';
+                //alert(url);
+                $("#img-jeu").empty();
+                $('<img class="image-jeu" src="'+local+url+'">').appendTo("#img-jeu");
+                //alert( "Handler for .change() called." );
+            });
         });
-
     </script>
 </body>
 </html>

@@ -9,7 +9,7 @@ $idJeu = $_GET["idJeu"];
 
 include ("connect.php");
 try {
-    $query = "SELECT `deye_jeux`.IdJeux, `deye_jeux`.IdPhoto, `deye_photo`.IdPhoto, url \n"
+    $query = "SELECT `deye_jeux`.IdJeux, `deye_jeux`.IdPhoto, `deye_photo`.IdPhoto, url_photo \n"
             . "FROM `deye_jeux`,`deye_photo` \n"
             . "WHERE `deye_jeux`.IdJeux = $idJeu "
             . "AND`deye_photo`.IdPhoto = `deye_jeux`.IdPhoto LIMIT 0, 30 ";
