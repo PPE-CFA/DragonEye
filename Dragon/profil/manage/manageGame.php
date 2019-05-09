@@ -17,7 +17,6 @@
 <body>
   <?php
     include('../../include/header.php');
-    $bdd = new PDO('mysql:host=127.0.0.1;dbname=bdd_jeu;charset=utf8', 'root', '');
 
       //requete SQL : ajoute et supprime un jeu de la table deye_jeu
       if(isset($_SESSION['IdType']) AND $_SESSION['IdType'] == "A"){

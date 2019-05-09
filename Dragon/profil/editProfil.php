@@ -84,7 +84,7 @@ if(isset($_SESSION['IdPersonne']))
 
          <div class="center_div col-6 m-auto">
           <div class="row">
-         <form method="POST" class="form-signup m-auto col-10">
+         <form method="POST" class="form-signup col-10 m-auto">
             <div class="sign_up">
             <h4 class="card-title text-center">Modifier mon profil</h4>
               <div class="form-label-group">

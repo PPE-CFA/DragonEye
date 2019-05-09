@@ -1,8 +1,5 @@
 <?php
-session_start();
-
-$bdd = new PDO('mysql:host=127.0.0.1;dbname=bdd_jeu;charset=utf8', 'root', '');
-
+include('../../../include/header.php');
 //requete SQL : modifie le status de l'utilisateur, le nom, le prenom, et l'email de la table deye_personne
 
 if(isset($_SESSION['IdPersonne']) AND $_SESSION['IdType'] == "A")
@@ -65,7 +62,6 @@ if(isset($_SESSION['IdPersonne']) AND $_SESSION['IdType'] == "A")
 
 
 <body>
-  <?php  include('../../../include/header.php'); ?>
   <!---Formulaire pour modifier un utilisateur-->
 
    <div class="container-fluid padding">

@@ -17,24 +17,16 @@
 <body>
   <?php
     include('../../include/header.php');
-    $bdd = new PDO('mysql:host=127.0.0.1;dbname=bdd_jeu;charset=utf8', 'root', '');
 
     if(isset($_SESSION['IdType']) AND $_SESSION['IdType'] == "A"){
-
-      
-      
-        //confirme un nouvel user
+    //confirme un nouvel user
     if(isset($_GET['type']) AND $_GET['type'] == 'newmembre') {
         if(isset($_GET['confirme']) AND !empty($_GET['confirme'])) {
-          
- 
             $confirme = (int) $_GET['confirme'];
             $U = "U";
             $N = "N";
             $req = $bdd->prepare('UPDATE deye_personne SET IdType = ? WHERE IdPersonne = ? AND IdType = ?');
             $req->execute(array($U,$confirme,$N));
-
-   
         }
             //supprime un nouvel user
             

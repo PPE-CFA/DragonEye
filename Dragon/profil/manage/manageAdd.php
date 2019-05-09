@@ -17,8 +17,6 @@
 <body>
 <?php
 include('../../include/header.php');
-$bdd = new PDO('mysql:host=127.0.0.1;dbname=bdd_jeu;charset=utf8', 'root', '');
-
   //requete SQL : supprime une annonce de la table deye_annonce
   if(isset($_SESSION['IdType']) AND $_SESSION['IdType'] == "A"){
 

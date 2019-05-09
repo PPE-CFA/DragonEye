@@ -1,9 +1,6 @@
 
 <?php
-session_start();
-
-$bdd = new PDO('mysql:host=127.0.0.1;dbname=bdd_jeu', 'root', '');
-
+ include('../../../include/header.php');
 //requete SQL = modifier le nom, la date, le prix, le temps de jeu et le nombre de joueurs de la table deye_jeux
 
 if(isset($_SESSION['IdPersonne']) AND $_SESSION['IdType'] == "A")
@@ -100,13 +97,12 @@ if(isset($_SESSION['IdPersonne']) AND $_SESSION['IdType'] == "A")
 
 
 <body>
-  <?php  include('../../../include/header.php'); ?>
   <!--Formulaire pour modifier un jeu-->
-   <div class="container-fluid padding">
+   <div class="container-fluid padding m-top-100">
       <div class="row text-center padding">
-         <div class="container center-div">
+         <div class="container center-div col-6 m-auto">
          <div class="row">
-         <form method="POST" class="form-signup">
+         <form method="POST" class="form-signup col-10">
             <div class="form_modif_game">
             <h4 class="card-title text-center">Modifier le jeu</h4>
               <div class="form-label-group">
