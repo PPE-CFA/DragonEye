@@ -1,6 +1,6 @@
 <?php
 
-	$bdd = new PDO('mysql:host=127.0.0.1;dbname=bdd_jeu;charset=utf8', 'root', '');
+	$bdd = new PDO('mysql:host=127.0.0.1;dbname=dragoneye;charset=utf8', 'root', '');
 
 	$allEvent = $bdd->query('SELECT designation, heure_event, date_event, deye_photo.url_photo, deye_lieu.Adresse, deye_lieu.ville, deye_lieu.Nom
 													FROM deye_evenement

@@ -2,7 +2,7 @@
 
 <?php
 
-  $bdd = new PDO('mysql:host=127.0.0.1;dbname=bdd_jeu;charset=utf8', 'root', '');
+  $bdd = new PDO('mysql:host=127.0.0.1;dbname=dragoneye;charset=utf8', 'root', '');
 
   $allOffers = $bdd->query('SELECT IdAnnonce, deye_jeux.designation, deye_annonce_type.AnnonceType, deye_personne.nom, deye_photo.url_photo,
                            deye_age.age_requis, deye_categorie.libelle, deye_annonce.Description,region,ville,postal,Etat,deye_personne.prenom,

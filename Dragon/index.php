@@ -1,6 +1,6 @@
 <?php
   include('controleur/controleurAnnonce.php');
-  $unC = new ControleurAnnonce("localhost","bdd_jeu","root","");
+  $unC = new ControleurAnnonce("localhost","dragoneye","root","");
   $unC->setTableAnnonce("deye_annonce");
   $resultats = $unC->select_Annonce_recent();
   $resultats_demandes = $unC->select_Demandes();

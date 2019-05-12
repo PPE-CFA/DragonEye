@@ -166,7 +166,7 @@
 		<center>
 		<?php
 
-			$unC = new ControleurAnnonce("localhost","bdd_jeu","root","");
+			$unC = new ControleurAnnonce("localhost","dragoneye","root","");
 
 			$unC->setTableAnnonce("deye_annonce");
 

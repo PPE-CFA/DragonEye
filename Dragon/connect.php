@@ -10,7 +10,7 @@ define("DEBUG", 0);
 try {
 
     $host = "localhost";
-    $dbname = "BDD_jeu";
+    $dbname = "dragoneye";
     $user = "root";
     $mdp = "";
   

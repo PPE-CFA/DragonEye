@@ -1,6 +1,6 @@
 <?php
   include('controleur/controleurAnnonce.php');
-  $unC = new ControleurAnnonce("localhost","bdd_jeu","root","");
+  $unC = new ControleurAnnonce("localhost","dragoneye","root","");
   $unC->setTableAnnonce("deye_annonce");
   $resultats = $unC->select_Annonce_recent();
   var_dump($resultats);
@@ -96,7 +96,7 @@
                         <?php
 
                         include ("controleur/controleurIndex.php");
-                        $unC = new Controleur("localhost","bdd_jeu","root","");
+                        $unC = new Controleur("localhost","dragoneye","root","");
 
                         if(isset($_POST['forminscription']))
                         {

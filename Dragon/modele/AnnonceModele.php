@@ -43,7 +43,7 @@
   	    return null;
   	  }else
   	  {
-				$pdo = new PDO('mysql:host=127.0.0.1;dbname=bdd_jeu;charset=utf8', 'root', '');
+				$pdo = new PDO('mysql:host=127.0.0.1;dbname=dragoneye;charset=utf8', 'root', '');
 				$resultats = $pdo->query('SELECT IdAnnonce, deye_jeux.designation, deye_annonce_type.AnnonceType, deye_personne.nom, deye_photo.url_photo,
 					deye_age.age_requis, deye_categorie.libelle, deye_annonce.Description,region,ville,postal,Etat,deye_personne.prenom,
 					deye_jeux.prix, deye_jeux.date_sortie, deye_jeux.nb_joueurs, deye_jeux.temps_jeux, deye_personne.email

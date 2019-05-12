@@ -44,7 +44,7 @@
           <?php
 
           
-          $bdd= new PDO ('mysql:host=127.0.0.1;dbname=bdd_jeu', 'root', '');
+          $bdd= new PDO ('mysql:host=127.0.0.1;dbname=dragoneye', 'root', '');
           if(isset($_POST['forminscription'])){
 
             echo "oooook";

@@ -20,7 +20,7 @@
 
     <?php
 
-      $bdd = new PDO('mysql:host=localhost;dbname=bdd_jeu', 'root', '');
+      $bdd = new PDO('mysql:host=localhost;dbname=dragoneye', 'root', '');
 
       //Requete SQL : connecte un utilisateur
 
@@ -64,7 +64,7 @@
     
 
     <?php
-          $bdd = new PDO('mysql:host=localhost;dbname=bdd_jeu', 'root', '');
+          $bdd = new PDO('mysql:host=localhost;dbname=dragoneye', 'root', '');
 
           //Requete SQL : inscrit un utilisateur
 

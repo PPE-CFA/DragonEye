@@ -164,7 +164,7 @@
 		<center>
 		<?php
 
-			$unC = new Controleur("localhost","bdd_jeu","root","");
+			$unC = new Controleur("localhost","dragoneye","root","");
 
 			$unC->setTable("deye_evenement");
 

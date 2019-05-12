@@ -28,7 +28,7 @@
                 session_start();
               }
 
-              $bdd = new PDO('mysql:host=127.0.0.1;dbname=bdd_jeu;charset=utf8', 'root', '');
+              $bdd = new PDO('mysql:host=127.0.0.1;dbname=dragoneye;charset=utf8', 'root', '');
 
               if(isset($_SESSION["IdPersonne"]) AND $_SESSION["IdPersonne"] > 0){
                 $requser = $bdd->prepare("SELECT * FROM deye_personne WHERE IdPersonne = ?");
