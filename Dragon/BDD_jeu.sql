@@ -1,11 +1,11 @@
 #------------------------------------------------------------
 #        Script MySQL.
 #------------------------------------------------------------
-drop database if exists BDD_jeu ; 
-create database BDD_jeu; 
-use BDD_jeu; 
+drop database if exists dragoneye ; 
+create database dragoneye; 
+use dragoneye; 
 
-ALTER database BDD_jeu CHARACTER SET utf8 COLLATE utf8_general_ci;
+ALTER database dragoneye CHARACTER SET utf8 COLLATE utf8_general_ci;
 
 #------------------------------------------------------------
 # Table: DEYE_Lieu

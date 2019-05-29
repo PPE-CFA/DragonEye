@@ -1,5 +1,5 @@
 <?php
-  include("./modele/AnnonceModele.php");
+  include(_DIR2_."/modele/AnnonceModele.php");
   class ControleurAnnonce
   {
     private $unModeleAnnonce;

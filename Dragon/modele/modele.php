@@ -8,7 +8,7 @@
 	{
 		$this->pdo = null;
 		try{
-			$this->pdo = new PDO ("mysql:host=".$serveur.";dbname=".$bdd,$user,$mdp);
+			$this->pdo = new PDO ("mysql:hostname=".$serveur.";dbname=".$bdd,$user,$mdp);
 		}
 		catch (PDOException $exp)
 		{

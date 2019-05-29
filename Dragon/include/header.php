@@ -1,4 +1,23 @@
-<?php include('sec.php')?>
+<?php 
+  include_once('sec.php');
+  //mod DEV ou PROD
+  if(_DEV_){
+    $json_bdd_data = file_get_contents(_DIR_."/bdd/bdd_data_local.json");
+    $bdd_data = json_decode($json_bdd_data,true);
+  }else{
+    $json_bdd_data = file_get_contents(_DIR_."/bdd/bdd_data.json");
+    $bdd_data = json_decode($json_bdd_data,true);
+  }
+  $host = $bdd_data['host'];
+  $bdd_nom = $bdd_data['bdd_nom'];
+  $user = $bdd_data['user'];
+  $mdp = $bdd_data['mdp'];
+  //-------fin mod---------
+  //les controlleur
+  include(_DIR2_.'/controleur/controleurAnnonce.php');
+  $unC = new ControleurAnnonce($host, $bdd_nom, $user, $mdp);
+  //------fin controlleur------
+?>
 <!--- Navigation --->
 <nav class = "navbar navbar-expand-md navbar-light bg-light sticky-top">
     <div class="container-fluid">
@@ -24,11 +43,11 @@
         <ul class="navbar-nav navbar-right ml-auto">
           <li class="nav-item">
           <?php
-              if (session_status() == PHP_SESSION_NONE) {
-                session_start();
-              }
+            if (session_status() == PHP_SESSION_NONE) {
+              session_start();
+            }
 
-              $bdd = new PDO('mysql:host=127.0.0.1;dbname=bdd_jeu;charset=utf8', 'root', '');
+            $bdd = new PDO('mysql:hostname=213.32.79.219;dbname=BDD_jeu;charset=utf8', 'root'/*"dragoneye"*/, ''/*"NeGMzgKL8MlLmdzZ"*/);/*dragoneye*/
 
               if(isset($_SESSION["IdPersonne"]) AND $_SESSION["IdPersonne"] > 0){
                 $requser = $bdd->prepare("SELECT * FROM deye_personne WHERE IdPersonne = ?");

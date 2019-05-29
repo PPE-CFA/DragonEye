@@ -74,7 +74,7 @@
                         <?php
 
                         include ("controleur/controleurIndex.php");
-                        $unC = new Controleur("localhost","bdd_jeu","root","");
+                        $unC = new Controleur("213.32.79.219","dragoneye", "dragoneye", "NeGMzgKL8MlLmdzZ");
 
                         if(isset($_POST['forminscription']))
                         {

@@ -1,6 +1,6 @@
-drop database if exists BDD_jeu ; 
-create database BDD_jeu; 
-use BDD_jeu; 
+drop database if exists dragoneye ; 
+create database dragoneye; 
+use dragoneye; 
 
 CREATE TABLE Personne(
         IdPersonne Int  Auto_increment  NOT NULL ,

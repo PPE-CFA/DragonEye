@@ -20,7 +20,7 @@
 
     <?php
 
-      $bdd = new PDO('mysql:host=localhost;dbname=bdd_jeu', 'root', '');
+      //$bdd = new PDO('mysql:hostname=213.32.79.219;dbname=dragoneye', "dragoneye", "NeGMzgKL8MlLmdzZ");
 
       //Requete SQL : connecte un utilisateur
 
@@ -64,7 +64,7 @@
     
 
     <?php
-          $bdd = new PDO('mysql:host=localhost;dbname=bdd_jeu', 'root', '');
+          //$bdd = new PDO('mysql:hostname=213.32.79.219;dbname=dragoneye', "dragoneye", "NeGMzgKL8MlLmdzZ");
 
           //Requete SQL : inscrit un utilisateur
 
@@ -120,7 +120,7 @@
 
     <!--- FORM Connexion--->
 
-    <div class="col-6 m-top-250 left-col">
+    <div class="col-xs-12 col-lg-6 m-top-250 left-col">
       <div class="connexion_title">
 
       <h2 class="col-12">Deja inscrit ? Connectez-vous !</h2>
@@ -160,7 +160,7 @@
 
     
     
-    <div class="col-6 m-top-250">
+    <div class="col-xs-12 col-lg-6 m-top-250">
   
     <!---  FORM Inscription -->
     <div class="col-10 m-auto">
