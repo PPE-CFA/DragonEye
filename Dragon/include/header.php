@@ -16,6 +16,8 @@
   //les controlleur
   include(_DIR2_.'/controleur/controleurAnnonce.php');
   $unC = new ControleurAnnonce($host, $bdd_nom, $user, $mdp);
+  include(_DIR2_.'/controleur/controleurUser.php');
+  $unC_user = new ControleurUser($host, $bdd_nom, $user, $mdp);
   //------fin controlleur------
 ?>
 <!--- Navigation --->
@@ -42,26 +44,19 @@
         </ul>
         <ul class="navbar-nav navbar-right ml-auto">
           <li class="nav-item">
-          <?php
-            if (session_status() == PHP_SESSION_NONE) {
-              session_start();
-            }
-
-            $bdd = new PDO('mysql:hostname=213.32.79.219;dbname=BDD_jeu;charset=utf8', 'root'/*"dragoneye"*/, ''/*"NeGMzgKL8MlLmdzZ"*/);/*dragoneye*/
+            <?php
+              if (session_status() == PHP_SESSION_NONE) {
+                session_start();
+              }
+              //user controlleur
+              //$bdd = new PDO('mysql:hostname=213.32.79.219;dbname=BDD_jeu;charset=utf8', 'root'/*"dragoneye"*/, ''/*"NeGMzgKL8MlLmdzZ"*/);/*dragoneye*/
 
               if(isset($_SESSION["IdPersonne"]) AND $_SESSION["IdPersonne"] > 0){
-                $requser = $bdd->prepare("SELECT * FROM deye_personne WHERE IdPersonne = ?");
-                $requser->execute(array($_SESSION['IdPersonne']));
-                $user = $requser->fetch();
-            ?>
-              <a href="<?=_DIR_?>/profil/profil.php" class="btn btn-primary"><?= $user['nom'];?> <?=$user['prenom'];?></a>
-            <?php
-              }else{
-            ?>
-                <a href="<?=_DIR_?>/connexion/inscription.php" class="btn btn-primary">S'inscrire/Se connecter</a>
-            <?php
+                //vue user
+                $user = $unC_user->select_User($_SESSION["IdPersonne"]);
               }
-            ?>            
+              include(_DIR2_.'/vue/vue_user.php');
+            ?>
 					</li>
 				</ul>
 			</div>

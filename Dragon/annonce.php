@@ -33,10 +33,6 @@
         $deposerAnnonce = true;
         include("include/header.php");
         ?>
-
-
-
-
         <section id="contact">
             <div class="contact-cover">
                 <div class="contact-inner">
