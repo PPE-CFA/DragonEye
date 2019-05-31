@@ -19,7 +19,7 @@
 	include('../include/header.php');
 	//page specific controller
   include(_DIR2_.'/controleur/controleurEvent.php');
-  $unC_event = new ControleurEvent($host, $bdd_nom, $user, $mdp);
+  $unC_event = new ControleurEvent($host, $bdd_nom, $bdd_user, $mdp);
   $stmt_allEvent = $unC_event->select_allEvent();
 ?>
 

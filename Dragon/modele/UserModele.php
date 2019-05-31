@@ -28,6 +28,32 @@
             return $result;
         }
     }
+
+    public function connectUser($mailconnect, $mdpconnect)
+    {
+      if ($this->pdo == null){//pas de connexion
+          return null;
+      }else{
+        $sql = 'SELECT * FROM deye_personne WHERE email = ? AND mdp = ?';
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(array($mailconnect, $mdpconnect));
+        $result = $stmt->fetch();
+        return $result;
+      }
+    }
+
+    public function existUser($mailconnect, $mdpconnect)
+    {
+      if ($this->pdo == null){//pas de connexion
+          return null;
+      }else{
+        $sql = 'SELECT * FROM deye_personne WHERE email = ? AND mdp = ?';
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(array($mailconnect, $mdpconnect));
+        $result = $stmt->rowCount();
+        return $result;
+      }
+    }
 		
   	public function setTableUser($uneTableUser)
   	{

@@ -15,7 +15,40 @@
 </head>
 
 <body>
-  <?php include('../include/header.php')?>
+  <?php 
+    include('../include/header.php');
+    if(isset($_POST['formconnexion'])) {
+      $mailconnect = $_POST['mailconnect'];
+      $mdpconnect = $_POST['mdpconnect'];
+
+      if(!empty($mailconnect) AND !empty($mdpconnect))
+      {
+        //$requser = $bdd->prepare("SELECT * FROM deye_personne WHERE email = ? AND mdp = ?");
+        //$requser->execute(array($mailconnect,$mdpconnect));
+        $userExist = $unC_user->existUser($mailconnect, $mdpconnect);
+        if($userExist === 1){
+          $userinfo =  $unC_user->connectUser($mailconnect, $mdpconnect);
+          $_SESSION['IdPersonne'] = $userinfo['idPersonne'];
+          $_SESSION['IdType'] = $userinfo['idType'];
+          $_SESSION['nom'] = $userinfo['Nom'];
+          $_SESSION['prenom'] = $userinfo['Prenom'];
+          $_SESSION['email'] = $userinfo['Email'];
+          $_SESSION['mdp'] = $userinfo['Mdp'];
+          header("Location: ../profil/profil.php?id=".$_SESSION['idPersonne']);
+        }
+        else
+        {
+          $erreurConnect = "Mauvais mail ou mot de passe !";
+        }
+
+      }
+      else
+      {
+
+        $erreurConnect = "Tous les champs doivent être remplies !";
+      }
+    }
+  ?>
 
 
     <?php
@@ -33,7 +66,7 @@
           $requser = $bdd->prepare("SELECT * FROM deye_personne WHERE email = ? AND mdp = ?");
           $requser->execute(array($mailconnect,$mdpconnect));
           $userexist = $requser->rowCount();
-          if($userexist == 1){
+          if($userexist === 1){
 
             $userinfo = $requser->fetch();
             $_SESSION['IdPersonne'] = $userinfo['IdPersonne'];
@@ -148,7 +181,6 @@
       if(isset($erreurConnect)) {
               echo '<font color="red" class="erreur">'.$erreurConnect."</font>";
       }
-      
       ?>
       </div>
       </div>

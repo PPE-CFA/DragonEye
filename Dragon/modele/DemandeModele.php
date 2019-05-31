@@ -7,6 +7,7 @@
     {
         $this->pdo = null;
         try{
+            var_dump($bdd.', '.$user);
             $this->pdo = new PDO ("mysql:hostname=".$serveur.";dbname=".$bdd,$user,$mdp);
         }
         catch (PDOException $exp)

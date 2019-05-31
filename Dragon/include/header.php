@@ -10,14 +10,14 @@
   }
   $host = $bdd_data['host'];
   $bdd_nom = $bdd_data['bdd_nom'];
-  $user = $bdd_data['user'];
+  $bdd_user = $bdd_data['user'];
   $mdp = $bdd_data['mdp'];
   //-------fin mod---------
   //les controlleur
   include(_DIR2_.'/controleur/controleurAnnonce.php');
-  $unC = new ControleurAnnonce($host, $bdd_nom, $user, $mdp);
+  $unC = new ControleurAnnonce($host, $bdd_nom, $bdd_user, $mdp);
   include(_DIR2_.'/controleur/controleurUser.php');
-  $unC_user = new ControleurUser($host, $bdd_nom, $user, $mdp);
+  $unC_user = new ControleurUser($host, $bdd_nom, $bdd_user, $mdp);
   //------fin controlleur------
 ?>
 <!--- Navigation --->

@@ -20,5 +20,17 @@
         $resultats=$this->unUserModele->select_User($id_user);
         return $resultats;
       }
+
+      function connectUser($mailconnect, $mdpconnect)
+      {
+        $result=$this->unUserModele->connectUser($mailconnect, $mdpconnect);
+        return $result;
+      }
+
+      function existUser($mailconnect, $mdpconnect)
+      {
+        $result=$this->unUserModele->existUser($mailconnect, $mdpconnect);
+        return $result;
+      }
     }
 ?>

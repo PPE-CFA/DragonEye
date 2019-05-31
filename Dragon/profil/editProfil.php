@@ -4,12 +4,15 @@ include('../include/header.php');
 
 if(isset($_SESSION['IdPersonne']))
 {
-   $requser = $bdd->prepare("SELECT * FROM deye_personne WHERE IdPersonne = ?");
-   $requser->execute(array($_SESSION['IdPersonne']));
-   $user = $requser->fetch();
+   //select_user
+   //$requser = $bdd->prepare("SELECT * FROM deye_personne WHERE IdPersonne = ?");
+   //$requser->execute(array($_SESSION['IdPersonne']));
+   //$user = $requser->fetch();
+   var_dump($user);
 
-   if(isset($_POST['newNom']) AND !empty($_POST['newNom']) AND $_POST['newNom'] != $user['nom']){
-      
+   if(isset($_POST['newNom']) AND !empty($_POST['newNom']) AND $_POST['newNom'] != $user['Nom']){
+      //update user nom
+
       $newNom = htmlspecialchars($_POST['newNom']);
       //$u = "U";
       //$updateNom = $bdd->prepare("UPDATE deye_personne SET nom = ? WHERE IdPersonne = ? AND IdType = ?");
@@ -19,8 +22,9 @@ if(isset($_SESSION['IdPersonne']))
       
    }
 
-   if(isset($_POST['newPrenom']) AND !empty($_POST['newPrenom']) AND $_POST['newPrenom'] != $user['prenom']){
-      
+   if(isset($_POST['newPrenom']) AND !empty($_POST['newPrenom']) AND $_POST['newPrenom'] != $user['Prenom']){
+      //update user nom
+
       $newPrenom = htmlspecialchars($_POST['newPrenom']);
       //$u = "U";
       //$updatePrenom = $bdd->prepare("UPDATE deye_personne SET prenom = ? WHERE IdPersonne = ? AND IdType = ?");
@@ -30,8 +34,9 @@ if(isset($_SESSION['IdPersonne']))
       
    }
 
-   if(isset($_POST['newMail']) AND !empty($_POST['newMail']) AND $_POST['newMail'] != $user['email']){
-      
+   if(isset($_POST['newMail']) AND !empty($_POST['newMail']) AND $_POST['newMail'] != $user['Email']){
+      //update user nom
+
       $newMail = htmlspecialchars($_POST['newMail']);
       //$u = "U";
       //$updateMail = $bdd->prepare("UPDATE deye_personne SET email = ? WHERE IdPersonne = ? AND IdType = ?");
@@ -41,7 +46,8 @@ if(isset($_SESSION['IdPersonne']))
    }
 
    if(isset($_POST['newMdp']) AND !empty($_POST['newMdp']) AND isset($_POST['newMdp2']) AND !empty($_POST['newMdp2'])) {
-      
+      //update user nom
+
       $newMdp = ($_POST['newMdp']);
       $newMdp2 = ($_POST['newMdp2']);
       //$u = "U";
@@ -56,10 +62,12 @@ if(isset($_SESSION['IdPersonne']))
       
    }
    
-   $requser = $bdd->prepare("SELECT * FROM deye_personne WHERE IdPersonne = ?");
-   $requser->execute(array($_SESSION['IdPersonne']));
-   $user = $requser->fetch();
+   //$requser = $bdd->prepare("SELECT * FROM deye_personne WHERE IdPersonne = ?");
+   //$requser->execute(array($_SESSION['IdPersonne']));
+   //$user = $requser->fetch();
 
+   //refresh info
+   $user = $unC_user->select_User($_SESSION["IdPersonne"]);
 ?>
 <html>
    <head>

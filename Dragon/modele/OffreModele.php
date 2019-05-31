@@ -35,7 +35,6 @@
                         WHERE Idforme = "NO"
                         ORDER BY IdAnnonce DESC';
             $stmt = $this->pdo->query($sql);
-            var_dump($stmt);
             return $stmt;
         }
     }

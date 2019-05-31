@@ -21,7 +21,7 @@
   include('../include/header.php');
   //page specific controller
   include(_DIR2_.'/controleur/controleurDemande.php');
-  $unC_demande = new ControleurDemande($host, $bdd_nom, $user, $mdp);
+  $unC_demande = new ControleurDemande($host, $bdd_nom, $bdd_user, $mdp);
   $stmt_allDemande = $unC_demande->select_allDemande();
 ?>
   <header>

@@ -20,7 +20,7 @@
   include('../include/header.php');
   //page specific controller
   include(_DIR2_.'/controleur/controleurOffre.php');
-  $unC_offre = new ControleurOffre($host, $bdd_nom, $user, $mdp);
+  $unC_offre = new ControleurOffre($host, $bdd_nom, $bdd_user, $mdp);
   $stmt_allOffre = $unC_offre->select_allOffre();
 ?>
 
