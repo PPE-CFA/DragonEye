@@ -17,6 +17,9 @@
 <body>
   <?php
     include('../../include/header.php');
+    //page specific controller
+    include(_DIR2_.'/controleur/controleurEvent.php');
+    $unC_event = new ControleurEvent($host, $bdd_nom, $bdd_user, $mdp);
 
       //requete SQL : modifie ou supprime un jeu de la table deye_jeu
       if(isset($_SESSION['IdType']) AND $_SESSION['IdType'] == "A"){
@@ -70,12 +73,12 @@
     }
 
 
-    $allEvents = $bdd->query('SELECT IdEvent, designation, date_event, heure_event, url_photo, Adresse
+    /*$allEvents = $bdd->query('SELECT IdEvent, designation, date_event, heure_event, url_photo, Adresse
     FROM deye_evenement
     INNER JOIN deye_photo ON deye_evenement.IdPhoto = deye_photo.IdPhoto
-    INNER JOIN deye_lieu ON deye_evenement.IdLieu = deye_lieu.IdLieu ORDER BY IdEvent  DESC');
+    INNER JOIN deye_lieu ON deye_evenement.IdLieu = deye_lieu.IdLieu ORDER BY IdEvent  DESC');*/
 
-
+    $stmt_allEvent = $unC_event->select_allEvent();
   ?>
 
 
@@ -98,11 +101,11 @@
     <th>Adresse</th>
     </thead>
     <tbody>
-      <?php while($res = $allEvents->fetch()){?>
+      <?php while($res = $stmt_allEvent->fetch()){ ?>
       <tr class="table-info">
 
             <td>
-                <?=$res['IdEvent']?>
+                <?=$res['idEvent']?>
             </td>
 
             <td>

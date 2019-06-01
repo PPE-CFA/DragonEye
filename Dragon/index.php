@@ -24,10 +24,6 @@
   $unC->setTableAnnonce("deye_annonce");
   $resultats = $unC->select_Annonce_recent();
   //$resultats_demandes = $unC->select_Demandes();
-
-  var_dump($resultats);
-  var_dump(_DEV_);
-  var_dump($bdd_data);
 ?>
 
 <!--- Image centrale--->

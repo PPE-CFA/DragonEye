@@ -23,25 +23,11 @@
   $unC_offre = new ControleurOffre($host, $bdd_nom, $bdd_user, $mdp);
   $stmt_allOffre = $unC_offre->select_allOffre();
 ?>
+<div class="offers-filter col-12">
+  <img class="col-12" src="../img/header.jpg"/>
+</div>
 
-  <header>
-          
-          <div class="container-fluid padding">
-          <div class="row">
-          <div class="col-md-12">
-          <div class="offers-filter">
-            <img src="../img/header.jpg"/>
-          </div>
-        </div>
-        </div>
-        </div>
-      
-
-  </header>
-
-
-
-  <!--Toutes les Offres-->
+<!--Toutes les Offres-->
 <div class="container-fluid padding card_ad">
 <div class="row text-center padding">
   <div class="card_offers_title col-12">

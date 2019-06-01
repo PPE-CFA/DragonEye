@@ -21,13 +21,12 @@
         if ($this->pdo == null){//pas de connexion
             return null;
         }else{
-            $sql = 'SELECT designation, heure_event, date_event, deye_photo.url_photo, deye_lieu.Adresse, deye_lieu.ville, deye_lieu.Nom
+            $sql = 'SELECT idEvent, designation, heure_event, date_event, deye_photo.url_photo, deye_lieu.Adresse, deye_lieu.ville, deye_lieu.Nom
                         FROM deye_evenement
                         INNER JOIN deye_photo ON deye_evenement.IdEvent=deye_photo.IdPhoto
                         INNER JOIN deye_lieu ON deye_evenement.IdEvent=deye_lieu.IdLieu
                         ORDER BY date_event ASC';
             $stmt = $this->pdo->query($sql);
-            var_dump($stmt);
             return $stmt;
         }
     }

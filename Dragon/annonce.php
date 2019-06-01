@@ -30,8 +30,11 @@
     </head>
     <body>
         <?php 
-        $deposerAnnonce = true;
-        include("include/header.php");
+            $deposerAnnonce = true;
+            include("include/header.php");
+            //page specific controller
+            include(_DIR2_.'/controleur/controleurJeu.php');
+            $unC_jeu = new ControleurJeu($host, $bdd_nom, $bdd_user, $mdp);
         ?>
         <section id="contact">
             <div class="contact-cover">
@@ -44,20 +47,16 @@
                             <!--input name="titre" type="title" required placeholder="Titre de l'annonce" class="form-control"-->
                             <select name="jeu" id="jeu" class="form-control jeux" form="annonceform">
                                 <?php
-                                include ("connect.php");
-                                $query = "SELECT  IdJeux, designation FROM deye_jeux";
+                                    $stmt_allJeu = $unC_jeu->select_allJeu();
+                                    $count = 0;
 
-                                $stmt1 = $pdo->prepare($query);
-                                $stmt1->execute();
-                                $count = 0;
-
-                                // pour chaque document
-                                while ($result1 = $stmt1->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT)) {
-                                    $count = $count + 1;
-                                    $id = $result1[0];
-                                    $libelle = $result1[1];
-                                    echo "<option value=$id>$libelle</option>";
-                                }
+                                    // pour chaque document
+                                    while ($result1 = $stmt_allJeu->fetch()) {
+                                        $count = $count + 1;
+                                        $id = $result1['idJeux'];
+                                        $libelle = $result1['Designation'];
+                                        include('vue/vue_option_anonce.php'); 
+                                    }
                                 ?>
                             </select>
                         </div>
@@ -77,27 +76,16 @@
                         <div class="form-group">
                             <label class="form-control-label"><i class="fa fa-gamepad"></i> CATEGORIE</label>
                             <select name="categorie" id="country" class="form-control" form="annonceform">
-                                <!--option value="Action">ACTION</option>
-                                <option value="Strategie">STRATEGIE</option>
-                                <option value="Fps">FPS</option>
-                                <option value="Rpg">RPG</option>
-                                <option value="Course">COURSE</option-->
-
                                 <?php
-                                include ("connect.php");
-                                $query = "SELECT  IdCategorie, libelle FROM deye_categorie";
-                                $data = array();
-                                $stmt1 = $pdo->prepare($query);
-                                $stmt1->execute();
-                                $count = 0;
-
-                                // pour chaque document
-                                while ($result1 = $stmt1->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT)) {
-                                    $count = $count + 1;
-                                    $id = $result1[0];
-                                    $libelle = $result1[1];
-                                    echo "<option value=$id>$libelle</option>";
-                                }
+                                    $stmt_allJeu = $unC_jeu->select_allJeu();
+                                    $count = 0;
+                                    // pour chaque document
+                                    while ($result1 = $stmt_allJeu->fetch()) {
+                                        $count = $count + 1;
+                                        $id = $result1['idCategorie'];
+                                        $libelle = $result1['cateLibelle'];
+                                        include('vue/vue_option_anonce.php'); 
+                                    }
                                 ?>
                             </select>
                         </div>
@@ -106,38 +94,21 @@
                             <label class="form-control-label"><i class="fa fa-bookmark"></i> Age</label>
                             <!--input name="age" type="text" required placeholder="" class="form-control"-->
                             <select name="age" id="age" class="form-control" form="annonceform">
-                                <!--option value="Action">ACTION</option>
-                                <option value="Strategie">STRATEGIE</option>
-                                <option value="Fps">FPS</option>
-                                <option value="Rpg">RPG</option>
-                                <option value="Course">COURSE</option-->
-
                                 <?php
-                                include ("connect.php");
-                                $query = "SELECT  IdAge, age_requis FROM deye_age";
+                                    $stmt_allJeu = $unC_jeu->select_allJeu();
+                                    $count = 0;
 
-                                $stmt1 = $pdo->prepare($query);
-                                $stmt1->execute();
-                                $count = 0;
-
-                                // pour chaque document
-                                while ($result1 = $stmt1->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_NEXT)) {
-                                    $count = $count + 1;
-                                    $id = $result1[0];
-                                    $libelle = $result1[1];
-                                    echo "<option value=$id>$libelle</option>";
-                                }
+                                    // pour chaque document
+                                    while ($result1 = $stmt_allJeu->fetch()) {
+                                        $count = $count + 1;
+                                        $id = $result1['idAge'];
+                                        $libelle = $result1['Age_requis'];
+                                        include('vue/vue_option_anonce.php'); 
+                                    }
                                 ?>
                             </select>
 
                         </div>
-
-
-
-
-
-
-
                         <div class="form-group">
                             <label class="form-control-label"><i class="fa fa-envelope-open"></i> Description de l'annonce</label>
                             <textarea name="description" class="form-control"required cols="3" rows="6" placeholder="Description"></textarea>
