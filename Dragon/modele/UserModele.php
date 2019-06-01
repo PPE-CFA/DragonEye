@@ -77,14 +77,28 @@
       }
     }
 
-    public function updateUser($value, $champ, $id_user)
+    public function updateUser($value, $champ, $id_user, $action)
     {
       if ($this->pdo == null){//pas de connexion
           return null;
       }else{
-        $sql = 'UPDATE deye_personne SET '.$champ.' = ? WHERE IdPersonne = '.$id_user.'';
-        $stmt = $this->pdo->prepare($sql);
-        $stmt->execute(array($value));
+        if($action === 'edit'){
+          $sql = 'UPDATE deye_personne SET '.$champ.' = ? WHERE idPersonne = '.$id_user.'';
+          $stmt = $this->pdo->prepare($sql);
+          $stmt->execute(array($value));
+        }else if($action === 'confirm'){
+          $sql = 'UPDATE deye_personne SET idType = "U" WHERE idPersonne = '.$id_user.' AND idType = "N"';
+          $stmt = $this->pdo->prepare($sql);
+          $stmt->execute();
+        }else if($action === 'supprime'){
+          $sql = 'DELETE FROM deye_personne WHERE IdPersonne = '.$id_user.' AND IdType = "N"';
+          $stmt = $this->pdo->prepare($sql);
+          $stmt->execute();
+        }else if($action === 'supprime_user'){
+          $sql = 'DELETE FROM deye_personne WHERE IdPersonne = '.$id_user.' AND IdType = "U"';
+          $stmt = $this->pdo->prepare($sql);
+          $stmt->execute();
+        }
       }
     }
 		

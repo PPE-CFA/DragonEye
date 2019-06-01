@@ -4,7 +4,7 @@
 <div class="container-fluid padding">
 <div class="row text-center">
   <div class="col-md-4">
-    <img class="deye_logo" src="<?=_DIR_?>/img/logo2.png">
+    <img class="deye_logo" src="<?=_DIR_?>/img/logo4.png">
     <hr class="light">
     <p>phone</p>
     <p>email</p>

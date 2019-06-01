@@ -19,36 +19,23 @@
     include('../../include/header.php');
 
     if(isset($_SESSION['IdType']) AND $_SESSION['IdType'] == "A"){
-    //confirme un nouvel user
-    if(isset($_GET['type']) AND $_GET['type'] == 'newmembre') {
+      //confirme un nouvel user
+      if(isset($_GET['type']) AND $_GET['type'] == 'newmembre') {
         if(isset($_GET['confirme']) AND !empty($_GET['confirme'])) {
-            $confirme = (int) $_GET['confirme'];
-            $U = "U";
-            $N = "N";
-            $req = $bdd->prepare('UPDATE deye_personne SET IdType = ? WHERE IdPersonne = ? AND IdType = ?');
-            $req->execute(array($U,$confirme,$N));
+          $confirme = (int) $_GET['confirme'];
+          $unC_user->updateUser('', '', $confirme, 'confirm');
         }
-            //supprime un nouvel user
-            
-          if(isset($_GET['supprime']) AND !empty($_GET['supprime'])) {
-            
-            $supprime = (int) $_GET['supprime'];
-            $N = "N";
-            $req = $bdd->prepare('DELETE FROM deye_personne WHERE IdPersonne = ? AND IdType = ?');
-            $req->execute(array($supprime,$N));
-
-
+        //supprime un nouvel user
+        if(isset($_GET['supprime']) AND !empty($_GET['supprime'])) {
+          $supprime = (int) $_GET['supprime'];
+          $unC_user->updateUser('', '', $supprime, 'supprime');
         }
         //supprime un utilisateur
-        }elseif(isset($_GET['type']) AND $_GET['type'] == 'allmembre') {
-
+      }elseif(isset($_GET['type']) AND $_GET['type'] == 'allmembre') {
         $supprime = (int) $_GET['supprime'];
-            $U = "U";
-            $req = $bdd->prepare('DELETE FROM deye_personne WHERE IdPersonne = ? AND IdType = ?');
-            $req->execute(array($supprime,$U));
-        }
-    }
-    else{
+        $unC_user->updateUser('', '', $supprime, 'supprime_user');
+      }
+    }else{
       exit();
     }
 

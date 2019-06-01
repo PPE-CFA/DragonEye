@@ -39,9 +39,9 @@
         return $result;
       }
 
-      function updateUser($value, $champ, $id_user)
+      function updateUser($value, $champ, $id_user, $action)
       {
-        $result=$this->unUserModele->updateUser($value, $champ, $id_user);
+        $result=$this->unUserModele->updateUser($value, $champ, $id_user, $action);
         return $result;
       }
 

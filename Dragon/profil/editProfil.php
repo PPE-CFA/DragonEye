@@ -11,24 +11,24 @@ if(isset($_SESSION['IdPersonne']))
 
    if(isset($_POST['newNom']) AND !empty($_POST['newNom']) AND $_POST['newNom'] != $user['Nom']){
       $newNom = htmlspecialchars($_POST['newNom']);
-      $unC_user->updateUser($newNom, 'Nom', $_SESSION['IdPersonne']);
+      $unC_user->updateUser($newNom, 'Nom', $_SESSION['IdPersonne'], 'edit');
    }
 
    if(isset($_POST['newPrenom']) AND !empty($_POST['newPrenom']) AND $_POST['newPrenom'] != $user['Prenom']){
       $newPrenom = htmlspecialchars($_POST['newPrenom']);
-      $unC_user->updateUser($newPrenom, 'Prenom', $_SESSION['IdPersonne']);
+      $unC_user->updateUser($newPrenom, 'Prenom', $_SESSION['IdPersonne'], 'edit');
    }
 
    if(isset($_POST['newMail']) AND !empty($_POST['newMail']) AND $_POST['newMail'] != $user['Email']){
       $newMail = htmlspecialchars($_POST['newMail']);
-      $unC_user->updateUser($newMail, 'Email', $_SESSION['IdPersonne']);
+      $unC_user->updateUser($newMail, 'Email', $_SESSION['IdPersonne'], 'edit');
    }
 
    if(isset($_POST['newMdp']) AND !empty($_POST['newMdp']) AND isset($_POST['newMdp2']) AND !empty($_POST['newMdp2'])) {
       $newMdp = ($_POST['newMdp']);
       $newMdp2 = ($_POST['newMdp2']);
       if($newMdp === $newMdp2){
-         $unC_user->updateUser($newMdp, 'Mdp', $_SESSION['IdPersonne']);
+         $unC_user->updateUser($newMdp, 'Mdp', $_SESSION['IdPersonne'], 'edit');
       }else{
          $erreur = "Vos deux mots de passe ne correspondent pas !";
       }
