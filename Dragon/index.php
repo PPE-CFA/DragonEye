@@ -1,9 +1,7 @@
 <?php
-  include('controleur/controleurAnnonce.php');
-  $unC = new ControleurAnnonce("localhost","bdd_jeu","root","");
-  $unC->setTableAnnonce("deye_annonce");
-  $resultats = $unC->select_Annonce_recent();
-  $resultats_demandes = $unC->select_Demandes();
+  //include('controleur/controleurAnnonce.php');
+  //$unC = new ControleurAnnonce("213.32.79.219","dragoneye","dragoneye"/*dragoneye*/,"NeGMzgKL8MlLmdzZ"/*NeGMzgKL8MlLmdzZ*/);/*dragoneye*/
+  //$unC = new ControleurAnnonce("localhost","dragoneye","root","");
 ?>
 <!DOCTYPE html>
 <html>
@@ -21,7 +19,12 @@
 </head>
 
 <body>
-<?php include('include/header.php')?>
+<?php 
+  include('include/header.php');
+  $unC->setTableAnnonce("deye_annonce");
+  $resultats = $unC->select_Annonce_recent();
+  //$resultats_demandes = $unC->select_Demandes();
+?>
 
 <!--- Image centrale--->
 <div id="slides" class="carousel slide" date-ride="carousel">
@@ -111,7 +114,7 @@
       <?php include('vue/vue_demandes_accueil.php'); ?>
     </div>
     <br>
-    <a href="connect/sign.html"class="btn btn-primary">Voir plus</a>
+    <a href="offres/offres.php"class="btn btn-primary">Voir plus d'offres</a>
     <hr>
   </div>
 

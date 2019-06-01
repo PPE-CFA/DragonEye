@@ -1,5 +1,5 @@
 <?php
-  include("./modele/AnnonceModele.php");
+  include(_DIR2_."/modele/AnnonceModele.php");
   class ControleurAnnonce
   {
     private $unModeleAnnonce;
@@ -31,6 +31,12 @@
   {
     $resultats=$this->unModeleAnnonce->select_Demandes();
     return $resultats;
+  }
+
+  function select_allAd()
+  {
+    $stmt=$this->unModeleAnnonce->select_allAd();
+    return $stmt;
   }
 
 }

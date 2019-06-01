@@ -1,30 +1,4 @@
 <!-- Requete SQL : affiche toutes les données des offres de la table annonce -->
-
-<?php
-
-  $bdd = new PDO('mysql:host=127.0.0.1;dbname=bdd_jeu;charset=utf8', 'root', '');
-
-  $allOffers = $bdd->query('SELECT IdAnnonce, deye_jeux.designation, deye_annonce_type.AnnonceType, deye_personne.nom, deye_photo.url_photo,
-                           deye_age.age_requis, deye_categorie.libelle, deye_annonce.Description,region,ville,postal,Etat,deye_personne.prenom,
-                           deye_jeux.prix, deye_jeux.date_sortie, deye_jeux.nb_joueurs, deye_jeux.temps_jeux, deye_personne.email
-                            FROM deye_annonce
-                            INNER JOIN deye_jeux     ON deye_annonce.IdJeux=deye_jeux.IdJeux
-                            INNER JOIN deye_personne ON deye_annonce.IdPersonne=deye_personne.IdPersonne
-                            INNER JOIN deye_annonce_type ON deye_annonce.Idforme = deye_annonce_type.IdA_type
-                            INNER JOIN deye_photo    ON deye_annonce.IdPhoto=deye_photo.IdPhoto
-                            INNER JOIN deye_age      ON deye_annonce.IdAge=deye_age.IdAge
-                            INNER JOIN deye_categorie ON deye_annonce.IdCategorie=deye_categorie.IdCategorie
-                            
-
-                            WHERE Idforme = "O"
-                            ORDER BY IdAnnonce DESC');
-
-
-
-
-?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,38 +16,28 @@
 </head>
 
 <body>
-<?php include('../include/header.php') ?>
+<?php 
+  include('../include/header.php');
+  //page specific controller
+  include(_DIR2_.'/controleur/controleurOffre.php');
+  $unC_offre = new ControleurOffre($host, $bdd_nom, $bdd_user, $mdp);
+  $stmt_allOffre = $unC_offre->select_allOffre();
+?>
+<div class="offers-filter col-12">
+  <img class="col-12" src="../img/header.jpg"/>
+</div>
 
-  <header>
-          
-          <div class="container-fluid padding">
-          <div class="row">
-          <div class="col-md-12">
-          <div class="offers-filter">
-            <img src="../img/header.jpg"/>
-          </div>
-        </div>
-        </div>
-        </div>
-      
-
-  </header>
-
-
-
-  <!--Toutes les Offres-->
+<!--Toutes les Offres-->
 <div class="container-fluid padding card_ad">
 <div class="row text-center padding">
   <div class="card_offers_title col-12">
     <h2>Offres</h2>
   </div>
 
-            
-    <!--card offre-->
-  
-  <?php while($res = $allOffers->fetch()){?>
   <div class="container">
-    <div class="row padding">
+    <div class="row padding">        
+    <!--card offre-->
+    <?php while($res = $stmt_allOffre->fetch()){?>
 
       <div class="col-sm-4">
         <div class="card">
@@ -90,15 +54,6 @@
             </div>
           </div>
         </div>
-     
-    
-
-    </div>
-    </div>
-
-
-
-
 
 <!-- Modal -->
 <div id="myModal" class="modal fade" role="dialog">
@@ -162,7 +117,7 @@
 
           }else{
         ?>
-            <a href="../../connexion/inscription.php" class="btn btn-secondary"><i class="fas fa-id-card"></i> Obtenir les coordonnées</a>  
+            <a href="../connexion/inscription.php" class="btn btn-secondary"><i class="fas fa-id-card"></i> Obtenir les coordonnées</a>  
 
         <?php    
           }
@@ -177,7 +132,8 @@
 <?php
   }
 ?>
-
+ </div>
+</div>
 </div>
 </div>
   <?php include('../include/footer.php') ?>

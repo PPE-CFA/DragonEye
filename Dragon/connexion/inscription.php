@@ -15,12 +15,45 @@
 </head>
 
 <body>
-  <?php include('../include/header.php')?>
+  <?php 
+    include('../include/header.php');
+    if(isset($_POST['formconnexion'])) {
+      $mailconnect = $_POST['mailconnect'];
+      $mdpconnect = $_POST['mdpconnect'];
+
+      if(!empty($mailconnect) AND !empty($mdpconnect))
+      {
+        //$requser = $bdd->prepare("SELECT * FROM deye_personne WHERE email = ? AND mdp = ?");
+        //$requser->execute(array($mailconnect,$mdpconnect));
+        $userExist = $unC_user->existUser($mailconnect, $mdpconnect);
+        if($userExist === 1){
+          $userinfo =  $unC_user->connectUser($mailconnect, $mdpconnect);
+          $_SESSION['IdPersonne'] = $userinfo['idPersonne'];
+          $_SESSION['IdType'] = $userinfo['idType'];
+          $_SESSION['nom'] = $userinfo['Nom'];
+          $_SESSION['prenom'] = $userinfo['Prenom'];
+          $_SESSION['email'] = $userinfo['Email'];
+          $_SESSION['mdp'] = $userinfo['Mdp'];
+          header("Location: ../profil/profil.php?id=".$_SESSION['idPersonne']);
+        }
+        else
+        {
+          $erreurConnect = "Mauvais mail ou mot de passe !";
+        }
+
+      }
+      else
+      {
+
+        $erreurConnect = "Tous les champs doivent être remplies !";
+      }
+    }
+  ?>
 
 
     <?php
 
-      $bdd = new PDO('mysql:host=localhost;dbname=bdd_jeu', 'root', '');
+      //$bdd = new PDO('mysql:hostname=213.32.79.219;dbname=dragoneye', "dragoneye", "NeGMzgKL8MlLmdzZ");
 
       //Requete SQL : connecte un utilisateur
 
@@ -33,7 +66,7 @@
           $requser = $bdd->prepare("SELECT * FROM deye_personne WHERE email = ? AND mdp = ?");
           $requser->execute(array($mailconnect,$mdpconnect));
           $userexist = $requser->rowCount();
-          if($userexist == 1){
+          if($userexist === 1){
 
             $userinfo = $requser->fetch();
             $_SESSION['IdPersonne'] = $userinfo['IdPersonne'];
@@ -64,7 +97,7 @@
     
 
     <?php
-          $bdd = new PDO('mysql:host=localhost;dbname=bdd_jeu', 'root', '');
+          //$bdd = new PDO('mysql:hostname=213.32.79.219;dbname=dragoneye', "dragoneye", "NeGMzgKL8MlLmdzZ");
 
           //Requete SQL : inscrit un utilisateur
 
@@ -120,49 +153,49 @@
 
     <!--- FORM Connexion--->
 
-   
-    <div class="connexion_title">
+    <div class="col-xs-12 col-lg-6 m-top-250 left-col">
+      <div class="connexion_title">
 
-    <h2>Deja inscrit ? Connectez-vous !</h2>
-    <div class="col-md-5">
-    <form method="POST" class="form-signin">
+      <h2 class="col-12">Deja inscrit ? Connectez-vous !</h2>
+      <div class="col-10 m-auto">
+      <form method="POST" class="form-signin">
 
-            <div class="sign_in">
-            <h5 class="card-title text-center">Connexion</h5>
-            
-              <div class="form-label-group">
-                <label for="inputEmail">Email</label>
-                <input type="email" id="mailconnect" class="form-control" name="mailconnect" placeholder="Email">
-              </div>
+              <div class="sign_in">
+              <h5 class="card-title text-center">Connexion</h5>
               
-              <div class="form-label-group">
-                <label for="inputMdp">Mot de passe</label>
-                <input type="password" id="mdpconnect" class="form-control" name="mdpconnect" placeholder="Mot de passe">
-              </div>
-              
-              <button class="btn btn-lg btn-secondary btn-block text-uppercase" name="formconnexion" type="submit">Go !</button>
-              </div>
+                <div class="form-label-group">
+                  <label for="inputEmail">Email</label>
+                  <input type="email" id="mailconnect" class="form-control" name="mailconnect" placeholder="Email">
+                </div>
+                
+                <div class="form-label-group">
+                  <label for="inputMdp">Mot de passe</label>
+                  <input type="password" id="mdpconnect" class="form-control" name="mdpconnect" placeholder="Mot de passe">
+                </div>
+                
+                <button class="btn btn-lg btn-secondary btn-block text-uppercase" name="formconnexion" type="submit">Go !</button>
+                </div>
 
-    </form>
-    <?php
-    if(isset($erreurConnect)) {
-            echo '<font color="red" class="erreur">'.$erreurConnect."</font>";
-    }
-    
-    ?>
+      </form>
+      <?php
+      if(isset($erreurConnect)) {
+              echo '<font color="red" class="erreur">'.$erreurConnect."</font>";
+      }
+      ?>
+      </div>
+      </div>
     </div>
-    </div>
 
 
-    <div class="vertical_line"></div>
+ 
 
 
     
     
-    <div class="col-sm-3 offset-sm-7">
+    <div class="col-xs-12 col-lg-6 m-top-250">
   
     <!---  FORM Inscription -->
-    
+    <div class="col-10 m-auto">
     <form method="POST" class="form-signup">
       
             <div class="sign_up">
@@ -206,6 +239,7 @@
         
         
     ?>
+    </div>
     </div>
 
     

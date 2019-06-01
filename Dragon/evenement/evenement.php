@@ -1,16 +1,3 @@
-<?php
-
-	$bdd = new PDO('mysql:host=127.0.0.1;dbname=bdd_jeu;charset=utf8', 'root', '');
-
-	$allEvent = $bdd->query('SELECT designation, heure_event, date_event, deye_photo.url_photo, deye_lieu.Adresse, deye_lieu.ville, deye_lieu.Nom
-													FROM deye_evenement
-													INNER JOIN deye_photo ON deye_evenement.IdEvent=deye_photo.IdPhoto
-													INNER JOIN deye_lieu ON deye_evenement.IdEvent=deye_lieu.IdLieu
-													ORDER BY date_event ASC');
-
-?>
-
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -28,7 +15,13 @@
 </head>
 
 <body>
-<?php include('../include/header.php') ?>
+<?php 
+	include('../include/header.php');
+	//page specific controller
+  include(_DIR2_.'/controleur/controleurEvent.php');
+  $unC_event = new ControleurEvent($host, $bdd_nom, $bdd_user, $mdp);
+  $stmt_allEvent = $unC_event->select_allEvent();
+?>
 
 	<div class="container-fluid padding">
 		<div class="row titleEvent text-center">
@@ -57,7 +50,7 @@
                 
             </thead>
                 <tbody>
-                <?php while($res = $allEvent->fetch()){?>
+                <?php while($res = $stmt_allEvent->fetch()){?>
                 <tr class="table-info">
 
                       
