@@ -57,7 +57,11 @@
                 $erreur2 = "Veuillez remplir tous les champs !";
             }
 
+            var_dump($date_sortie);
+
           }
+
+        
             
                     
         
