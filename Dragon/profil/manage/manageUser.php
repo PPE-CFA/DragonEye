@@ -53,11 +53,11 @@
     }
 
     
-    $membres = $bdd->query('SELECT * FROM deye_personne WHERE IdType = "N" ORDER BY IdPersonne DESC LIMIT 0,5');
-    $allMembres = $bdd->query('SELECT * FROM deye_personne WHERE IdType ="U" ORDER BY IdPersonne DESC');
+    //$membres = $bdd->query('SELECT * FROM deye_personne WHERE IdType = "N" ORDER BY IdPersonne DESC LIMIT 0,5');
+    //$allMembres = $bdd->query('SELECT * FROM deye_personne WHERE IdType ="U" ORDER BY IdPersonne DESC');
 
-    
-
+    $membres = $unC_user->select_Membre();
+    $allMembres = $unC_user->select_allMembre();
   ?>
 
             <!--- Liste les 5 derniers nouveaux utilisateurs --->
@@ -84,32 +84,32 @@
               <tr class="table-info">
                     
                     <td>
-                        <?=$res['IdPersonne']?>
+                        <?=$res['idPersonne']?>
                     </td>
 
                     <td>
-                        <?=$res['IdType']?>
+                        <?=$res['idType']?>
                     </td>
 
                     <td>
-                        <?=$res['nom']?>
+                        <?=$res['Nom']?>
                     </td>
 
                     <td>
-                        <?=$res['prenom']?>
+                        <?=$res['Prenom']?>
                     </td>
 
                     <td>
-                        <?=$res['email']?>
+                        <?=$res['Email']?>
                     </td>
 
                     <td>
                     
-                        <?php if($res['IdType'] == "N") { ?>  
-                            <a href="manageUser.php?type=newmembre&confirme=<?= $res['IdPersonne'] ?>" class="btn btn-success">Confirmer</a>
+                        <?php if($res['idType'] == "N") { ?>  
+                            <a href="manageUser.php?type=newmembre&confirme=<?= $res['idPersonne'] ?>" class="btn btn-success">Confirmer</a>
                         <?php } ?> 
                             
-                        <a href="manageUser.php?type=newmembre&supprime=<?= $res['IdPersonne'] ?>" class="btn btn-danger">Supprimer</a>
+                        <a href="manageUser.php?type=newmembre&supprime=<?= $res['idPersonne'] ?>" class="btn btn-danger">Supprimer</a>
                     </td>
                             
                 
@@ -147,28 +147,28 @@
                   <tr class="table-info">
                         
                         <td>
-                            <?=$res['IdPersonne']?>
+                            <?=$res['idPersonne']?>
                         </td>
 
                         <td>
-                            <?=$res['IdType']?>
+                            <?=$res['idType']?>
                         </td>
 
                         <td>
-                            <?=$res['nom']?>
+                            <?=$res['Nom']?>
                         </td>
 
                         <td>
-                            <?=$res['prenom']?>
+                            <?=$res['Prenom']?>
                         </td>
 
                         <td>
-                            <?=$res['email']?>
+                            <?=$res['Email']?>
                         </td>
 
                         <td>  
-                            <a href="modifManage/modifUser.php?type=allmembre&modifUser=<?= $res['IdPersonne'] ?>" class="btn btn-primary">Modifier</a>  
-                            <a href="manageUser.php?type=allmembre&supprime=<?= $res['IdPersonne'] ?>" class="btn btn-danger">Supprimer</a>
+                            <a href="modifManage/modifUser.php?type=allmembre&modifUser=<?= $res['idPersonne'] ?>" class="btn btn-primary">Modifier</a>  
+                            <a href="manageUser.php?type=allmembre&supprime=<?= $res['idPersonne'] ?>" class="btn btn-danger">Supprimer</a>
                         </td>
                                 
                     

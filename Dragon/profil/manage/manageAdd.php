@@ -17,6 +17,12 @@
 <body>
 <?php
 include('../../include/header.php');
+  //page specific controller
+  include(_DIR2_.'/controleur/controleurOffre.php');
+  $unC_offre = new ControleurOffre($host, $bdd_nom, $bdd_user, $mdp);
+  include(_DIR2_.'/controleur/controleurDemande.php');
+  $unC_demande = new ControleurDemande($host, $bdd_nom, $bdd_user, $mdp);
+
   //requete SQL : supprime une annonce de la table deye_annonce
   if(isset($_SESSION['IdType']) AND $_SESSION['IdType'] == "A"){
 
@@ -81,7 +87,7 @@ include('../../include/header.php');
     exit();
   }
 
-  $allOffers = $bdd->query('SELECT IdAnnonce, deye_jeux.designation, deye_annonce_type.AnnonceType, deye_personne.nom, deye_photo.url_photo, deye_age.age_requis, deye_categorie.libelle, deye_annonce.Description,region,ville,postal,Etat
+  /*$allOffers = $bdd->query('SELECT IdAnnonce, deye_jeux.designation, deye_annonce_type.AnnonceType, deye_personne.nom, deye_photo.url_photo, deye_age.age_requis, deye_categorie.libelle, deye_annonce.Description,region,ville,postal,Etat
                           FROM deye_annonce
                           INNER JOIN deye_jeux     ON deye_annonce.IdJeux=deye_jeux.IdJeux
                           INNER JOIN deye_personne ON deye_annonce.IdPersonne=deye_personne.IdPersonne
@@ -90,9 +96,10 @@ include('../../include/header.php');
                           INNER JOIN deye_age      ON deye_annonce.IdAge=deye_age.IdAge
                           INNER JOIN deye_categorie ON deye_annonce.IdCategorie=deye_categorie.IdCategorie
                           WHERE Idforme = "NO"
-                          ORDER BY IdAnnonce DESC');
+                          ORDER BY IdAnnonce DESC');*/
+  $stmt_allOffre = $unC_offre->select_allOffre();
 
-  $allDemands = $bdd->query('SELECT IdAnnonce, deye_jeux.designation, deye_annonce_type.AnnonceType, deye_personne.nom, deye_photo.url_photo, deye_age.age_requis, deye_categorie.libelle, deye_annonce.Description,region,ville,postal,Etat
+  /*$allDemands = $bdd->query('SELECT IdAnnonce, deye_jeux.designation, deye_annonce_type.AnnonceType, deye_personne.nom, deye_photo.url_photo, deye_age.age_requis, deye_categorie.libelle, deye_annonce.Description,region,ville,postal,Etat
                               FROM deye_annonce
                               INNER JOIN deye_jeux     ON deye_annonce.IdJeux=deye_jeux.IdJeux
                               INNER JOIN deye_personne ON deye_annonce.IdPersonne=deye_personne.IdPersonne
@@ -101,9 +108,10 @@ include('../../include/header.php');
                               INNER JOIN deye_age      ON deye_annonce.IdAge=deye_age.IdAge
                               INNER JOIN deye_categorie ON deye_annonce.IdCategorie=deye_categorie.IdCategorie
                               WHERE Idforme = "ND"
-                              ORDER BY IdAnnonce DESC');
+                              ORDER BY IdAnnonce DESC');*/
+  $stmt_allDemands = $unC_demande->select_allDemande();
 
-$allAdd = $bdd->query('SELECT IdAnnonce, deye_jeux.designation, deye_annonce_type.AnnonceType, deye_personne.nom, deye_photo.url_photo, deye_age.age_requis, deye_categorie.libelle, deye_annonce.Description,region,ville,postal,Etat
+  /*$allAdd = $bdd->query('SELECT IdAnnonce, deye_jeux.designation, deye_annonce_type.AnnonceType, deye_personne.nom, deye_photo.url_photo, deye_age.age_requis, deye_categorie.libelle, deye_annonce.Description,region,ville,postal,Etat
                             FROM deye_annonce
                             INNER JOIN deye_jeux     ON deye_annonce.IdJeux=deye_jeux.IdJeux
                             INNER JOIN deye_personne ON deye_annonce.IdPersonne=deye_personne.IdPersonne
@@ -112,11 +120,8 @@ $allAdd = $bdd->query('SELECT IdAnnonce, deye_jeux.designation, deye_annonce_typ
                             INNER JOIN deye_age      ON deye_annonce.IdAge=deye_age.IdAge
                             INNER JOIN deye_categorie ON deye_annonce.IdCategorie=deye_categorie.IdCategorie
                             WHERE Idforme = "O" OR Idforme = "D"
-                            ORDER BY IdAnnonce DESC');
-
-
-
-
+                            ORDER BY IdAnnonce DESC');*/
+  $allAdd = $unC->select_allAd();
 ?>
 
 
@@ -149,7 +154,7 @@ $allAdd = $bdd->query('SELECT IdAnnonce, deye_jeux.designation, deye_annonce_typ
                 
               </thead>
                 <tbody>
-                  <?php while($res = $allDemands->fetch()){?>
+                  <?php while($res = $stmt_allDemands->fetch()){?>
                   <tr class="table-info">
                         
                       <td>
@@ -250,7 +255,7 @@ $allAdd = $bdd->query('SELECT IdAnnonce, deye_jeux.designation, deye_annonce_typ
                 
                 </thead>
                 <tbody>
-                  <?php while($res = $allOffers->fetch()){?>
+                  <?php while($res = $stmt_allOffre->fetch()){?>
                   <tr class="table-info">
                         
                         <td>

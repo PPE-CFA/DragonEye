@@ -21,9 +21,27 @@
         return $resultats;
       }
 
+      function select_allMembre()
+      {
+        $stmt=$this->unUserModele->select_allMembre();
+        return $stmt;
+      }
+
+      function select_Membre()
+      {
+        $stmt=$this->unUserModele->select_Membre();
+        return $stmt;
+      }
+
       function connectUser($mailconnect, $mdpconnect)
       {
         $result=$this->unUserModele->connectUser($mailconnect, $mdpconnect);
+        return $result;
+      }
+
+      function updateUser($value, $champ, $id_user)
+      {
+        $result=$this->unUserModele->updateUser($value, $champ, $id_user);
         return $result;
       }
 

@@ -38,6 +38,19 @@
             return $stmt;
         }
     }
+
+    public function select_userOffre()
+  	{
+        if ($this->pdo == null){//pas de connexion
+            return null;
+        }else{
+            $sql = 'SELECT * FROM deye_annonce
+                        INNER JOIN deye_jeux ON deye_annonce.IdJeux=deye_jeux.IdJeux
+                        WHERE Idforme = "O"';
+            $stmt = $this->pdo->query($sql);
+            return $stmt;
+        }
+    }
 		
   	public function setTableOffre($uneTableOffre)
   	{

@@ -20,5 +20,11 @@
         $stmt=$this->unDemandeModele->select_allDemande();
         return $stmt;
       }
+
+      function select_userDemande($id_user)
+      {
+        $stmt=$this->unDemandeModele->select_userDemande($id_user);
+        return $stmt;
+      }
     }
 ?>

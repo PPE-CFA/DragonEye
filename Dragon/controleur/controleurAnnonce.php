@@ -33,5 +33,11 @@
     return $resultats;
   }
 
+  function select_allAd()
+  {
+    $stmt=$this->unModeleAnnonce->select_allAd();
+    return $stmt;
+  }
+
 }
 ?>

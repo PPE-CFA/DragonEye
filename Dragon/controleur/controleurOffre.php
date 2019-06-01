@@ -20,5 +20,11 @@
         $stmt=$this->unOffreModele->select_allOffre();
         return $stmt;
       }
+
+      function select_userOffre()
+      {
+        $stmt=$this->unOffreModele->select_userOffre();
+        return $stmt;
+      }
     }
 ?>

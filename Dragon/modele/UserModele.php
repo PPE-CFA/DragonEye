@@ -29,6 +29,28 @@
         }
     }
 
+    public function select_allMembre()
+  	{
+        if ($this->pdo == null){//pas de connexion
+            return null;
+        }else{
+            $requete = 'SELECT * FROM deye_personne WHERE IdType ="U" ORDER BY IdPersonne DESC';
+            $stmt = $this->pdo->query($requete);
+            return $stmt;
+        }
+    }
+
+    public function select_Membre()
+  	{
+        if ($this->pdo == null){//pas de connexion
+            return null;
+        }else{
+            $requete = 'SELECT * FROM deye_personne WHERE IdType = "N" ORDER BY IdPersonne DESC LIMIT 0,5';
+            $stmt = $this->pdo->query($requete);
+            return $stmt;
+        }
+    }
+
     public function connectUser($mailconnect, $mdpconnect)
     {
       if ($this->pdo == null){//pas de connexion
@@ -52,6 +74,17 @@
         $stmt->execute(array($mailconnect, $mdpconnect));
         $result = $stmt->rowCount();
         return $result;
+      }
+    }
+
+    public function updateUser($value, $champ, $id_user)
+    {
+      if ($this->pdo == null){//pas de connexion
+          return null;
+      }else{
+        $sql = 'UPDATE deye_personne SET '.$champ.' = ? WHERE IdPersonne = '.$id_user.'';
+        $stmt = $this->pdo->prepare($sql);
+        $stmt->execute(array($value));
       }
     }
 		
