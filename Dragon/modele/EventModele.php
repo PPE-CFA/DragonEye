@@ -67,6 +67,8 @@
             return null;
         }else{
             $sql = 'INSERT INTO deye_evenement(designation,date_event,heure_event,idPhoto,idLieu) VALUES(?,?,?,?,?)';
+            var_dump($sql);
+            exit();
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute($array_value_event);
         }

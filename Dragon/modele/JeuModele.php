@@ -34,6 +34,28 @@
         }
     }
 
+    public function select_allAge()
+  	{
+        if ($this->pdo == null){//pas de connexion
+            return null;
+        }else{
+            $sql = 'SELECT * FROM deye_age';
+            $stmt = $this->pdo->query($sql);
+            return $stmt;
+        }
+    }
+
+    public function select_allCat()
+  	{
+        if ($this->pdo == null){//pas de connexion
+            return null;
+        }else{
+            $sql = 'SELECT * FROM deye_categorie';
+            $stmt = $this->pdo->query($sql);
+            return $stmt;
+        }
+    }
+
     public function select_Jeu($id_jeu)
     {
         if ($this->pdo == null){//pas de connexion
@@ -75,6 +97,8 @@
         }else{
             $sql = 'INSERT INTO deye_jeux(designation,date_sortie,prix,temps_jeux,nb_joueurs,IdPersonne,IdEditeur,IdAge,IdCategorie,IdPhoto)
                         VALUES(?,?,?,?,?,?,?,?,?,?)';
+            var_dump($sql, $array_value_jeu);
+            exit();
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute($array_value_jeu);
         }
