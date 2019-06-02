@@ -7,7 +7,7 @@
 		{
 			$this->pdo = null;
 			try{
-				$this->pdo = new PDO ("mysql:hostname=".$serveur.";dbname=".$bdd,$user,$mdp);
+				$this->pdo = new PDO ("mysql:hostname=".$serveur.";dbname=".$bdd,$user,$mdp,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
 			}
 			catch (PDOException $exp)
 			{
@@ -55,7 +55,7 @@
 					INNER JOIN deye_photo    ON deye_annonce.IdPhoto=deye_photo.IdPhoto
 					INNER JOIN deye_age      ON deye_annonce.IdAge=deye_age.IdAge
 					INNER JOIN deye_categorie ON deye_annonce.IdCategorie=deye_categorie.IdCategorie
-					WHERE idA_type = "NO"
+					WHERE id_Type = "NO"
 					ORDER BY IdAnnonce DESC 
 					LIMIT 0,3');
   	    return $resultats;
@@ -79,7 +79,7 @@
 					INNER JOIN deye_photo    ON deye_annonce.IdPhoto=deye_photo.IdPhoto
 					INNER JOIN deye_age      ON deye_annonce.IdAge=deye_age.IdAge
 					INNER JOIN deye_categorie ON deye_annonce.IdCategorie=deye_categorie.IdCategorie
-					WHERE idA_type = "ND"
+					WHERE id_Type = "ND"
 					ORDER BY IdAnnonce DESC 
 					LIMIT 3');
   	    return $resultats;
@@ -91,8 +91,9 @@
   	  if ($this->pdo == null) //pas de connexion
   	  {
   	    return null;
-  	  }else{
-				$sql = 'SELECT IdAnnonce, deye_jeux.designation, deye_annonce_type.Annonce_Type, deye_personne.nom, deye_photo.url_photo, deye_age.age_requis, deye_categorie.libelle, deye_annonce.Description,region,ville,postal,Etat
+  	  }else
+  	  {
+				$sql = 'SELECT IdAnnonce, deye_jeux.designation, deye_annonce_type.Annonce_Type, deye_personne.nom, deye_photo.url_photo, deye_age.age_requis, deye_categorie.libelle, deye_annonce.Description,region,ville,postal,Etat, Depot
 									FROM deye_annonce
 									INNER JOIN deye_jeux     ON deye_annonce.IdJeux=deye_jeux.IdJeux
 									INNER JOIN deye_personne ON deye_annonce.IdPersonne=deye_personne.IdPersonne
@@ -102,10 +103,39 @@
 									INNER JOIN deye_categorie ON deye_annonce.IdCategorie=deye_categorie.IdCategorie
 									WHERE Idforme = "O" OR Idforme = "D"
 									ORDER BY IdAnnonce DESC';
-  	    $stmt = $this->pdo->query($sql);
-  	    return $stmt;
+  	   $stmt = $this->pdo->query($sql);
+			 return $stmt;
   	  }
 		}
+
+		public function updateAd($value, $champ, $id_annonce, $action)
+    {
+      if ($this->pdo == null){//pas de connexion
+          return null;
+			
+			}else{
+         if($action === 'confirm_offers'){
+          $sql = 'UPDATE deye_annonce SET idForme = "O" WHERE idAnnonce = '.$id_annonce.'';
+          $stmt = $this->pdo->prepare($sql);
+					$stmt->execute();
+
+					var_dump($stmt);
+			
+				}else if($action == 'confirm_demands'){
+
+					$sql = 'UPDATE deye_annonce SET idForme = "D" WHERE idAnnonce = '.$id_annonce.'';
+          $stmt = $this->pdo->prepare($sql);
+					$stmt->execute();
+
+
+        }else if($action === 'supprime'){
+          $sql = 'DELETE FROM deye_annonce WHERE idAnnonce = '.$id_annonce.' ';
+          $stmt = $this->pdo->prepare($sql);
+          $stmt->execute();
+        
+      }
+		}
+	}
 		
   	public function setTableAnnonce($uneTableAnnonce)
   	{

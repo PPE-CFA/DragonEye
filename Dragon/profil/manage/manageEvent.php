@@ -204,15 +204,7 @@
 
   </div>
   </div>
-  <!-- Je veux un tableau qui affiche tous les events et que tu puisses les supprimer et les modifier
-  et un formulaire qui permet d'ajouter un event.
-  Puis je veux deux boutons, le premier btn btn-secondary "revenir en arrière" qui permet de revenir à admin.php et l'autre
-  qui permet de se déconnecter "me déconnecter" btn btn-danger.
-  Si le footer est en haut à l'affichage c'est normal il faut du contenu entre la nav barre et le bas de page !
-  Les feuilles de CSS manageEvent_style.css et modifEvent_style.css sont à ta disposition pour le CSS de la page.
-  INTERDICTION DE TOUCHER AU RESTE DES PAGES SANS ME LE DIRE.
-  Me signaler dès que tu vois un bug.
-  -->
+
   <?php include('../../include/footer.php') ?>    
 </body>
 </html>

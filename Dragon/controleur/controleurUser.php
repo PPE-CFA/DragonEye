@@ -33,6 +33,18 @@
         return $stmt;
       }
 
+      function select_aUser($id_user)
+      {
+        $result=$this->unUserModele->select_aUser($id_user); 
+        return $result;
+      }
+
+      function select_newIdUser($id_user,$new_id)
+      {
+        $result=$this->unUserModele->select_newIdUser($id_user,$new_id); 
+        return $result;
+      }
+
       function connectUser($mailconnect, $mdpconnect)
       {
         $result=$this->unUserModele->connectUser($mailconnect, $mdpconnect);

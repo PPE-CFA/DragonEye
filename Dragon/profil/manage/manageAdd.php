@@ -23,7 +23,7 @@ include('../../include/header.php');
   include(_DIR2_.'/controleur/controleurDemande.php');
   $unC_demande = new ControleurDemande($host, $bdd_nom, $bdd_user, $mdp);
 
-  //requete SQL : supprime une annonce de la table deye_annonce
+  //requete SQL : supprime ou confirme une annonce de la table deye_annonce
   if(isset($_SESSION['IdType']) AND $_SESSION['IdType'] == "A"){
 
     if(isset($_GET['type']) AND $_GET['type'] == 'alloffers') {
@@ -32,20 +32,24 @@ include('../../include/header.php');
           
  
         $confirme = (int) $_GET['confirme'];
-        $O = "O";
+        /*$O = "O";
         $NO = "NO";
         
         $req = $bdd->prepare('UPDATE deye_annonce SET Idforme = ? WHERE IdAnnonce = ? AND Idforme = ?');
         $req->execute(array($O,$confirme,$NO));
+        */
+        $unC->updateAd('', '', $confirm, 'confirm_offers');
 
     }
                
       if(isset($_GET['supprime']) AND !empty($_GET['supprime'])) {
         
         $supprime = (int) $_GET['supprime'];
+        /*
         $req = $bdd->prepare('DELETE FROM deye_annonce WHERE IdAnnonce = ? AND Idforme = ?');
         $req->execute(array($supprime));
-
+        */
+        $unC->updateAd('', '', $supprime, 'supprime');
       }
 
     }elseif(isset($_GET['type']) AND $_GET['type'] == "alldemands"){
@@ -55,19 +59,26 @@ include('../../include/header.php');
           
  
         $confirme = (int) $_GET['confirme'];
-        $D = "D";
+        /*$D = "D";
         $ND = "ND";
         
         $req = $bdd->prepare('UPDATE deye_annonce SET Idforme = ? WHERE IdAnnonce = ? AND Idforme = ?');
         $req->execute(array($D,$confirme,$ND));
-
+        */
+        $unC->updateAd('', '', $confirme, 'confirm_demands');
       }
 
       if(isset($_GET['supprime']) AND !empty($_GET['supprime'])){
 
+
+
         $supprime = (int) $_GET['supprime'];
+        /*
         $req = $bdd->prepare('DELETE FROM deye_annonce WHERE IdAnnonce = ?');
         $req->execute(array($supprime));
+        */
+        $unC->updateAd('', '', $supprime, 'supprime');
+
 
       }
     }elseif(isset($_GET['type']) AND $_GET['type'] == "alladd"){
@@ -75,8 +86,11 @@ include('../../include/header.php');
       if(isset($_get['supprime']) AND !empty($_GET['supprime'])){
 
         $supprime = (int) $_GET['supprime'];
+        /*
         $req = $bdd->prepare('DELETE FROM deye_annonce WHERE IdAnnonce = ?');
         $req->execute(array($supprime));
+        */
+        $unC->updateAd('', '', $supprime, 'supprime');
 
 
       }
@@ -121,7 +135,7 @@ include('../../include/header.php');
                             INNER JOIN deye_categorie ON deye_annonce.IdCategorie=deye_categorie.IdCategorie
                             WHERE Idforme = "O" OR Idforme = "D"
                             ORDER BY IdAnnonce DESC');*/
-  $allAdd = $unC->select_allAd();
+    $allAdd = $unC->select_allAd();
 ?>
 
 
@@ -150,7 +164,9 @@ include('../../include/header.php');
               <th>Code postal</th>
               <th>Etat</th>
               <th>Description</th>
+              <th>Depot</th>
               <th>Editer</th>
+              
                 
               </thead>
                 <tbody>
@@ -201,8 +217,14 @@ include('../../include/header.php');
                         <?=$res['Etat']?>
                       </td>
 
+
+
                       <td>
                         <?=$res['Description']?>
+                      </td>
+
+                      <td>
+                        <?=$res['Depot']?>
                       </td>
 
                       <td>   
@@ -251,6 +273,7 @@ include('../../include/header.php');
                 <th>Code postal</th>
                 <th>Etat</th>
                 <th>Description</th>
+                <th>Depot</th>
                 <th>Editer</th>
                 
                 </thead>
@@ -307,6 +330,10 @@ include('../../include/header.php');
                             <?=$res['Description']?>
                         </td>
 
+                        <td>
+                            <?=$res['Depot']?>
+                        </td>
+
                         <td>   
                             <a href="manageAdd.php?type=alloffers&confirme=<?= $res['IdAnnonce'] ?>" class="btn btn-success">Confirmer</a>
                             <a href="manageAdd.php?type=alloffers&supprime=<?= $res['IdAnnonce'] ?>" class="btn btn-danger danger">Supprimer</a>
@@ -353,7 +380,9 @@ include('../../include/header.php');
                 <th>Code postal</th>
                 <th>Etat</th>
                 <th>Description</th>
+                <th>Depot</th>
                 <th>Editer</th>
+                
                 
                 </thead>
                 <tbody>
@@ -369,7 +398,7 @@ include('../../include/header.php');
                         </td>
 
                         <td>
-                          <?=$res['AnnonceType']?>
+                          <?=$res['Annonce_Type']?>
                         </td>
 
                         <td>
@@ -407,6 +436,10 @@ include('../../include/header.php');
 
                         <td>
                             <?=$res['Description']?>
+                        </td>
+
+                        <td>
+                            <?=$res['Depot']?>
                         </td>
 
                         <td>   

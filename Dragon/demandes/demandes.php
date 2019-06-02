@@ -72,9 +72,8 @@
       <div class="modal-body">
         
         <div class="img-ad">
-          <img src="../img/nature3.jpg"/>
-          <!--popover
-          <a href="#" title="Fiche de <?=$res['designation']?>" data-toggle="popover" data-trigger="focus" data-img="<?=$res['url_photo']?>" ></a>-->
+          <img src="<? $res=['url_photo']?>"/>
+          
           
           <?=$res['designation']?>
         </div>
@@ -91,7 +90,7 @@
           <h5>Description </h5>
           <p><?=$res['Description']?></p>
           <h5>De <?=$res['nom']?> <?=$res['prenom']?></h5>
-          Posté le : ...
+          Posté le : <?=$res['Depot']?>
 
         
         </div>
