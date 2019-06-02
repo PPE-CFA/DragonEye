@@ -21,9 +21,21 @@
         return $stmt;
       }
 
-      function select_userOffre()
+      function select_allNewOffre()
       {
-        $stmt=$this->unOffreModele->select_userOffre();
+        $stmt=$this->unOffreModele->select_allNewOffre();
+        return $stmt;
+      }
+
+      function select_allLastOffre()
+      {
+        $stmt=$this->unOffreModele->select_allLastOffre();
+        return $stmt;
+      }
+
+      function select_userOffre($id_user)
+      {
+        $stmt=$this->unOffreModele->select_userOffre($id_user);
         return $stmt;
       }
     }

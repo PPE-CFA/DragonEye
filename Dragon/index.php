@@ -16,14 +16,18 @@
   <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
   <script src="https://use.fontawesome.com/releases/v5.0.8/js/all.js"></script>
   <link href="css/style.css" rel="stylesheet">
+  <link href="css/index_style.css" rel="stylesheet">
 </head>
 
 <body>
 <?php 
   include('include/header.php');
-  $unC->setTableAnnonce("deye_annonce");
-  $resultats = $unC->select_Annonce_recent();
-  //$resultats_demandes = $unC->select_Demandes();
+  include(_DIR2_.'/controleur/controleurOffre.php');
+  include(_DIR2_.'/controleur/controleurDemande.php');
+  $unC_offre = new ControleurOffre($host, $bdd_nom, $bdd_user, $mdp);
+  $unC_demande = new controleurDemande($host, $bdd_nom, $bdd_user, $mdp);
+  $stmt_allLastOffre = $unC_offre->select_allLastOffre();
+  $stmt_allLastDemande = $unC_demande->select_allLastDemande();
 ?>
 
 <!--- Image centrale--->
@@ -38,16 +42,6 @@
       <div class="carousel-caption">
           <h1 class="display-2">Dragon's Eye</h1>
           <h3>Echange de jeu en un simple clic !</h3>
-          <form class="form-inline form-container">
-            <div class="form-group mb-6">
-              <input type="text" class="form-control" id="inputgame" placeholder="Rechercher un jeu">
-            </div>
-            <div class="form-group mx-sm-3 mb-6">
-              <label for="inputlieu" class="sr-only">Lieu</label>
-              <input type="text" class="form-control" id="inputlieu" placeholder="Lieu">
-            </div>
-            <button type="submit" class="btn btn-primary">Go !</button>
-          </form>
       </div>
     </div>
     <div class="carousel-item">
@@ -55,7 +49,7 @@
       <div class="carousel-caption">
           <h1 class="display-2">Vous avez une annonce?</h1>
           <h3>Venez vite la déposer ici facile et rapide !</h3>
-          <button type="submit" class="btn btn-primary">Oui j'ai une annonce !</button>
+          <a href="annonce.php" class="btn btn-primary">Oui j'ai une annonce !</a>
       </div>
     </div>
 </div>
@@ -95,8 +89,107 @@
     <!--card offre-->
   <div class="container">
     <div class="row padding">
-      <?php include('vue/vue_anonces_accueil.php'); ?>
+      <!--card offre-->
+    <?php while($res = $stmt_allLastOffre->fetch()){?>
+
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="img-jeu">
+          <img src="<?=$res['url_photo']?>" class="thumbnail" alt="offres">
+          </div>
+          <hr>
+            <div class="card-body">
+              <h4 class="card-title"><?=$res['designation']?></h4>
+              <p class="card-text"><i class="fas fa-gamepad"></i> <?=$res['libelle']?></p>
+              <p class="card-text"><i class="fas fa-map-marker-alt"></i> <?=$res['region']?>, <?=$res['ville']?>  </p>
+              <p class="card-text"><i class="fas fa-users"></i> <?=$res['age_requis']?></p>
+              <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal<?= $res['IdAnnonce'] ?>">Voir plus</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Modal -->
+<div id="myModal<?= $res['IdAnnonce'] ?>" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><img src="img/logo.png"> Offre - <?=$res['designation']?></h4>
+        <h6 class="modal-subtitle"><?=$res['region']?>, <?=$res['ville']?>, <?=$res['postal']?></h6>
+        
+      </div>
+      
+      <!--Modal Body-->
+      <div class="modal-body">
+        
+        <div class="img-ad">
+          <img src = "<?=$res['url_photo']?>"/>
+          
+          
+          <?=$res['designation']?>
+        </div>
+
+
+        <div class="description-ad">
+
+          <h5>Categorie</h5>
+          <?=$res['libelle']?>
+          <h5>Age</h5>
+          <?=$res['age_requis']?>
+          <h5>Etat du jeu </h5> 
+          <?=$res['Etat']?>
+          <h5>Description </h5>
+          <p><?=$res['Description']?></p>
+          <h5>De <?=$res['nom']?> <?=$res['prenom']?></h5>
+          Posté le : <?=$res['Depot']?>
+
+        
+        </div>
+        
+      </div>
+
+    
+
+      <!--Modal Footer-->
+      <div class="modal-footer">
+
+
+        <!--Affiche les coordonnées si l'utilisateur est connecté sinon le dirige vers la page de connection/inscription-->
+        <?php
+
+          if(isset($_SESSION['IdPersonne']))
+          {
+        ?>
+          
+            <button type="button" class="btn btn-outline-secondary"><?=$res['email']?> </button>
+        
+        <?php
+
+          }else{
+        ?>
+            <a href="../connexion/inscription.php" class="btn btn-secondary"><i class="fas fa-id-card"></i> Obtenir les coordonnées</a>  
+
+        <?php    
+          }
+        ?>
+
+      </div>
     </div>
+
+        </div>
+      </div>
+
+      <?php
+        }
+      ?>
+
+
+    </div>
+    <br>
+      <a href="offres/offres.php"class="btn btn-primary">Voir plus d'offres</a>
+      <hr>
   </div>
 </div>
 </div>
@@ -111,10 +204,103 @@
   <!--card offre-->
   <div class="container">
     <div class="row padding">
-      <?php include('vue/vue_demandes_accueil.php'); ?>
+      <!--card offre-->
+    <?php while($res = $stmt_allLastDemande->fetch()){?>
+      <div class="col-sm-4">
+        <div class="card">
+          <div class="img-jeu">
+          <img src="<?=$res['url_photo']?>" class="thumbnail" alt="offres">
+          </div>
+          <hr>
+            <div class="card-body">
+              <h4 class="card-title"><?=$res['designation']?></h4>
+              <p class="card-text"><i class="fas fa-gamepad"></i> <?=$res['libelle']?></p>
+              <p class="card-text"><i class="fas fa-map-marker-alt"></i> <?=$res['region']?>, <?=$res['ville']?>  </p>
+              <p class="card-text"><i class="fas fa-users"></i> <?=$res['age_requis']?></p>
+              <button type="button" class="btn btn-outline-secondary" data-toggle="modal" data-target="#myModal<?= $res['IdAnnonce'] ?>">Voir plus</button>
+            </div>
+          </div>
+        </div>
+
+<!-- Modal -->
+<div id="myModal<?= $res['IdAnnonce'] ?>" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+
+    <!-- Modal content-->
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal">&times;</button>
+        <h4 class="modal-title"><img src="../../img/logo.png"> Offre - <?=$res['designation']?></h4>
+        <h6 class="modal-subtitle"><?=$res['region']?>, <?=$res['ville']?>, <?=$res['postal']?></h6>
+        
+      </div>
+      
+      <!--Modal Body-->
+      <div class="modal-body">
+        
+        <div class="img-ad">
+          <img src="<? $res=['url_photo']?>"/>
+          
+          
+          <?=$res['designation']?>
+        </div>
+
+
+        <div class="description-ad">
+
+          <h5>Categorie</h5>
+          <?=$res['libelle']?>
+          <h5>Age</h5>
+          <?=$res['age_requis']?>
+          <h5>Etat du jeu </h5> 
+          <?=$res['Etat']?>
+          <h5>Description </h5>
+          <p><?=$res['Description']?></p>
+          <h5>De <?=$res['nom']?> <?=$res['prenom']?></h5>
+          Posté le : <?=$res['Depot']?>
+
+        
+        </div>
+        
+      </div>
+
+    
+
+      <!--Modal Footer-->
+      <div class="modal-footer">
+
+
+        <!--Affiche les coordonnées si l'utilisateur est connecté sinon le dirige vers la page de connection/inscription-->
+        <?php
+
+          if(isset($_SESSION['IdPersonne']))
+          {
+        ?>
+          
+            <button type="button" class="btn btn-outline-secondary"><?=$res['email']?> </button>
+        
+        <?php
+
+          }else{
+        ?>
+            <a href="../connexion/inscription.php" class="btn btn-secondary"><i class="fas fa-id-card"></i> Obtenir les coordonnées</a>  
+
+        <?php    
+          }
+        ?>
+
+      </div>
+    </div>
+
+    </div>
+  </div>
+
+      <?php
+        }
+      ?>
     </div>
     <br>
-    <a href="offres/offres.php"class="btn btn-primary">Voir plus d'offres</a>
+    <a href="demandes/demandes.php"class="btn btn-primary">Voir plus de demandes</a>
     <hr>
   </div>
 

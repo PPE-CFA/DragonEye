@@ -21,6 +21,18 @@
         return $stmt;
       }
 
+      function select_allNewDemande()
+      {
+        $stmt=$this->unDemandeModele->select_allNewDemande();
+        return $stmt;
+      }
+
+      function select_allLastDemande()
+      {
+        $stmt=$this->unDemandeModele->select_allLastDemande();
+        return $stmt;
+      }
+
       function select_userDemande($id_user)
       {
         $stmt=$this->unDemandeModele->select_userDemande($id_user);

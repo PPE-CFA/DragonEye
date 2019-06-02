@@ -25,7 +25,11 @@
                         FROM deye_evenement
                         INNER JOIN deye_photo ON deye_evenement.IdEvent=deye_photo.IdPhoto
                         INNER JOIN deye_lieu ON deye_evenement.IdEvent=deye_lieu.IdLieu
-                        ORDER BY date_event ASC';
+                        ORDER BY date_event ASC'; 
+
+                       
+
+
             $stmt = $this->pdo->query($sql);
             return $stmt;
         }
@@ -66,11 +70,9 @@
         if ($this->pdo == null){//pas de connexion
             return null;
         }else{
-            $sql = 'INSERT INTO deye_evenement(designation,date_event,heure_event,idPhoto,idLieu) VALUES(?,?,?,?,?)';
-            var_dump($sql);
-            exit();
+            $sql = 'INSERT INTO deye_evenement(Designation,Date_event,Heure_event,idPhoto,idLieu) VALUES(?,?,?,?,?)';
             $stmt = $this->pdo->prepare($sql);
-            $stmt->execute($array_value_event);
+            $stmt->execute($array_value_event); 
         }
     }
 
