@@ -41,40 +41,32 @@
 
             if(!empty($nom) AND !empty($date) AND !empty($price) AND !empty($time) AND !empty($numbersPlayers) AND !empty($idAdmin) AND !empty($idEditeur) AND !empty($age) AND !empty($idCategorie))
             {
-    
-                  $reqNom = $bdd->prepare("SELECT * FROM deye_jeux WHERE designation = ?");
-                  $reqNom->execute(array($nom));
-                  $nomExist = $reqNom->rowCount();
-                  if($nomExist == 0){
-                      $insertGame = $bdd->prepare('INSERT INTO deye_jeux(designation,date_sortie,prix,temps_jeux,nb_joueurs,IdPersonne,IdEditeur,IdAge,IdCategorie,IdPhoto)
-                                                    VALUES(?,?,?,?,?,?,?,?,?,?)');
-                      $insertGame->execute(array($nom,$date,$price,$time,$numbersPlayers,$idAdmin,$idEditeur,$age,$idCategorie,$idPhoto));
-                      $erreur = "Votre jeu a bien été ajouté !";
-                  }else{
-                    $erreur2 = "Le jeu existe déja !";
-                  }
+              //$reqNom = $bdd->prepare("SELECT * FROM deye_jeux WHERE designation = ?");
+              //$reqNom->execute(array($nom));
+              //$nomExist = $reqNom->rowCount();
+              $nomExist = $unC_jeu->existJeu($nomJeu);
+              if($nomExist === 0){
+                  //$insertGame = $bdd->prepare('INSERT INTO deye_jeux(designation,date_sortie,prix,temps_jeux,nb_joueurs,IdPersonne,IdEditeur,IdAge,IdCategorie,IdPhoto)
+                  //                              VALUES(?,?,?,?,?,?,?,?,?,?)');
+                  //$insertGame->execute(array($nom,$date,$price,$time,$numbersPlayers,$idAdmin,$idEditeur,$age,$idCategorie,$idPhoto));
+                  
+                  $unC_jeu->addJeu(array($nom,$date,$price,$time,$numbersPlayers,$idAdmin,$idEditeur,$age,$idCategorie,$idPhoto));
+                  $erreur = "Votre jeu a bien été ajouté !";
               }else{
-                $erreur2 = "Veuillez remplir tous les champs !";
+                $erreur2 = "Le jeu existe déja !";
+              }
+            }else{
+              $erreur2 = "Veuillez remplir tous les champs !";
             }
-
-            var_dump($date_sortie);
-
+            //var_dump($date_sortie);
           }
-
-        
-            
-                    
-        
           if(isset($_GET['type']) AND $_GET['type'] == 'allgames') {
-        
-            
             if(isset($_GET['supprime']) AND !empty($_GET['supprime'])) {
-            
-            $supprime = (int) $_GET['supprime'];
-            $req = $bdd->prepare('DELETE FROM deye_jeux WHERE IdJeux = ?');
-            $req->execute(array($supprime));
+              $supprime = (int) $_GET['supprime'];
+              //$req = $bdd->prepare('DELETE FROM deye_jeux WHERE IdJeux = ?');
+              //$req->execute(array($supprime));
 
-
+              $unC_jeu->updateJeu('', '', $supprime, 'supprime');
           }
       }
 
@@ -161,7 +153,7 @@
                         </td>
 
                         <td>
-                            <?=$res['Libelle']?>
+                            <?=$res['cateLibelle']?>
                         </td>
 
                         <td>

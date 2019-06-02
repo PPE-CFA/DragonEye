@@ -91,9 +91,8 @@
   	  if ($this->pdo == null) //pas de connexion
   	  {
   	    return null;
-  	  }else
-  	  {
-				$sql = 'SELECT IdAnnonce, deye_jeux.designation, deye_annonce_type.AnnonceType, deye_personne.nom, deye_photo.url_photo, deye_age.age_requis, deye_categorie.libelle, deye_annonce.Description,region,ville,postal,Etat
+  	  }else{
+				$sql = 'SELECT IdAnnonce, deye_jeux.designation, deye_annonce_type.Annonce_Type, deye_personne.nom, deye_photo.url_photo, deye_age.age_requis, deye_categorie.libelle, deye_annonce.Description,region,ville,postal,Etat
 									FROM deye_annonce
 									INNER JOIN deye_jeux     ON deye_annonce.IdJeux=deye_jeux.IdJeux
 									INNER JOIN deye_personne ON deye_annonce.IdPersonne=deye_personne.IdPersonne
