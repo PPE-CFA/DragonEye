@@ -57,7 +57,7 @@
 
       //Requete SQL : connecte un utilisateur
 
-      if(isset($_POST['formconnexion'])) {
+      /*if(isset($_POST['formconnexion'])) {
         $mailconnect = $_POST['mailconnect'];
         $mdpconnect = $_POST['mdpconnect'];
 
@@ -89,7 +89,7 @@
 
           $erreurConnect = "Tous les champs doivent être remplies !";
         }
-      }
+      }*/
 
     ?>
 
