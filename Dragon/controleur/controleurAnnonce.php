@@ -40,10 +40,15 @@
   }
 
   function updateAd($value, $champ, $id_annonce, $action)
-      {
-        $result=$this->unModeleAnnonce->updateAd($value, $champ, $id_annonce, $action);
-        return $result;
-      }
+  {
+    $result=$this->unModeleAnnonce->updateAd($value, $champ, $id_annonce, $action);
+    return $result;
+  }
+
+  function addAnnonce($array_value_annonce)
+  {
+    $this->unModeleAnnonce->addAnnonce($array_value_annonce);
+  }
 
 }
 ?>

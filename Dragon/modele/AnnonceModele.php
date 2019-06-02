@@ -110,13 +110,13 @@
 
 		public function updateAd($value, $champ, $id_annonce, $action)
     {
-      if ($this->pdo == null){//pas de connexion
-          return null;
+			if ($this->pdo == null){//pas de connexion
+					return null;
 			
 			}else{
-         if($action === 'confirm_offers'){
-          $sql = 'UPDATE deye_annonce SET idForme = "O" WHERE idAnnonce = '.$id_annonce.'';
-          $stmt = $this->pdo->prepare($sql);
+				if($action === 'confirm_offers'){
+					$sql = 'UPDATE deye_annonce SET idForme = "O" WHERE idAnnonce = '.$id_annonce.'';
+					$stmt = $this->pdo->prepare($sql);
 					$stmt->execute();
 
 					var_dump($stmt);
@@ -124,18 +124,30 @@
 				}else if($action == 'confirm_demands'){
 
 					$sql = 'UPDATE deye_annonce SET idForme = "D" WHERE idAnnonce = '.$id_annonce.'';
-          $stmt = $this->pdo->prepare($sql);
+					$stmt = $this->pdo->prepare($sql);
 					$stmt->execute();
 
 
-        }else if($action === 'supprime'){
-          $sql = 'DELETE FROM deye_annonce WHERE idAnnonce = '.$id_annonce.' ';
-          $stmt = $this->pdo->prepare($sql);
-          $stmt->execute();
-        
-      }
+				}else if($action === 'supprime'){
+					$sql = 'DELETE FROM deye_annonce WHERE idAnnonce = '.$id_annonce.' ';
+					$stmt = $this->pdo->prepare($sql);
+					$stmt->execute();
+				
+				}
+			}
 		}
-	}
+
+		public function addAnnonce($array_value_annonce)
+    {
+        if ($this->pdo == null){//pas de connexion
+            return null;
+        }else{
+            $sql = 'INSERT INTO deye_annonce (idJeux ,idPersonne ,idAge , idPhoto, idCategorie, idForme, Region, Ville, Postal, Etat, Description, Depot)
+						        	VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)';
+						$stmt = $this->pdo->prepare($sql);
+            $stmt->execute($array_value_annonce);
+        }
+    }
 		
   	public function setTableAnnonce($uneTableAnnonce)
   	{

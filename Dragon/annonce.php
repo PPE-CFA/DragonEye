@@ -77,13 +77,13 @@
                             <label class="form-control-label"><i class="fa fa-gamepad"></i> CATEGORIE</label>
                             <select name="categorie" id="country" class="form-control" form="annonceform">
                                 <?php
-                                    $stmt_allJeu = $unC_jeu->select_allJeu();
+                                    $stmt_allCat = $unC_jeu->select_allCat();
                                     $count = 0;
                                     // pour chaque document
-                                    while ($result1 = $stmt_allJeu->fetch()) {
+                                    while ($result1 = $stmt_allCat->fetch()) {
                                         $count = $count + 1;
                                         $id = $result1['idCategorie'];
-                                        $libelle = $result1['cateLibelle'];
+                                        $libelle = $result1['Libelle'];
                                         include('vue/vue_option_anonce.php'); 
                                     }
                                 ?>
@@ -95,11 +95,12 @@
                             <!--input name="age" type="text" required placeholder="" class="form-control"-->
                             <select name="age" id="age" class="form-control" form="annonceform">
                                 <?php
-                                    $stmt_allJeu = $unC_jeu->select_allJeu();
+                                    $stmt_allAge = $unC_jeu->select_allAge();
                                     $count = 0;
 
                                     // pour chaque document
-                                    while ($result1 = $stmt_allJeu->fetch()) {
+                                    while ($result1 = $stmt_allAge->fetch()) {
+                                        var_dump($result1);
                                         $count = $count + 1;
                                         $id = $result1['idAge'];
                                         $libelle = $result1['Age_requis'];
@@ -113,13 +114,38 @@
                             <label class="form-control-label"><i class="fa fa-envelope-open"></i> Description de l'annonce</label>
                             <textarea name="description" class="form-control"required cols="3" rows="6" placeholder="Description"></textarea>
                         </div>
-<!-- Image personnnelle du meme jeu-->
+
                         <div class="form-group">
+                            <label class="form-control-label"><i class="fas fa-images"></i> Id photo</label>
+                            <input name="image1" class="form-control" type="text"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label"><i class="fa fa-bookmark"></i> Region</label>
+                            <input name="an_region" class="form-control" type="text"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label"><i class="fa fa-bookmark"></i> Ville</label>
+                            <input name="an_ville" class="form-control" type="text"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label"><i class="fa fa-bookmark"></i> Postal</label>
+                            <input name="an_postal" class="form-control" type="text"/>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label"><i class="fa fa-bookmark"></i> Etat</label>
+                            <input name="an_etat" class="form-control" type="text"/>
+                        </div>
+<!-- Image personnnelle du meme jeu-->
+                        <!--<div class="form-group">
 
                             <label for="exampleInputFile"><i class="fas fa-images"></i>Ajouter une image</label>
                             <input name="image1" type="file" class="form-control-file" id="exampleInputFile" aria-describedby="fileHelp">
 
-                        </div>
+                        </div>-->
 
                         <input class="btn " type="submit" value="Poster l'annnonce">
                         <!--div class="form-group" align="center">

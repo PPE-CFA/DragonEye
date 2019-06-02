@@ -36,6 +36,18 @@
             $this->unModeleJeu->addJeu($array_value_jeu);
         }
 
+        function select_allAge()
+        {
+            $stmt=$this->unModeleJeu->select_allAge();
+            return $stmt;
+        }
+
+        function select_allCat()
+        {
+            $stmt=$this->unModeleJeu->select_allCat();
+            return $stmt;
+        }
+
         function existJeu($nomJeu)
         {
             $result=$this->unModeleJeu-> existJeu($nomJeu);

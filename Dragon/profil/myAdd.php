@@ -43,6 +43,7 @@
                                     WHERE IdPersonne = ? AND Idforme = "D"
                                     ORDER BY IdAnnonce DESC');*/
     $allMyDemands = $unC_demande->select_userDemande($_SESSION['IdPersonne']);
+    var_dump($_SESSION['IdPersonne']);
     //$allMyDemands->execute(array($_SESSION['IdPersonne']));
 ?>
 <!DOCTYPE html>
