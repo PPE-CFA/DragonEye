@@ -1,84 +1,71 @@
 
 <?php
  include('../../../include/header.php');
+ //page specific controller
+ include(_DIR2_.'/controleur/controleurJeu.php');
+ $unC_jeu = new ControleurJeu($host, $bdd_nom, $bdd_user, $mdp);
 //requete SQL = modifier le nom, la date, le prix, le temps de jeu et le nombre de joueurs de la table deye_jeux
 
 if(isset($_SESSION['IdPersonne']) AND $_SESSION['IdType'] == "A")
 {
-   $requser = $bdd->prepare('SELECT IdJeux, designation, date_sortie, prix, temps_jeux, nb_joueurs, deye_editeur.Nom, deye_age.age_requis
+   /*$requser = $bdd->prepare('SELECT IdJeux, designation, date_sortie, prix, temps_jeux, nb_joueurs, deye_editeur.Nom, deye_age.age_requis
                               FROM deye_jeux
                               INNER JOIN deye_editeur  ON deye_jeux.IdEditeur = deye_editeur.IdEditeur
                               INNER JOIN deye_age      ON deye_jeux.IdAge = deye_age.IdAge
                              ');
 
    $requser->execute(array($_GET['idModifGame']));
-   $game = $requser->fetch();
+   $game = $requser->fetch();*/
+
+   $game = $unC_jeu->select_Jeu($_GET['idModifGame']);
 
    if(isset($_POST['newNom']) AND !empty($_POST['newNom']) AND $_POST['newNom'] != $game['designation']){
       
+      //$updateNom = $bdd->prepare("UPDATE deye_jeux SET designation = ? WHERE IdJeux = ?");
+      //$updateNom->execute(array($newNom,$_GET['idModifGame']));
+
       $newNom = htmlspecialchars($_POST['newNom']);
-      $updateNom = $bdd->prepare("UPDATE deye_jeux SET designation = ? WHERE IdJeux = ?");
-      $updateNom->execute(array($newNom,$_GET['idModifGame']));
-      
+      $unC_jeu->updateJeu($newNom, 'Designation', $_GET['idModifGame'], 'edit');
    }
 
    if(isset($_POST['newDate']) AND !empty($_POST['newDate']) AND $_POST['newDate'] != $game['date_sortie']){
-      
       $newDate = htmlspecialchars($_POST['newDate']);
-      $updateDate = $bdd->prepare("UPDATE deye_jeux SET date_sortie = ? WHERE IdJeux = ?");
-      $updateDate->execute(array($newDate,$_GET['idModifGame']));
-      
+      $unC_jeu->updateJeu($newDate, 'Date_sortie', $_GET['idModifGame'], 'edit');
    }
 
    if(isset($_POST['newPrix']) AND !empty($_POST['newPrix']) AND $_POST['newPrix'] != $game['prix']){
-      
       $newPrix = htmlspecialchars($_POST['newPrix']);
-      $updatePrix = $bdd->prepare("UPDATE deye_jeux SET prix = ? WHERE IdJeux = ?");
-      $updatePrix->execute(array($newPrix,$_GET['idModifGame']));
-      
+      $unC_jeu->updateJeu($newPrix, 'Prix', $_GET['idModifGame'], 'edit');
    }
 
    if(isset($_POST['newTimeGame']) AND !empty($_POST['newTimeGame']) AND $_POST['newTimeGame'] != $game['temps_jeux']) {
-      
       $newTime = htmlspecialchars($_POST['newTimeGame']);
-      $updateTime = $bdd->prepare("UPDATE deye_jeux SET temps_jeux = ? WHERE IdJeux = ?");
-      $updateTime->execute(array($newTime,$_GET['idModifGame']));
-
+      $unC_jeu->updateJeu($newTime, 'Temps_jeux', $_GET['idModifGame'], 'edit');
    }
 
     if(isset($_POST['newNumberPlayers']) AND !empty($_POST['newNumberPlayers']) AND $_POST['newNumberPlayers'] != $game['nb_joueurs']){
-      
       $newNumberPlayers = htmlspecialchars($_POST['newNumberPlayers']);
-      $updateNumberPlayers = $bdd->prepare("UPDATE deye_jeux SET nb_joueurs = ? WHERE IdJeux = ?");
-      $updateNumberPlayers->execute(array($newNumberPlayers,$_GET['idModifGame']));
-        
-    
-      
+      $unC_jeu->updateJeu($newNumberPlayers, 'Nb_joueurs', $_GET['idModifGame'], 'edit');
     }
 
     if(isset($_POST['newIdEditeur']) AND !empty($_POST['newIdEditeur']) AND $_POST['newIdEditeur'] != $game['Nom']){
-      
       $newIdEditeur = htmlspecialchars($_POST['newIdEditeur']);
-      $updateIdEditeur = $bdd->prepare("UPDATE deye_jeux SET IdEditeur = ? WHERE IdJeux = ?");
-      $updateIdEditeur->execute(array($newIdEditeur,$_GET['idModifGame']));
+      //$updateIdEditeur = $bdd->prepare("UPDATE deye_jeux SET IdEditeur = ? WHERE IdJeux = ?");
+      //$updateIdEditeur->execute(array($newIdEditeur,$_GET['idModifGame']));
 
+      $unC_jeu->updateJeu($newIdEditeur, 'idEditeur', $_GET['idModifGame'], 'edit');
     }
 
 
     if(isset($_POST['newIdAge']) AND !empty($_POST['newIdAge']) AND $_POST['newIdAge'] != $game['age_requis']){
-      
       $newIdAge = htmlspecialchars($_POST['newIdAge']);
-      $updateIdAge = $bdd->prepare("UPDATE deye_jeux SET IdAge = ? WHERE IdJeux = ?");
-      $updateIdAge->execute(array($newIdAge,$_GET['idModifGame']));
-        
-    
-      
+      //$updateIdAge = $bdd->prepare("UPDATE deye_jeux SET IdAge = ? WHERE IdJeux = ?");
+      //$updateIdAge->execute(array($newIdAge,$_GET['idModifGame']));
+
+      $unC_jeu->updateJeu($newIdAge, 'idAge', $_GET['idModifGame'], 'edit');
     }
 
-    
-      
-   
-
+    $game = $unC_jeu->select_Jeu($_GET['idModifGame']);
 ?>
 <html>
    <head>
