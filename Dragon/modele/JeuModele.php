@@ -75,9 +75,6 @@
         }else{
             $sql = 'INSERT INTO deye_jeux(designation,date_sortie,prix,temps_jeux,nb_joueurs,IdPersonne,IdEditeur,IdAge,IdCategorie,IdPhoto)
                         VALUES(?,?,?,?,?,?,?,?,?,?)';
-            var_dump($sql);
-            var_dump($array_value_jeu);
-            exit();
             $stmt = $this->pdo->prepare($sql);
             $stmt->execute($array_value_jeu);
         }

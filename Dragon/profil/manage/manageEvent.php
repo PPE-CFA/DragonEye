@@ -36,12 +36,16 @@
             if(!empty($nom) AND !empty($date) AND !empty($time) AND !empty($photo) AND !empty($adresse))
             {
 
-                  $reqNom = $bdd->prepare("SELECT * FROM deye_evenement WHERE designation = ?");
-                  $reqNom->execute(array($nom));
-                  $nomExist = $reqNom->rowCount();
+                  //$reqNom = $bdd->prepare("SELECT * FROM deye_evenement WHERE designation = ?");
+                  //$reqNom->execute(array($nom));
+                  //$nomExist = $reqNom->rowCount();
+
+                  $nomExist = $unC_event->existEvent($nom);
                   if($nomExist == 0){
-                      $insertEvent = $bdd->prepare("INSERT INTO deye_evenement(designation,date_event,heure_event,IdPhoto,IdLieu) VALUES(?,?,?,?,?)");
-                      $insertEvent->execute(array($nom,$date,$time,$photo,$adresse));
+                      //$insertEvent = $bdd->prepare("INSERT INTO deye_evenement(designation,date_event,heure_event,IdPhoto,IdLieu) VALUES(?,?,?,?,?)");
+                      //$insertEvent->execute(array($nom,$date,$time,$photo,$adresse));
+
+                      $unC_event->addEvent(array($nom,$date,$time,$photo,$adresse));
                       $erreur = "Votre évènement a bien été ajouté !";
                   }else{
                     $erreur2 = "L'évènement existe déja !";

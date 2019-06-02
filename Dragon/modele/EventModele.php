@@ -60,6 +60,30 @@
             }
         }
     }
+
+    public function addEvent($array_value_event)
+    {
+        if ($this->pdo == null){//pas de connexion
+            return null;
+        }else{
+            $sql = 'INSERT INTO deye_evenement(designation,date_event,heure_event,idPhoto,idLieu) VALUES(?,?,?,?,?)';
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute($array_value_event);
+        }
+    }
+
+    public function existEvent($nomEvent)
+    {
+        if ($this->pdo == null){//pas de connexion
+            return null;
+        }else{
+            $sql = 'SELECT * FROM deye_evenement WHERE designation = ?';
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute(array($nomEvent));
+            $result = $stmt->rowCount();
+            return $result;
+        }
+    }
 		
   	public function setTableEvent($uneTableEvent)
   	{

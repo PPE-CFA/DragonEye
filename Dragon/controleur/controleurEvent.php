@@ -29,8 +29,18 @@
 
       function updateEvent($value, $champ, $id_event, $action)
       {
-        $stmt=$this->unEventModele->updateEvent($value, $champ, $id_event, $action);
-        return $stmt;
+        $this->unEventModele->updateEvent($value, $champ, $id_event, $action);
+      }
+
+      function addEvent($array_value_event)
+      {
+        $this->unEventModele->addEvent($array_value_event);
+      }
+
+      function existEvent($nomEvent)
+      {
+        $result=$this->unEventModele->existEvent($nomEvent);
+        return $result;
       }
 
     }
