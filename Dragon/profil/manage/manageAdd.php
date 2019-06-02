@@ -166,7 +166,7 @@ include('../../include/header.php');
                       </td>
 
                       <td>
-                        <?=$res['AnnonceType']?>
+                        <?=$res['Annonce_Type']?>
                       </td>
 
                       <td>
@@ -267,7 +267,7 @@ include('../../include/header.php');
                         </td>
 
                         <td>
-                          <?=$res['AnnonceType']?>
+                          <?=$res['Annonce_Type']?>
                         </td>
 
                         <td>
