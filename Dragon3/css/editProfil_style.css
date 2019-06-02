@@ -1,0 +1,32 @@
+.container{
+
+    max-width: 330px;
+    
+}
+
+
+/*---CSS Editer le profil FORM---*/
+
+
+.form-label-group {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+
+  
+  .form-label-group input {
+    border: 1px solid #FF9900;
+  }
+
+ 
+  .sign_up{
+    position:relative;
+    top:100px;
+  }
+
+  .erreur{
+    position:relative;
+    top:115px;
+  }
+
+
