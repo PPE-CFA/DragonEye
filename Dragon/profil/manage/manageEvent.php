@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -45,7 +47,12 @@
                       //$insertEvent = $bdd->prepare("INSERT INTO deye_evenement(designation,date_event,heure_event,IdPhoto,IdLieu) VALUES(?,?,?,?,?)");
                       //$insertEvent->execute(array($nom,$date,$time,$photo,$adresse));
 
+                     
+
+                      
+
                       $unC_event->addEvent(array($nom,$date,$time,$photo,$adresse));
+                      
                       $erreur = "Votre évènement a bien été ajouté !";
                   }else{
                     $erreur2 = "L'évènement existe déja !";

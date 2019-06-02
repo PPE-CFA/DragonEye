@@ -51,6 +51,7 @@
                   //$insertGame->execute(array($nom,$date,$price,$time,$numbersPlayers,$idAdmin,$idEditeur,$age,$idCategorie,$idPhoto));
                   
                   $unC_jeu->addJeu(array($nom,$date,$price,$time,$numbersPlayers,$idAdmin,$idEditeur,$age,$idCategorie,$idPhoto));
+                  
                   $erreur = "Votre jeu a bien été ajouté !";
               }else{
                 $erreur2 = "Le jeu existe déja !";

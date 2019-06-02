@@ -111,7 +111,7 @@ include('../../include/header.php');
                           INNER JOIN deye_categorie ON deye_annonce.IdCategorie=deye_categorie.IdCategorie
                           WHERE Idforme = "NO"
                           ORDER BY IdAnnonce DESC');*/
-  $stmt_allOffre = $unC_offre->select_allOffre();
+  $stmt_allNewOffre = $unC_offre->select_allNewOffre();
 
   /*$allDemands = $bdd->query('SELECT IdAnnonce, deye_jeux.designation, deye_annonce_type.AnnonceType, deye_personne.nom, deye_photo.url_photo, deye_age.age_requis, deye_categorie.libelle, deye_annonce.Description,region,ville,postal,Etat
                               FROM deye_annonce
@@ -123,7 +123,7 @@ include('../../include/header.php');
                               INNER JOIN deye_categorie ON deye_annonce.IdCategorie=deye_categorie.IdCategorie
                               WHERE Idforme = "ND"
                               ORDER BY IdAnnonce DESC');*/
-  $stmt_allDemands = $unC_demande->select_allDemande();
+  $stmt_allNewDemands = $unC_demande->select_allNewDemande();
 
   /*$allAdd = $bdd->query('SELECT IdAnnonce, deye_jeux.designation, deye_annonce_type.AnnonceType, deye_personne.nom, deye_photo.url_photo, deye_age.age_requis, deye_categorie.libelle, deye_annonce.Description,region,ville,postal,Etat
                             FROM deye_annonce
@@ -170,7 +170,7 @@ include('../../include/header.php');
                 
               </thead>
                 <tbody>
-                  <?php while($res = $stmt_allDemands->fetch()){?>
+                  <?php while($res = $stmt_allNewDemands->fetch()){?>
                   <tr class="table-info">
                         
                       <td>
@@ -278,7 +278,7 @@ include('../../include/header.php');
                 
                 </thead>
                 <tbody>
-                  <?php while($res = $stmt_allOffre->fetch()){?>
+                  <?php while($res = $stmt_allNewOffre->fetch()){?>
                   <tr class="table-info">
                         
                         <td>

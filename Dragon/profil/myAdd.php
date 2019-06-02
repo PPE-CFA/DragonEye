@@ -30,7 +30,7 @@
     //$allMyOffers = $bdd->query('SELECT * FROM deye_annonce
                                 //INNER JOIN deye_jeux ON deye_annonce.IdJeux=deye_jeux.IdJeux
                                 //WHERE Idforme = "O"');
-    $allMyOffers = $unC_offre->select_userOffre();
+    $allMyOffers = $unC_offre->select_userOffre($_SESSION['IdPersonne']);
     
     /*$allMyDemands = $bdd->prepare('SELECT IdAnnonce, deye_jeux.designation, deye_annonce_type.AnnonceType, deye_personne.nom, deye_photo.url_photo, deye_age.age_requis, deye_categorie.libelle, deye_annonce.Description,region,ville,postal,Etat
                                     FROM deye_annonce
@@ -182,15 +182,15 @@
                 </td>
 
                 <td>  
-                    <!--<img src="<?=$res['url_photo']?>"/>-->  
+                    <img src="<?=$res['url_photo']?>"/> 
                 </td>
 
                 <td>
-                    <!--<?=$res['age_requis']?>-->
+                    <?=$res['age_requis']?>
                 </td>
 
                 <td>
-                    <!--<?=$res['libelle']?>-->
+                    <?=$res['libelle']?>
                 </td>
 
                 <td>

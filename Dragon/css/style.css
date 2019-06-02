@@ -28,6 +28,17 @@ html,body{
     background-color: #007DFF;
 
 }
+
+.btn-secondary {
+  border-color: #007DFF;
+  background-color: #007DFF;
+
+}
+.btn-secondary:hover {
+  border-color: #007DFF;
+  background-color: #007DFF;
+
+}
 .d-flex{
   display : flow-root;
 }
