@@ -39,5 +39,11 @@
     return $stmt;
   }
 
+  function updateAd($value, $champ, $id_annonce, $action)
+      {
+        $result=$this->unModeleAnnonce->updateAd($value, $champ, $id_annonce, $action);
+        return $result;
+      }
+
 }
 ?>

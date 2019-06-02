@@ -7,7 +7,7 @@
     {
         $this->pdo = null;
         try{
-            $this->pdo = new PDO ("mysql:hostname=".$serveur.";dbname=".$bdd,$user,$mdp);
+            $this->pdo = new PDO ("mysql:hostname=".$serveur.";dbname=".$bdd,$user,$mdp,array(PDO::MYSQL_ATTR_INIT_COMMAND => 'SET NAMES utf8'));
         }
         catch (PDOException $exp)
         {
@@ -37,6 +37,19 @@
             $requete = 'SELECT * FROM deye_personne WHERE IdType ="U" ORDER BY IdPersonne DESC';
             $stmt = $this->pdo->query($requete);
             return $stmt;
+        }
+    }
+
+    public function select_aUser($id_user)
+  	{
+        if ($this->pdo == null){//pas de connexion
+            return null;
+        }else{
+            $requete = 'SELECT * FROM deye_personne WHERE IdType ="U" AND IdPersonne = '.$id_user.' ';
+            $stmt = $this->pdo->prepare($requete); 
+            $stmt->execute();
+            $result = $stmt->fetch();
+            return $result;
         }
     }
 
