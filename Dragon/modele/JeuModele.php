@@ -33,7 +33,69 @@
             return $stmt;
         }
     }
-		
+
+    public function select_Jeu($id_jeu)
+    {
+        if ($this->pdo == null){//pas de connexion
+            return null;
+        }else{
+            $sql = 'SELECT IdJeux, designation, date_sortie, prix, temps_jeux, nb_joueurs, deye_editeur.Nom, deye_age.age_requis
+                        FROM deye_jeux
+                        INNER JOIN deye_editeur  ON deye_jeux.IdEditeur = deye_editeur.IdEditeur
+                        INNER JOIN deye_age      ON deye_jeux.IdAge = deye_age.IdAge
+                        WHERE IdJeux = '.$id_jeu.'';
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute();
+            $result = $stmt->fetch();
+            return $result;
+        }
+    }
+
+    public function updateJeu($value, $champ, $id_jeu, $action)
+    {
+        if ($this->pdo == null){//pas de connexion
+            return null;
+        }else{
+            if($action === 'edit'){
+                $sql = 'UPDATE deye_jeux SET '.$champ.' = ? WHERE IdJeux = '.$id_jeu.'';
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute(array($value));
+            }else if($action === 'supprime'){
+                $sql = 'DELETE FROM deye_jeux WHERE IdJeux = '.$id_jeu.'';
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute();
+            }
+        }
+    }
+
+    public function addJeu($array_value_jeu)
+    {
+        if ($this->pdo == null){//pas de connexion
+            return null;
+        }else{
+            $sql = 'INSERT INTO deye_jeux(designation,date_sortie,prix,temps_jeux,nb_joueurs,IdPersonne,IdEditeur,IdAge,IdCategorie,IdPhoto)
+                        VALUES(?,?,?,?,?,?,?,?,?,?)';
+            var_dump($sql);
+            var_dump($array_value_jeu);
+            exit();
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute($array_value_jeu);
+        }
+    }
+
+    public function existJeu($nomJeu)
+    {
+        if ($this->pdo == null){//pas de connexion
+            return null;
+        }else{
+            $sql = 'SELECT * FROM deye_jeux WHERE designation = ?';
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute(array($nomJeu));
+            $result = $stmt->rowCount();
+            return $result;
+        }
+    }
+    
   	public function setTableJeu($uneTableJeu)
   	{
   		$this->table = $uneTableJeu;

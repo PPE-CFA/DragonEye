@@ -56,14 +56,13 @@
 
           if(isset($_GET['type']) AND $_GET['type'] == 'allevents') {
 
-
             if(isset($_GET['supprime']) AND !empty($_GET['supprime'])) {
 
-            $supprime = (int) $_GET['supprime'];
-            $req = $bdd->prepare('DELETE FROM deye_evenement WHERE IdEvent = ?');
-            $req->execute(array($supprime));
-
-
+              $supprime = (int) $_GET['supprime'];
+              //$req = $bdd->prepare('DELETE FROM deye_evenement WHERE IdEvent = ?');
+              //$req->execute(array($supprime));
+              $unC_event->updateEvent('', '', $supprime, 'supprime');
+              
           }
       }
 
@@ -129,8 +128,8 @@
             </td>
 
             <td>
-                <a href="modifManage/modifEvent.php?type=modifevent&idModifEvent=<?= $res['IdEvent'] ?>" class="btn btn-primary">Modifier</a>
-                <a href="manageEvent.php?type=allevents&supprime=<?= $res['IdEvent'] ?>" class="btn btn-danger">Supprimer</a>
+                <a href="modifManage/modifEvent.php?type=modifevent&idModifEvent=<?= $res['idEvent'] ?>" class="btn btn-primary">Modifier</a>
+                <a href="manageEvent.php?type=allevents&supprime=<?= $res['idEvent'] ?>" class="btn btn-danger">Supprimer</a>
             </td>
 
 

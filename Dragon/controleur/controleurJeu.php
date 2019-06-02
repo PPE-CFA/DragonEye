@@ -19,6 +19,28 @@
             $stmt=$this->unModeleJeu->select_allJeu();
             return $stmt;
         }
+
+        function select_Jeu($id_jeu)
+        {
+            $result=$this->unModeleJeu->select_Jeu($id_jeu);
+            return $result;
+        }
+
+        function updateJeu($value, $champ, $id_jeu, $action)
+        {
+            $this->unModeleJeu->updateJeu($value, $champ, $id_jeu, $action);
+        }
+
+        function addJeu($array_value_jeu)
+        {
+            $this->unModeleJeu->addJeu($array_value_jeu);
+        }
+
+        function existJeu($nomJeu)
+        {
+            $result=$this->unModeleJeu-> existJeu($nomJeu);
+            return $result;
+        }
     }
 ?>
  

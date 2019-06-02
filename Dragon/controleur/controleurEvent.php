@@ -20,5 +20,18 @@
         $stmt=$this->unEventModele->select_allEvent();
         return $stmt;
       }
+
+      function select_Event($id_event)
+      {
+        $result=$this->unEventModele->select_Event($id_event);
+        return $result;
+      }
+
+      function updateEvent($value, $champ, $id_event, $action)
+      {
+        $stmt=$this->unEventModele->updateEvent($value, $champ, $id_event, $action);
+        return $stmt;
+      }
+
     }
 ?>

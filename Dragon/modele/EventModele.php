@@ -30,6 +30,36 @@
             return $stmt;
         }
     }
+
+    public function select_Event($id_event)
+  	{
+        if ($this->pdo == null){//pas de connexion
+            return null;
+        }else{
+            $sql = 'SELECT * FROM deye_evenement WHERE idEvent = ?';
+            $stmt = $this->pdo->prepare($sql);
+            $stmt->execute(array($id_event));
+            $result = $stmt->fetch();
+            return $result;
+        }
+    }
+
+    public function updateEvent($value, $champ, $id_event, $action)
+    {
+        if ($this->pdo == null){//pas de connexion
+            return null;
+        }else{
+            if($action === 'edit'){
+                $sql = 'UPDATE deye_evenement SET '.$champ.' = ? WHERE idEvent = '.$id_event.'';
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute(array($value));
+            }else if($action === 'supprime'){
+                $sql = 'DELETE FROM deye_evenement WHERE idEvent = '.$id_event.'';
+                $stmt = $this->pdo->prepare($sql);
+                $stmt->execute();
+            }
+        }
+    }
 		
   	public function setTableEvent($uneTableEvent)
   	{
