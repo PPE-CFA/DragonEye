@@ -38,7 +38,7 @@ include('../../include/header.php');
         $req = $bdd->prepare('UPDATE deye_annonce SET Idforme = ? WHERE IdAnnonce = ? AND Idforme = ?');
         $req->execute(array($O,$confirme,$NO));
         */
-        $unC->updateAd('', '', $confirm, 'confirm_offers');
+        $unC->updateAd('', '', $confirme, 'confirm_offers');
 
     }
                

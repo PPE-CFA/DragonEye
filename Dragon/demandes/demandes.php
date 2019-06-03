@@ -42,7 +42,7 @@
       <div class="col-sm-4">
         <div class="card">
           <div class="img-jeu">
-          <img src="<?=$res['url_photo']?>" class="thumbnail" alt="offres">
+          <img src="<?=_DIR_.$res['url_photo']?>" class="thumbnail" alt="offres">
           </div>
           <hr>
             <div class="card-body">
@@ -63,7 +63,7 @@
     <div class="modal-content">
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal">&times;</button>
-        <h4 class="modal-title"><img src="../../img/logo.png"> Offre - <?=$res['designation']?></h4>
+        <h4 class="modal-title"><img src="<?=_DIR_?>/img/logo.png"> Offre - <?=$res['designation']?></h4>
         <h6 class="modal-subtitle"><?=$res['region']?>, <?=$res['ville']?>, <?=$res['postal']?></h6>
         
       </div>
@@ -72,10 +72,7 @@
       <div class="modal-body">
         
         <div class="img-ad">
-          <img src="<? $res=['url_photo']?>"/>
-          
-          
-          <?=$res['designation']?>
+          <img src="<?=_DIR_.$res['url_photo']?>"/>
         </div>
 
 
