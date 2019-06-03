@@ -14,17 +14,18 @@
         if(isset($_GET['supprime']) AND !empty($_GET['supprime']))
         {
             $supprime = (int) $_GET['supprime'];
-            $req = $bdd->prepare('DELETE FROM deye_annonce WHERE IdAnnonce = ?');
-            $req->execute(array($supprime));
+            //$req = $bdd->prepare('DELETE FROM deye_annonce WHERE IdAnnonce = ?');
+            //$req->execute(array($supprime));
+            $unC->updateAd('', '', $supprime, 'supprime');
         }
     }elseif(isset($_GET['type']) AND $_GET['type'] == 'allmyoffers'){
 
         if(isset($_GET['supprime']) AND !empty($_GET['supprime']))
         {
             $supprime = (int) $_GET['supprime'];
-            $req = $bdd->prepare('DELETE FROM deye_annonce WHERE IdAnnonce = ?');
-            $req->execute(array($supprime));
-            var_dump($req->execute(array($supprime)));
+            //$req = $bdd->prepare('DELETE FROM deye_annonce WHERE IdAnnonce = ?');
+            //$req->execute(array($supprime));
+            $unC->updateAd('', '', $supprime, 'supprime');
         }
     }
     //$allMyOffers = $bdd->query('SELECT * FROM deye_annonce
@@ -129,7 +130,7 @@
 
                 <td>   
                     
-                    <a href="myAdd.php?type=allmydemands&supprime=<?= $res['IdAnnonce'] ?>" class="btn btn-danger danger">Supprimer</a>
+                    <a href="myAdd.php?type=allmydemands&supprime=<?= $res['idAnnonce'] ?>" class="btn btn-danger danger">Supprimer</a>
                 </td>
                                 
                     

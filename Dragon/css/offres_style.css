@@ -39,7 +39,7 @@ header img{
 
   .thumbnail
   {
-    max-width: 210px;
+    max-width: 100%;
     height: 210px;
     padding:0.25rem;
   
