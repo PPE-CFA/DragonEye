@@ -4,62 +4,43 @@ include('../include/header.php');
 
 if(isset($_SESSION['IdPersonne']))
 {
-   $requser = $bdd->prepare("SELECT * FROM deye_personne WHERE IdPersonne = ?");
-   $requser->execute(array($_SESSION['IdPersonne']));
-   $user = $requser->fetch();
+   //select_user
+   //$requser = $bdd->prepare("SELECT * FROM deye_personne WHERE IdPersonne = ?");
+   //$requser->execute(array($_SESSION['IdPersonne']));
+   //$user = $requser->fetch();
 
-   if(isset($_POST['newNom']) AND !empty($_POST['newNom']) AND $_POST['newNom'] != $user['nom']){
-      
+   if(isset($_POST['newNom']) AND !empty($_POST['newNom']) AND $_POST['newNom'] != $user['Nom']){
       $newNom = htmlspecialchars($_POST['newNom']);
-      //$u = "U";
-      //$updateNom = $bdd->prepare("UPDATE deye_personne SET nom = ? WHERE IdPersonne = ? AND IdType = ?");
-      $updateNom = $bdd->prepare("UPDATE deye_personne SET nom = ? WHERE IdPersonne = ? ");
-      //$updateNom->execute(array($newNom,$_SESSION['IdPersonne'],$u));
-      $updateNom->execute(array($newNom,$_SESSION['IdPersonne']));
-      
+      $unC_user->updateUser($newNom, 'Nom', $_SESSION['IdPersonne'], 'edit');
    }
 
-   if(isset($_POST['newPrenom']) AND !empty($_POST['newPrenom']) AND $_POST['newPrenom'] != $user['prenom']){
-      
+   if(isset($_POST['newPrenom']) AND !empty($_POST['newPrenom']) AND $_POST['newPrenom'] != $user['Prenom']){
       $newPrenom = htmlspecialchars($_POST['newPrenom']);
-      //$u = "U";
-      //$updatePrenom = $bdd->prepare("UPDATE deye_personne SET prenom = ? WHERE IdPersonne = ? AND IdType = ?");
-      $updatePrenom = $bdd->prepare("UPDATE deye_personne SET prenom = ? WHERE IdPersonne = ? ");
-      //$updatePrenom->execute(array($newPrenom,$_SESSION['IdPersonne'],$u));
-      $updatePrenom->execute(array($newPrenom,$_SESSION['IdPersonne']));
-      
+      $unC_user->updateUser($newPrenom, 'Prenom', $_SESSION['IdPersonne'], 'edit');
    }
 
-   if(isset($_POST['newMail']) AND !empty($_POST['newMail']) AND $_POST['newMail'] != $user['email']){
-      
+   if(isset($_POST['newMail']) AND !empty($_POST['newMail']) AND $_POST['newMail'] != $user['Email']){
       $newMail = htmlspecialchars($_POST['newMail']);
-      //$u = "U";
-      //$updateMail = $bdd->prepare("UPDATE deye_personne SET email = ? WHERE IdPersonne = ? AND IdType = ?");
-      $updateMail = $bdd->prepare("UPDATE deye_personne SET email = ? WHERE IdPersonne = ? ");
-      //$updateMail->execute(array($newMail,$_SESSION['IdPersonne'],$u));
-      $updateMail->execute(array($newMail,$_SESSION['IdPersonne']));
+      $unC_user->updateUser($newMail, 'Email', $_SESSION['IdPersonne'], 'edit');
    }
 
    if(isset($_POST['newMdp']) AND !empty($_POST['newMdp']) AND isset($_POST['newMdp2']) AND !empty($_POST['newMdp2'])) {
-      
       $newMdp = ($_POST['newMdp']);
       $newMdp2 = ($_POST['newMdp2']);
-      //$u = "U";
-      if($newMdp == $newMdp2){
-         //$updateMdp = $bdd->prepare("UPDATE deye_personne SET mdp = ? WHERE IdPersonne = ? AND IdType = ?");
-         $updateMdp = $bdd->prepare("UPDATE deye_personne SET mdp = ? WHERE IdPersonne = ? ");
-         //$updateMdp->execute(array($newMdp,$_SESSION['IdPersonne'],$u));
-         $updateMdp->execute(array($newMdp,$_SESSION['IdPersonne']));
+      if($newMdp === $newMdp2){
+         $unC_user->updateUser($newMdp, 'Mdp', $_SESSION['IdPersonne'], 'edit');
       }else{
          $erreur = "Vos deux mots de passe ne correspondent pas !";
       }
       
    }
    
-   $requser = $bdd->prepare("SELECT * FROM deye_personne WHERE IdPersonne = ?");
-   $requser->execute(array($_SESSION['IdPersonne']));
-   $user = $requser->fetch();
+   //$requser = $bdd->prepare("SELECT * FROM deye_personne WHERE IdPersonne = ?");
+   //$requser->execute(array($_SESSION['IdPersonne']));
+   //$user = $requser->fetch();
 
+   //refresh info
+   $user = $unC_user->select_User($_SESSION["IdPersonne"]);
 ?>
 <html>
    <head>
@@ -89,19 +70,19 @@ if(isset($_SESSION['IdPersonne']))
             <h4 class="card-title text-center">Modifier mon profil</h4>
               <div class="form-label-group">
                 <label for="inputInscription">Nom</label>
-                <input type="text" id="newNom" class="form-control" name="newNom" value="<?php echo $user['nom'];?>" placeholder="Entrer votre nom">
+                <input type="text" id="newNom" class="form-control" name="newNom" value="<?php echo $user['Nom'];?>" placeholder="Entrer votre nom">
               </div>
               <div class="form-label-group">
                 <label for="inputPrenom">Prenom</label>
-                <input type="text" id="newPrenom" class="form-control" name="newPrenom" value="<?php echo $user['prenom'];?>" placeholder="Entrer votre prenom">
+                <input type="text" id="newPrenom" class="form-control" name="newPrenom" value="<?php echo $user['Prenom'];?>" placeholder="Entrer votre prenom">
               </div>
               <div class="form-label-group">
                 <label for="inputEmail">Email</label>
-                <input type="email" id="newMail" class="form-control" name="newMail" value="<?php echo $user['email'];?>" placeholder="Email">
+                <input type="email" id="newMail" class="form-control" name="newMail" value="<?php echo $user['Email'];?>" placeholder="Email">
               </div>
               <div class="form-label-group">
                 <label for="inputMdp">Mot de passe</label>
-                <input type="password" id="newMdp" class="form-control" name="newMdp" value="<?php echo $user['mdp'];?>" placeholder="Mot de passe">
+                <input type="password" id="newMdp" class="form-control" name="newMdp" value="<?php echo $user['Mdp'];?>" placeholder="Mot de passe">
               </div>
               <div class="form-label-group">
                 <label for="inputMdp2">Confirmer mot de passe</label>

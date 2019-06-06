@@ -1,56 +1,66 @@
 <?php
 include('../../../include/header.php');
+//page specific controller
+include(_DIR2_.'/controleur/controleurEvent.php');
+$unC_event = new ControleurEvent($host, $bdd_nom, $bdd_user, $mdp);
 //requete SQL = modifier le nom, la date, le prix, le temps de jeu et le nombre de joueurs de la table deye_jeux
 
 if(isset($_SESSION['IdPersonne']) AND $_SESSION['IdType'] == "A")
 {
-   $requser = $bdd->prepare("SELECT * FROM deye_evenement WHERE IdEvent = ?");
-   $requser->execute(array($_GET['idModifEvent']));
-   $event = $requser->fetch();
+   //$requser = $bdd->prepare("SELECT * FROM deye_evenement WHERE IdEvent = ?");
+   //$requser->execute(array($_GET['idModifEvent']));
+   //$event = $requser->fetch();
+   $event = $unC_event->select_Event($_GET['idModifEvent']);
 
-   if(isset($_POST['newNom']) AND !empty($_POST['newNom']) AND $_POST['newNom'] != $event['designation']){
+   if(isset($_POST['newNom']) AND !empty($_POST['newNom']) AND $_POST['newNom'] != $event['Designation']){
 
       $newNom = htmlspecialchars($_POST['newNom']);
-      $updateNom = $bdd->prepare("UPDATE deye_evenement SET designation = ? WHERE IdEvent = ?");
-      $updateNom->execute(array($newNom,$_GET['idModifEvent']));
+      //$updateNom = $bdd->prepare("UPDATE deye_evenement SET designation = ? WHERE IdEvent = ?");
+      //$updateNom->execute(array($newNom,$_GET['idModifEvent']));
 
+      $unC_event->updateEvent($newNom, 'Designation', $_GET['idModifEvent'], 'edit');
    }
 
-   if(isset($_POST['newDateEvent']) AND !empty($_POST['newDateEvent']) AND $_POST['newDateEvent'] != $event['date_event']){
+   if(isset($_POST['newDateEvent']) AND !empty($_POST['newDateEvent']) AND $_POST['newDateEvent'] != $event['Date_event']){
 
       $newDateEvent = htmlspecialchars($_POST['newDateEvent']);
-      $updateDate = $bdd->prepare("UPDATE deye_evenement SET date_event = ? WHERE IdEvent = ?");
-      $updateDate->execute(array($newDateEvent,$_GET['idModifEvent']));
+      //$updateDate = $bdd->prepare("UPDATE deye_evenement SET date_event = ? WHERE IdEvent = ?");
+      //$updateDate->execute(array($newDateEvent,$_GET['idModifEvent']));
 
+      $unC_event->updateEvent($newDateEvent, 'Date_event', $_GET['idModifEvent'], 'edit');
    }
 
-   if(isset($_POST['newTimeEvent']) AND !empty($_POST['newTimeEvent']) AND $_POST['newTimeEvent'] != $event['heure_event']){
+   if(isset($_POST['newTimeEvent']) AND !empty($_POST['newTimeEvent']) AND $_POST['newTimeEvent'] != $event['Heure_event']){
 
       $newTimeEvent = htmlspecialchars($_POST['newTimeEvent']);
-      $updateTime = $bdd->prepare("UPDATE deye_evenement SET heure_event = ? WHERE IdEvent = ?");
-      $updateTime->execute(array($newTimeEvent,$_GET['idModifEvent']));
+      //$updateTime = $bdd->prepare("UPDATE deye_evenement SET heure_event = ? WHERE IdEvent = ?");
+      //$updateTime->execute(array($newTimeEvent,$_GET['idModifEvent']));
 
+      $unC_event->updateEvent($newTimeEvent, 'Heure_event', $_GET['idModifEvent'], 'edit');
    }
 
-   if(isset($_POST['newPhotoEvent']) AND !empty($_POST['newPhotoEvent']) AND $_POST['newPhotoEvent'] != $event['IdPhoto']) {
+   if(isset($_POST['newPhotoEvent']) AND !empty($_POST['newPhotoEvent']) AND $_POST['newPhotoEvent'] != $event['idPhoto']) {
 
       $newPhotoEvent = htmlspecialchars($_POST['newPhotoEvent']);
-      $updatePhoto = $bdd->prepare("UPDATE deye_evenement SET IdPhoto = ? WHERE IdPhoto = ?");
-      $updatePhoto->execute(array($newPhotoEvent,$_GET['idModifEvent']));
+      //$updatePhoto = $bdd->prepare("UPDATE deye_evenement SET IdPhoto = ? WHERE IdPhoto = ?");
+      //$updatePhoto->execute(array($newPhotoEvent,$_GET['idModifEvent']));
 
+      $unC_event->updateEvent($newPhotoEvent, 'idPhoto', $_GET['idModifEvent'], 'edit');
    }
 
-    if(isset($_POST['newAdresseEvent']) AND !empty($_POST['newAdresseEvent']) AND $_POST['newAdresseEvent'] != $event['IdLieu']){
+    if(isset($_POST['newAdresseEvent']) AND !empty($_POST['newAdresseEvent']) AND $_POST['newAdresseEvent'] != $event['idLieu']){
 
       $newAdresseEvent = htmlspecialchars($_POST['newAdresseEvent']);
-      $updateAdresse = $bdd->prepare("UPDATE deye_evenement SET IdLieu = ? WHERE IdLieu = ?");
-      $updateAdresse->execute(array($newAdresseEvent,$_GET['idModifEvent']));
+      //$updateAdresse = $bdd->prepare("UPDATE deye_evenement SET IdLieu = ? WHERE IdLieu = ?");
+      //$updateAdresse->execute(array($newAdresseEvent,$_GET['idModifEvent']));
 
+      $unC_event->updateEvent($newAdresseEvent, 'idLieu', $_GET['idModifEvent'], 'edit');
     }
 
-    $requser = $bdd->prepare("SELECT * FROM deye_evenement WHERE IdEvent = ?");
-    $requser->execute(array($_GET['idModifEvent']));
-    $event = $requser->fetch();
+    //$requser = $bdd->prepare("SELECT * FROM deye_evenement WHERE IdEvent = ?");
+    //$requser->execute(array($_GET['idModifEvent']));
+    //$event = $requser->fetch();
+    $event = $unC_event->select_Event($_GET['idModifEvent']);
 ?>
 
 
@@ -80,22 +90,22 @@ if(isset($_SESSION['IdPersonne']) AND $_SESSION['IdType'] == "A")
             <h4 class="card-title text-center">Modifier l'évènement</h4>
               <div class="form-label-group">
                 <label for="inputEvent">Nom de l'évènement</label>
-                <input type="text" id="newNom" class="form-control" name="newNom" value="<?php echo $event['designation'];?>" placeholder="Changer de nom">
+                <input type="text" id="newNom" class="form-control" name="newNom" value="<?php echo $event['Designation'];?>" placeholder="Changer de nom">
               </div>
               <div class="form-label-group">
                 <label for="inputPhotoEvent">Photo de l'évènement</label>
-                <input type="text" id="newPhotoEvent" class="form-control" name="newPhotoEvent" value="<?php echo $event['IdPhoto'];?>" placeholder="Changer la photo">
+                <input type="text" id="newPhotoEvent" class="form-control" name="newPhotoEvent" value="<?php echo $event['idPhoto'];?>" placeholder="Changer la photo">
               <div class="form-label-group">
                 <label for="inputDateEvent">Date de l'évènement</label>
-                <input type="date" id="newDateEvent" class="form-control" name="newDateEvent" value="<?php echo $event['date_event'];?>" placeholder="Changer de date">
+                <input type="date" id="newDateEvent" class="form-control" name="newDateEvent" value="<?php echo $event['Date_event'];?>" placeholder="Changer de date">
               </div>
               <div class="form-label-group">
                 <label for="inputTimeEvent">Heure de l'évènement</label>
-                <input type="text" id="newTimeEvent" class="form-control" name="newTimeEvent" value="<?php echo $event['heure_event'];?>" placeholder="Changer d'heure">
+                <input type="text" id="newTimeEvent" class="form-control" name="newTimeEvent" value="<?php echo $event['Heure_event'];?>" placeholder="Changer d'heure">
               </div>
               <div class="form-label-group">
                 <label for="inputAdresseEvent">Adresse</label>
-                <input type="text" id="newAdresseEvent" class="form-control" name="newAdresseEvent" value="<?php echo $event['IdLieu'];?>" placeholder="Changer l'adresse">
+                <input type="text" id="newAdresseEvent" class="form-control" name="newAdresseEvent" value="<?php echo $event['idLieu'];?>" placeholder="Changer l'adresse">
               </div>
 
               <button class="btn btn-lg btn-secondary btn-block text-uppercase" type="submit">Je modifie</button>

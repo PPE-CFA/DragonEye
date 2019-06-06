@@ -9,16 +9,16 @@ define("DEBUG", 0);
 
 try {
 
-    $host = "localhost";
+    $host = "213.32.79.219";
     $dbname = "dragoneye";
-    $user = "root";
-    $mdp = "";
+    $user =  "dragoneye";
+    $mdp = "NeGMzgKL8MlLmdzZ";
   
     $port = "3306";
     define("CHEMIN_DOCUMENTS", __DIR__ ."\\images\\");
 
 
-    $dsn = "mysql:host=$host;port=$port;dbname=$dbname";
+    $dsn = "mysql:hostname=$host;port=$port;dbname=$dbname";
     $pdo = new PDO($dsn, $user, $mdp);
 
     $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);

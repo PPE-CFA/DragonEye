@@ -2,33 +2,38 @@
         - supprime une offre ou une demande de la table annonce
         - affiche toutes les données des offres/demandes de la table annonces-->
 <?php
-    include('../include/header.php'); 
+    include('../include/header.php');
+    //page specific controller
+    include(_DIR2_.'/controleur/controleurOffre.php');
+    $unC_offre = new ControleurOffre($host, $bdd_nom, $bdd_user, $mdp);
+    include(_DIR2_.'/controleur/controleurDemande.php');
+    $unC_demande = new ControleurDemande($host, $bdd_nom, $bdd_user, $mdp);
 
     if(isset($_GET['type']) AND $_GET['type'] == 'allmydemands'){
 
         if(isset($_GET['supprime']) AND !empty($_GET['supprime']))
         {
             $supprime = (int) $_GET['supprime'];
-            $req = $bdd->prepare('DELETE FROM deye_annonce WHERE IdAnnonce = ?');
-            $req->execute(array($supprime));
+            //$req = $bdd->prepare('DELETE FROM deye_annonce WHERE IdAnnonce = ?');
+            //$req->execute(array($supprime));
+            $unC->updateAd('', '', $supprime, 'supprime');
         }
     }elseif(isset($_GET['type']) AND $_GET['type'] == 'allmyoffers'){
 
         if(isset($_GET['supprime']) AND !empty($_GET['supprime']))
         {
             $supprime = (int) $_GET['supprime'];
-            $req = $bdd->prepare('DELETE FROM deye_annonce WHERE IdAnnonce = ?');
-            $req->execute(array($supprime));
-            var_dump($req->execute(array($supprime)));
+            //$req = $bdd->prepare('DELETE FROM deye_annonce WHERE IdAnnonce = ?');
+            //$req->execute(array($supprime));
+            $unC->updateAd('', '', $supprime, 'supprime');
         }
     }
-    $allMyOffers = $bdd->query('SELECT * FROM deye_annonce
-                                INNER JOIN deye_jeux ON deye_annonce.IdJeux=deye_jeux.IdJeux
-                                WHERE Idforme = "O"');
-
-
-
-    $allMyDemands = $bdd->prepare('SELECT IdAnnonce, deye_jeux.designation, deye_annonce_type.AnnonceType, deye_personne.nom, deye_photo.url_photo, deye_age.age_requis, deye_categorie.libelle, deye_annonce.Description,region,ville,postal,Etat
+    //$allMyOffers = $bdd->query('SELECT * FROM deye_annonce
+                                //INNER JOIN deye_jeux ON deye_annonce.IdJeux=deye_jeux.IdJeux
+                                //WHERE Idforme = "O"');
+    $allMyOffers = $unC_offre->select_userOffre($_SESSION['IdPersonne']);
+    
+    /*$allMyDemands = $bdd->prepare('SELECT IdAnnonce, deye_jeux.designation, deye_annonce_type.AnnonceType, deye_personne.nom, deye_photo.url_photo, deye_age.age_requis, deye_categorie.libelle, deye_annonce.Description,region,ville,postal,Etat
                                     FROM deye_annonce
                                     INNER JOIN deye_jeux     ON deye_annonce.IdJeux=deye_jeux.IdJeux
                                     INNER JOIN deye_personne ON deye_annonce.IdPersonne=deye_personne.IdPersonne
@@ -37,8 +42,10 @@
                                     INNER JOIN deye_age      ON deye_annonce.IdAge=deye_age.IdAge
                                     INNER JOIN deye_categorie ON deye_annonce.IdCategorie=deye_categorie.IdCategorie
                                     WHERE IdPersonne = ? AND Idforme = "D"
-                                    ORDER BY IdAnnonce DESC');
-    $allMyDemands->execute(array($_SESSION['IdPersonne']));
+                                    ORDER BY IdAnnonce DESC');*/
+    $allMyDemands = $unC_demande->select_userDemande($_SESSION['IdPersonne']);
+    var_dump($_SESSION['IdPersonne']);
+    //$allMyDemands->execute(array($_SESSION['IdPersonne']));
 ?>
 <!DOCTYPE html>
 <html>
@@ -123,7 +130,7 @@
 
                 <td>   
                     
-                    <a href="myAdd.php?type=allmydemands&supprime=<?= $res['IdAnnonce'] ?>" class="btn btn-danger danger">Supprimer</a>
+                    <a href="myAdd.php?type=allmydemands&supprime=<?= $res['idAnnonce'] ?>" class="btn btn-danger danger">Supprimer</a>
                 </td>
                                 
                     
@@ -177,15 +184,15 @@
                 </td>
 
                 <td>  
-                    <!--<img src="<?=$res['url_photo']?>"/>-->  
+                    <img src="<?=$res['url_photo']?>"/> 
                 </td>
 
                 <td>
-                    <!--<?=$res['age_requis']?>-->
+                    <?=$res['age_requis']?>
                 </td>
 
                 <td>
-                    <!--<?=$res['libelle']?>-->
+                    <?=$res['libelle']?>
                 </td>
 
                 <td>

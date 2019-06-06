@@ -1,3 +1,5 @@
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -17,6 +19,9 @@
 <body>
   <?php
     include('../../include/header.php');
+    //page specific controller
+    include(_DIR2_.'/controleur/controleurEvent.php');
+    $unC_event = new ControleurEvent($host, $bdd_nom, $bdd_user, $mdp);
 
       //requete SQL : modifie ou supprime un jeu de la table deye_jeu
       if(isset($_SESSION['IdType']) AND $_SESSION['IdType'] == "A"){
@@ -33,12 +38,21 @@
             if(!empty($nom) AND !empty($date) AND !empty($time) AND !empty($photo) AND !empty($adresse))
             {
 
-                  $reqNom = $bdd->prepare("SELECT * FROM deye_evenement WHERE designation = ?");
-                  $reqNom->execute(array($nom));
-                  $nomExist = $reqNom->rowCount();
+                  //$reqNom = $bdd->prepare("SELECT * FROM deye_evenement WHERE designation = ?");
+                  //$reqNom->execute(array($nom));
+                  //$nomExist = $reqNom->rowCount();
+
+                  $nomExist = $unC_event->existEvent($nom);
                   if($nomExist == 0){
-                      $insertEvent = $bdd->prepare("INSERT INTO deye_evenement(designation,date_event,heure_event,IdPhoto,IdLieu) VALUES(?,?,?,?,?)");
-                      $insertEvent->execute(array($nom,$date,$time,$photo,$adresse));
+                      //$insertEvent = $bdd->prepare("INSERT INTO deye_evenement(designation,date_event,heure_event,IdPhoto,IdLieu) VALUES(?,?,?,?,?)");
+                      //$insertEvent->execute(array($nom,$date,$time,$photo,$adresse));
+
+                     
+
+                      
+
+                      $unC_event->addEvent(array($nom,$date,$time,$photo,$adresse));
+                      
                       $erreur = "Votre évènement a bien été ajouté !";
                   }else{
                     $erreur2 = "L'évènement existe déja !";
@@ -53,14 +67,13 @@
 
           if(isset($_GET['type']) AND $_GET['type'] == 'allevents') {
 
-
             if(isset($_GET['supprime']) AND !empty($_GET['supprime'])) {
 
-            $supprime = (int) $_GET['supprime'];
-            $req = $bdd->prepare('DELETE FROM deye_evenement WHERE IdEvent = ?');
-            $req->execute(array($supprime));
-
-
+              $supprime = (int) $_GET['supprime'];
+              //$req = $bdd->prepare('DELETE FROM deye_evenement WHERE IdEvent = ?');
+              //$req->execute(array($supprime));
+              $unC_event->updateEvent('', '', $supprime, 'supprime');
+              
           }
       }
 
@@ -70,12 +83,12 @@
     }
 
 
-    $allEvents = $bdd->query('SELECT IdEvent, designation, date_event, heure_event, url_photo, Adresse
+    /*$allEvents = $bdd->query('SELECT IdEvent, designation, date_event, heure_event, url_photo, Adresse
     FROM deye_evenement
     INNER JOIN deye_photo ON deye_evenement.IdPhoto = deye_photo.IdPhoto
-    INNER JOIN deye_lieu ON deye_evenement.IdLieu = deye_lieu.IdLieu ORDER BY IdEvent  DESC');
+    INNER JOIN deye_lieu ON deye_evenement.IdLieu = deye_lieu.IdLieu ORDER BY IdEvent  DESC');*/
 
-
+    $stmt_allEvent = $unC_event->select_allEvent();
   ?>
 
 
@@ -98,11 +111,11 @@
     <th>Adresse</th>
     </thead>
     <tbody>
-      <?php while($res = $allEvents->fetch()){?>
+      <?php while($res = $stmt_allEvent->fetch()){ ?>
       <tr class="table-info">
 
             <td>
-                <?=$res['IdEvent']?>
+                <?=$res['idEvent']?>
             </td>
 
             <td>
@@ -126,8 +139,8 @@
             </td>
 
             <td>
-                <a href="modifManage/modifEvent.php?type=modifevent&idModifEvent=<?= $res['IdEvent'] ?>" class="btn btn-primary">Modifier</a>
-                <a href="manageEvent.php?type=allevents&supprime=<?= $res['IdEvent'] ?>" class="btn btn-danger">Supprimer</a>
+                <a href="modifManage/modifEvent.php?type=modifevent&idModifEvent=<?= $res['idEvent'] ?>" class="btn btn-primary">Modifier</a>
+                <a href="manageEvent.php?type=allevents&supprime=<?= $res['idEvent'] ?>" class="btn btn-danger">Supprimer</a>
             </td>
 
 
@@ -198,15 +211,7 @@
 
   </div>
   </div>
-  <!-- Je veux un tableau qui affiche tous les events et que tu puisses les supprimer et les modifier
-  et un formulaire qui permet d'ajouter un event.
-  Puis je veux deux boutons, le premier btn btn-secondary "revenir en arrière" qui permet de revenir à admin.php et l'autre
-  qui permet de se déconnecter "me déconnecter" btn btn-danger.
-  Si le footer est en haut à l'affichage c'est normal il faut du contenu entre la nav barre et le bas de page !
-  Les feuilles de CSS manageEvent_style.css et modifEvent_style.css sont à ta disposition pour le CSS de la page.
-  INTERDICTION DE TOUCHER AU RESTE DES PAGES SANS ME LE DIRE.
-  Me signaler dès que tu vois un bug.
-  -->
+
   <?php include('../../include/footer.php') ?>    
 </body>
 </html>

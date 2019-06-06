@@ -1,14 +1,8 @@
 <?php
-session_start();
-echo($_POST["age"]."<br>") ;;
-echo($_POST["categorie"]."<br>") ;;
-echo($_POST["jeu"]."<br>") ;;
-echo($_POST["description"]."<br>") ;;
+//page specific controller
+include("include/header.php");
 
-
-
-
-try {
+//try {
     // à prendre de l'objet $_SESSION
     // $idPersonne = $_SESSION['personne_connectee']
     $idJeu = $_POST["jeu"];
@@ -39,9 +33,10 @@ try {
     $attributFichier = "monfichiersol";
     $idfichier=uniqid();
     $valeurschamps = array();
-    include ("connect.php");
+    //include ("connect.php");
 
 
+    define("DEBUG", 0);
 
     // local
     if (DEBUG>3) {
@@ -76,27 +71,35 @@ try {
             }
         }
     }
-    $idPhoto = $name;
+    //$idPhoto = $name;
+    $idPhoto = $_POST['image1'];
+    $region = $_POST['an_region'];
+    $ville = $_POST['an_ville'];
+    $postal = $_POST['an_postal'];
+    $etat = $_POST['an_etat'];
 
     $ligneValeurChamps = "'".implode("','", $valeurschamps)."'";
     
     
     // set the PDO error mode to exception
-    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-    $sql = "INSERT INTO deye_annonce (IdJeux,IdPersonne,IdAge,IdCategorie,Description, PhotoAnnoncePerso)
-                     VALUES ('$idJeu','$idPersonne','$age','$categorie', '$description', '$idPhoto')";
-    
+
+    //$pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+    //$sql = "INSERT INTO deye_annonce (IdJeux,IdPersonne,IdAge,IdCategorie,Description, PhotoAnnoncePerso)
+    //                 VALUES ('$idJeu','$idPersonne','$age','$categorie', '$description', '$idPhoto')";
+    //$pdo->exec($sql);
+
     //$sql = "INSERT INTO doe (idproprietaire,px,py,nommonfichierarchitecte,nommonfichiercoffrage,nommonfichierarmature,statut)
     //             VALUES ('$idproprietaire','$px','$py','$nommonfichierarchitecte','$nommonfichiercoffrage','$nommonfichierarmature','en attente')";
     
     // use exec() because no results are returned
-    $pdo->exec($sql);
+    $date = new DateTime(); 
 
-} 
-catch (PDOException $e) {
-    echo "Erreur lors du dépot : <br>" . $e->getMessage();
-}
-$pdo = null;
+    $unC->addAnnonce(array($idJeu,$idPersonne,$age,$idPhoto,$categorie,'NO',$region,$ville,$postal,$etat,$description,$date->format("Y-m-d")));
+//} 
+//catch (PDOException $e) {
+//    echo "Erreur lors du dépot : <br>" . $e->getMessage();
+//}
+//$pdo = null;
 header("Location: depot_annonce_ok.php");
 
 

@@ -17,6 +17,9 @@
 <body>
   <?php
     include('../../include/header.php');
+    //page specific controller
+    include(_DIR2_.'/controleur/controleurJeu.php');
+    $unC_jeu = new ControleurJeu($host, $bdd_nom, $bdd_user, $mdp);
 
       //requete SQL : ajoute et supprime un jeu de la table deye_jeu
       if(isset($_SESSION['IdType']) AND $_SESSION['IdType'] == "A"){
@@ -38,36 +41,33 @@
 
             if(!empty($nom) AND !empty($date) AND !empty($price) AND !empty($time) AND !empty($numbersPlayers) AND !empty($idAdmin) AND !empty($idEditeur) AND !empty($age) AND !empty($idCategorie))
             {
-    
-                  $reqNom = $bdd->prepare("SELECT * FROM deye_jeux WHERE designation = ?");
-                  $reqNom->execute(array($nom));
-                  $nomExist = $reqNom->rowCount();
-                  if($nomExist == 0){
-                      $insertGame = $bdd->prepare('INSERT INTO deye_jeux(designation,date_sortie,prix,temps_jeux,nb_joueurs,IdPersonne,IdEditeur,IdAge,IdCategorie,IdPhoto)
-                                                    VALUES(?,?,?,?,?,?,?,?,?,?)');
-                      $insertGame->execute(array($nom,$date,$price,$time,$numbersPlayers,$idAdmin,$idEditeur,$age,$idCategorie,$idPhoto));
-                      $erreur = "Votre jeu a bien été ajouté !";
-                  }else{
-                    $erreur2 = "Le jeu existe déja !";
-                  }
+              //$reqNom = $bdd->prepare("SELECT * FROM deye_jeux WHERE designation = ?");
+              //$reqNom->execute(array($nom));
+              //$nomExist = $reqNom->rowCount();
+              $nomExist = $unC_jeu->existJeu($nomJeu);
+              if($nomExist === 0){
+                  //$insertGame = $bdd->prepare('INSERT INTO deye_jeux(designation,date_sortie,prix,temps_jeux,nb_joueurs,IdPersonne,IdEditeur,IdAge,IdCategorie,IdPhoto)
+                  //                              VALUES(?,?,?,?,?,?,?,?,?,?)');
+                  //$insertGame->execute(array($nom,$date,$price,$time,$numbersPlayers,$idAdmin,$idEditeur,$age,$idCategorie,$idPhoto));
+                  
+                  $unC_jeu->addJeu(array($nom,$date,$price,$time,$numbersPlayers,$idAdmin,$idEditeur,$age,$idCategorie,$idPhoto));
+                  
+                  $erreur = "Votre jeu a bien été ajouté !";
               }else{
-                $erreur2 = "Veuillez remplir tous les champs !";
+                $erreur2 = "Le jeu existe déja !";
+              }
+            }else{
+              $erreur2 = "Veuillez remplir tous les champs !";
             }
-
+            //var_dump($date_sortie);
           }
-            
-                    
-        
           if(isset($_GET['type']) AND $_GET['type'] == 'allgames') {
-        
-            
             if(isset($_GET['supprime']) AND !empty($_GET['supprime'])) {
-            
-            $supprime = (int) $_GET['supprime'];
-            $req = $bdd->prepare('DELETE FROM deye_jeux WHERE IdJeux = ?');
-            $req->execute(array($supprime));
+              $supprime = (int) $_GET['supprime'];
+              //$req = $bdd->prepare('DELETE FROM deye_jeux WHERE IdJeux = ?');
+              //$req->execute(array($supprime));
 
-
+              $unC_jeu->updateJeu('', '', $supprime, 'supprime');
           }
       }
 
@@ -76,17 +76,15 @@
       exit();
     }
 
-    
-    $allGames = $bdd->query('SELECT IdJeux, designation, date_sortie, prix, temps_jeux, nb_joueurs, deye_personne.nom, deye_editeur.Nom, deye_age.age_requis, deye_categorie.libelle, deye_photo.url_photo
+    /*$allGames = $bdd->query('SELECT IdJeux, designation, date_sortie, prix, temps_jeux, nb_joueurs, deye_personne.nom, deye_editeur.Nom, deye_age.age_requis, deye_categorie.libelle, deye_photo.url_photo
                               FROM deye_jeux
                               INNER JOIN deye_personne ON deye_jeux.IdPersonne = deye_personne.IdPersonne
                               INNER JOIN deye_editeur  ON deye_jeux.IdEditeur = deye_editeur.IdEditeur
                               INNER JOIN deye_age      ON deye_jeux.IdAge = deye_age.IdAge
                               INNER JOIN deye_categorie ON deye_jeux.IdCategorie = deye_categorie.IdCategorie
                               INNER JOIN deye_photo    ON deye_jeux.IdPhoto = deye_photo.IdPhoto
-                              ORDER BY IdJeux DESC');
- 
-
+                              ORDER BY IdJeux DESC');*/
+    $stmt_allGames = $unC_jeu->select_allJeu();    
   ?>
 
             
@@ -116,35 +114,35 @@
                 <th>Editer</th>
                 </thead>
                 <tbody>
-                  <?php while($res = $allGames->fetch()){?>
+                  <?php while($res = $stmt_allGames->fetch()){?>
                   <tr class="table-info">
                         
                         <td>
-                            <?=$res['IdJeux']?>
+                            <?=$res['idJeux']?>
                         </td>
 
                         <td>
-                            <?=$res['designation']?>
+                            <?=$res['Designation']?>
                         </td>
 
                         <td>
-                            <?=$res['date_sortie']?>
+                            <?=$res['Date_sortie']?>
                         </td>
 
                         <td>
-                            <?=$res['prix']?>
+                            <?=$res['Prix']?>
                         </td>
 
                         <td>
-                            <?=$res['temps_jeux']?>
+                            <?=$res['Temps_jeux']?>
                         </td>
 
                         <td>
-                            <?=$res['nb_joueurs']?>
+                            <?=$res['Nb_joueurs']?>
                         </td>
 
                         <td>
-                            <?=$res['nom']?> <!--Nom admin-->
+                            <?=$res['Nom']?> <!--Nom admin-->
                         </td>
 
                         <td>
@@ -152,20 +150,20 @@
                         </td>
 
                         <td>
-                            <?=$res['age_requis']?>
+                            <?=$res['Age_requis']?>
                         </td>
 
                         <td>
-                            <?=$res['libelle']?>
+                            <?=$res['cateLibelle']?>
                         </td>
 
                         <td>
-                            <img src="<?=$res['url_photo']?>"/>
+                            <img src="<?=$res['Url_photo']?>"/>
                         </td>
 
                         <td>   
-                            <a href="modifManage/modifGame.php?type=modifgames&idModifGame=<?= $res['IdJeux'] ?>" class="btn btn-primary primary">Modifier</a>
-                            <a href="manageGame.php?type=allgames&supprime=<?= $res['IdJeux'] ?>" class="btn btn-danger danger">Supprimer</a>
+                            <a href="modifManage/modifGame.php?type=modifgames&idModifGame=<?= $res['idJeux'] ?>" class="btn btn-primary primary">Modifier</a>
+                            <a href="manageGame.php?type=allgames&supprime=<?= $res['idJeux'] ?>" class="btn btn-danger danger">Supprimer</a>
                         </td>
                                 
                     
